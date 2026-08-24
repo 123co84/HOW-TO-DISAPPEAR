@@ -8,7 +8,7 @@
 
 <meta
   name="description"
-  content="For everything you couldn't say out loud."
+  content="A quiet place for everything you couldn't say out loud."
 >
 
 <meta name="theme-color" content="#050505">
@@ -25,16 +25,15 @@
   padding: 0;
 }
 
-html,
-body {
-  width: 100%;
-  min-height: 100%;
+html {
   background: #050505;
-  color: #deded8;
-  font-family: "Courier New", monospace;
 }
 
 body {
+  min-height: 100vh;
+  background: #050505;
+  color: #d7d7d2;
+  font-family: "Courier New", monospace;
   overflow-x: hidden;
 }
 
@@ -49,40 +48,49 @@ button {
   cursor: pointer;
 }
 
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
+a:focus-visible {
+  outline: 2px solid #aaa;
+  outline-offset: 3px;
+}
+
 
 /* =========================================================
-   CRT / GRAIN
+   ATMOSPHERE
 ========================================================= */
 
-body::before {
+body.site-mode::before {
   content: "";
   position: fixed;
   inset: 0;
+  z-index: 9000;
   pointer-events: none;
-  z-index: 9999;
 
   background:
     repeating-linear-gradient(
       to bottom,
-      rgba(255,255,255,.025) 0px,
-      rgba(255,255,255,.025) 1px,
-      transparent 2px,
+      rgba(255,255,255,.018) 0,
+      rgba(255,255,255,.018) 1px,
+      transparent 1px,
       transparent 4px
     );
 }
 
-body::after {
+body.site-mode::after {
   content: "";
   position: fixed;
   inset: 0;
+  z-index: 8999;
   pointer-events: none;
-  z-index: 9998;
 
   background:
     radial-gradient(
       circle at center,
-      transparent 35%,
-      rgba(0,0,0,.65) 100%
+      transparent 30%,
+      rgba(0,0,0,.62) 100%
     );
 }
 
@@ -110,27 +118,28 @@ body::after {
   display: flex;
   align-items: center;
   justify-content: center;
-  text-align: center;
 
   min-height: 100vh;
   padding: 30px;
 
+  text-align: center;
+
   background:
     radial-gradient(
       circle at 50% 42%,
-      #151515 0%,
-      #090909 38%,
-      #020202 80%
+      #171717 0%,
+      #090909 40%,
+      #020202 82%
     );
 }
 
 .intro-system {
   position: fixed;
-  top: 24px;
-  left: 24px;
+  top: 22px;
+  left: 22px;
 
-  color: #444;
-  font-size: 10px;
+  color: #3f3f3f;
+  font-size: 9px;
   line-height: 1.8;
 
   text-align: left;
@@ -141,26 +150,23 @@ body::after {
 }
 
 .main-title {
-  font-size: clamp(42px, 9vw, 110px);
+  font-size: clamp(40px, 9vw, 105px);
   font-weight: 300;
   letter-spacing: -6px;
   line-height: .95;
 
-  color: #deded8;
-
-  animation: titleFlicker 8s infinite;
+  animation: flicker 8s infinite;
 }
 
 .subtitle {
   margin-top: 28px;
 
   color: #666;
-  font-size: 12px;
-  letter-spacing: .4px;
+  font-size: 11px;
 }
 
 .enter-button {
-  margin-top: 65px;
+  margin-top: 62px;
 
   padding: 15px 30px;
 
@@ -172,19 +178,16 @@ body::after {
   font-size: 10px;
   letter-spacing: 1px;
 
-  transition:
-    background .3s,
-    color .3s,
-    border-color .3s;
+  transition: .3s;
 }
 
 .enter-button:hover {
   background: #ddd;
-  border-color: #ddd;
   color: #050505;
+  border-color: #ddd;
 }
 
-.blinking-cursor {
+.cursor {
   display: inline-block;
 
   width: 7px;
@@ -192,7 +195,7 @@ body::after {
 
   margin-left: 5px;
 
-  background: #999;
+  background: #aaa;
 
   animation: blink 1s infinite;
 }
@@ -203,19 +206,12 @@ body::after {
   }
 }
 
-@keyframes titleFlicker {
-
-  0%,
-  18%,
-  20%,
-  62%,
-  64%,
-  100% {
+@keyframes flicker {
+  0%, 18%, 20%, 62%, 64%, 100% {
     opacity: 1;
   }
 
-  19%,
-  63% {
+  19%, 63% {
     opacity: .72;
   }
 }
@@ -230,38 +226,33 @@ body::after {
   align-items: center;
   justify-content: center;
 
-  min-height: 100vh;
   padding: 25px;
 
   background:
     radial-gradient(
       circle at center,
-      #101010 0%,
-      #050505 65%
+      #111 0%,
+      #050505 70%
     );
 }
 
 .auth-container {
   width: min(520px, 100%);
 
-  padding: 42px;
+  padding: 40px;
 
-  border: 1px solid #252525;
+  border: 1px solid #262626;
 
-  background: rgba(5,5,5,.96);
+  background: rgba(5,5,5,.97);
 }
 
-.auth-top {
-  margin-bottom: 30px;
-}
-
-.auth-top .tiny {
+.auth-code {
   color: #444;
   font-size: 9px;
 }
 
-.auth-top h2 {
-  margin-top: 13px;
+.auth-container h2 {
+  margin-top: 14px;
 
   font-size: 21px;
   font-weight: 400;
@@ -271,6 +262,7 @@ body::after {
   margin-top: 12px;
 
   color: #666;
+
   font-size: 10px;
   line-height: 1.9;
 }
@@ -278,6 +270,49 @@ body::after {
 .auth-choice {
   display: grid;
   gap: 10px;
+
+  margin-top: 30px;
+}
+
+.signup-form {
+  display: none;
+  margin-top: 30px;
+}
+
+.signup-form.visible {
+  display: block;
+}
+
+.form-group {
+  margin-bottom: 22px;
+}
+
+.form-group label {
+  display: block;
+
+  margin-bottom: 8px;
+
+  color: #555;
+
+  font-size: 9px;
+}
+
+.form-group input,
+.form-group select {
+  width: 100%;
+
+  padding: 13px;
+
+  border: 1px solid #292929;
+  outline: none;
+
+  background: #030303;
+  color: #bbb;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  border-color: #777;
 }
 
 .primary-button,
@@ -289,11 +324,9 @@ body::after {
   border: 1px solid #303030;
 
   background: transparent;
-
   color: #999;
 
   font-size: 10px;
-  letter-spacing: .5px;
 
   transition: .25s;
 }
@@ -302,46 +335,6 @@ body::after {
 .secondary-button:hover {
   background: #ddd;
   color: #050505;
-}
-
-.signup-form {
-  display: none;
-}
-
-.signup-form.visible {
-  display: block;
-}
-
-.form-group {
-  margin-bottom: 20px;
-}
-
-.form-group label {
-  display: block;
-
-  margin-bottom: 8px;
-
-  color: #555;
-  font-size: 9px;
-}
-
-.form-group input,
-.form-group select {
-  width: 100%;
-
-  padding: 13px;
-
-  border: 1px solid #292929;
-
-  outline: none;
-
-  background: #030303;
-  color: #bbb;
-}
-
-.form-group input:focus,
-.form-group select:focus {
-  border-color: #666;
 }
 
 .symbol-grid {
@@ -370,12 +363,11 @@ body::after {
    MAIN APP
 ========================================================= */
 
-#app-main.active {
-  min-height: 100vh;
+#app.active {
   background:
     radial-gradient(
       circle at 50% 0%,
-      #101010,
+      #111,
       #050505 55%
     );
 }
@@ -383,8 +375,7 @@ body::after {
 .navigation {
   position: sticky;
   top: 0;
-
-  z-index: 100;
+  z-index: 500;
 
   height: 62px;
 
@@ -412,7 +403,8 @@ body::after {
   background: transparent;
 
   color: #777;
-  font-size: 17px;
+
+  font-size: 18px;
 }
 
 .menu-button:hover {
@@ -430,7 +422,7 @@ body::after {
 ========================================================= */
 
 .welcome {
-  min-height: 48vh;
+  min-height: 47vh;
 
   display: flex;
   flex-direction: column;
@@ -445,16 +437,16 @@ body::after {
 }
 
 .welcome-title {
-  margin-top: 16px;
+  margin-top: 15px;
 
-  font-size: clamp(38px, 7vw, 82px);
+  font-size: clamp(38px, 7vw, 80px);
   font-weight: 300;
 
   letter-spacing: -4px;
 }
 
 .welcome-text {
-  max-width: 560px;
+  max-width: 580px;
 
   margin-top: 20px;
 
@@ -466,7 +458,7 @@ body::after {
 
 
 /* =========================================================
-   CARDS
+   FEATURE GRID
 ========================================================= */
 
 .feature-grid {
@@ -479,6 +471,8 @@ body::after {
 }
 
 .feature {
+  position: relative;
+
   min-height: 190px;
 
   padding: 24px;
@@ -486,13 +480,9 @@ body::after {
   border-right: 1px solid #1e1e1e;
   border-bottom: 1px solid #1e1e1e;
 
-  position: relative;
-
   cursor: pointer;
 
-  transition:
-    background .3s,
-    transform .3s;
+  transition: .3s;
 }
 
 .feature:hover {
@@ -544,11 +534,11 @@ body::after {
   top: 72px;
   right: 20px;
 
-  width: 240px;
+  width: 245px;
 
   display: none;
 
-  z-index: 500;
+  z-index: 1000;
 
   border: 1px solid #292929;
 
@@ -598,9 +588,9 @@ body::after {
 
   padding: 20px;
 
-  z-index: 1000;
+  z-index: 2000;
 
-  background: rgba(0,0,0,.88);
+  background: rgba(0,0,0,.9);
 }
 
 .modal.open {
@@ -608,14 +598,14 @@ body::after {
 }
 
 .modal-window {
-  width: min(850px, 100%);
+  width: min(900px, 100%);
   max-height: 90vh;
 
   overflow-y: auto;
 
   padding: 34px;
 
-  border: 1px solid #282828;
+  border: 1px solid #292929;
 
   background: #070707;
 }
@@ -627,11 +617,12 @@ body::after {
   background: transparent;
 
   color: #666;
-  font-size: 19px;
+
+  font-size: 20px;
 }
 
 .modal-title {
-  margin-bottom: 28px;
+  margin-bottom: 26px;
 
   color: #ccc;
 
@@ -650,11 +641,186 @@ body::after {
 
 
 /* =========================================================
+   THE STATIC
+========================================================= */
+
+.static-choice {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+
+  background: #222;
+
+  border: 1px solid #222;
+}
+
+.static-door {
+  min-height: 280px;
+
+  padding: 30px;
+
+  background: #050505;
+
+  cursor: pointer;
+
+  transition: .4s;
+}
+
+.static-door:hover {
+  background: #101010;
+}
+
+.static-number {
+  color: #444;
+  font-size: 9px;
+}
+
+.static-door h3 {
+  margin-top: 80px;
+
+  font-size: 23px;
+  font-weight: 300;
+}
+
+.static-door p {
+  margin-top: 12px;
+
+  color: #555;
+
+  font-size: 9px;
+  line-height: 1.9;
+}
+
+.static-room {
+  min-height: 430px;
+
+  padding: 30px;
+
+  border: 1px solid #222;
+
+  background:
+    radial-gradient(
+      circle at 50% 45%,
+      #111,
+      #030303 70%
+    );
+}
+
+.static-room.anger {
+  background:
+    repeating-linear-gradient(
+      93deg,
+      #030303,
+      #030303 16px,
+      #090909 17px,
+      #030303 28px
+    );
+}
+
+.static-heading {
+  font-size: 32px;
+  font-weight: 300;
+}
+
+.static-subheading {
+  margin-top: 10px;
+
+  color: #555;
+
+  font-size: 9px;
+}
+
+.feeling-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+
+  margin-top: 30px;
+}
+
+.feeling-option {
+  padding: 9px 12px;
+
+  border: 1px solid #282828;
+
+  background: transparent;
+
+  color: #666;
+
+  font-size: 9px;
+}
+
+.feeling-option:hover,
+.feeling-option.selected {
+  border-color: #777;
+  color: #ddd;
+}
+
+.static-textarea {
+  width: 100%;
+  min-height: 150px;
+
+  margin-top: 20px;
+
+  padding: 15px;
+
+  border: 1px solid #282828;
+
+  outline: none;
+
+  resize: vertical;
+
+  background: #020202;
+  color: #aaa;
+
+  font-family: inherit;
+  font-size: 10px;
+  line-height: 1.8;
+}
+
+.static-action-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+
+  margin-top: 10px;
+}
+
+.static-save {
+  padding: 12px 18px;
+
+  border: 1px solid #303030;
+
+  background: transparent;
+
+  color: #888;
+
+  font-size: 9px;
+}
+
+.static-save:hover {
+  background: #ddd;
+  color: #050505;
+}
+
+.static-back {
+  margin-top: 18px;
+
+  border: 0;
+  background: transparent;
+
+  color: #555;
+
+  font-size: 9px;
+}
+
+
+/* =========================================================
    ROOM
 ========================================================= */
 
 .room {
-  min-height: 450px;
+  min-height: 430px;
 
   position: relative;
 
@@ -673,10 +839,10 @@ body::after {
 .room-clock {
   position: absolute;
 
-  top: 40px;
-  left: 40px;
+  top: 35px;
+  left: 35px;
 
-  color: #888;
+  color: #777;
 
   font-size: 10px;
 }
@@ -684,19 +850,15 @@ body::after {
 .room-window {
   position: absolute;
 
-  top: 45px;
-  right: 45px;
+  top: 40px;
+  right: 40px;
 
   width: 190px;
   height: 130px;
 
   border: 3px solid #151515;
 
-  background:
-    linear-gradient(
-      #050505,
-      #121212
-    );
+  background: #080808;
 
   cursor: pointer;
 }
@@ -733,9 +895,9 @@ body::after {
   position: absolute;
 
   left: 60px;
-  bottom: 75px;
+  bottom: 70px;
 
-  width: 240px;
+  width: 250px;
   height: 50px;
 
   border-top: 3px solid #202020;
@@ -745,7 +907,7 @@ body::after {
   position: absolute;
 
   left: 120px;
-  bottom: 115px;
+  bottom: 110px;
 
   padding: 13px;
 
@@ -756,82 +918,6 @@ body::after {
   font-size: 9px;
 
   cursor: pointer;
-}
-
-
-/* =========================================================
-   JOURNAL
-========================================================= */
-
-.journal-input {
-  width: 100%;
-  min-height: 180px;
-
-  padding: 15px;
-
-  resize: vertical;
-
-  border: 1px solid #292929;
-
-  outline: none;
-
-  background: #030303;
-
-  color: #bbb;
-
-  font-family: inherit;
-  font-size: 11px;
-}
-
-.journal-input:focus {
-  border-color: #666;
-}
-
-.save-button {
-  margin-top: 10px;
-
-  padding: 12px 20px;
-
-  border: 1px solid #303030;
-
-  background: transparent;
-
-  color: #888;
-
-  font-size: 10px;
-}
-
-.save-button:hover {
-  background: #ddd;
-  color: #000;
-}
-
-.entries {
-  margin-top: 30px;
-}
-
-.entry {
-  margin-bottom: 10px;
-
-  padding: 18px;
-
-  border: 1px solid #202020;
-}
-
-.entry-time {
-  color: #444;
-  font-size: 8px;
-}
-
-.entry-text {
-  margin-top: 10px;
-
-  color: #999;
-
-  font-size: 10px;
-  line-height: 1.9;
-
-  white-space: pre-wrap;
 }
 
 
@@ -868,8 +954,8 @@ body::after {
 .world h3 {
   margin-top: 28px;
 
-  font-weight: 400;
   font-size: 14px;
+  font-weight: 400;
 }
 
 .world p {
@@ -883,119 +969,88 @@ body::after {
 
 
 /* =========================================================
-   WALL
+   JOURNAL
 ========================================================= */
 
+.journal-input,
 .wall-input {
   width: 100%;
-  min-height: 100px;
+  min-height: 170px;
 
-  padding: 14px;
+  padding: 15px;
 
   border: 1px solid #292929;
-
-  background: #030303;
-
-  color: #bbb;
 
   outline: none;
 
   resize: vertical;
+
+  background: #030303;
+  color: #bbb;
+
+  font-size: 10px;
+  line-height: 1.8;
 }
 
-.wall-entry {
-  padding: 22px 0;
-
-  border-bottom: 1px solid #1c1c1c;
+.journal-input:focus,
+.wall-input:focus {
+  border-color: #666;
 }
 
+.save-button {
+  margin-top: 10px;
+
+  padding: 12px 20px;
+
+  border: 1px solid #303030;
+
+  background: transparent;
+
+  color: #888;
+
+  font-size: 9px;
+}
+
+.save-button:hover {
+  background: #ddd;
+  color: #000;
+}
+
+.entry {
+  margin-top: 10px;
+
+  padding: 18px;
+
+  border: 1px solid #202020;
+}
+
+.entry-time,
 .wall-visitor {
   color: #444;
   font-size: 8px;
 }
 
+.entry-text,
 .wall-message {
   margin-top: 10px;
 
   color: #999;
 
   font-size: 10px;
-
   line-height: 1.9;
+
+  white-space: pre-wrap;
 }
 
 
 /* =========================================================
-   HELP
-========================================================= */
-
-.help-container {
-  padding: 28px;
-
-  border: 1px solid #292929;
-
-  background: #080808;
-}
-
-.help-container h3 {
-  font-size: 18px;
-  font-weight: 400;
-}
-
-.help-container p {
-  margin-top: 15px;
-
-  color: #666;
-
-  font-size: 10px;
-  line-height: 1.9;
-}
-
-.help-number {
-  margin: 25px 0;
-
-  color: #ddd;
-
-  font-size: 38px;
-}
-
-.help-links {
-  display: flex;
-  flex-wrap: wrap;
-
-  gap: 8px;
-
-  margin-top: 20px;
-}
-
-.help-links a {
-  display: inline-block;
-
-  padding: 13px 18px;
-
-  border: 1px solid #303030;
-
-  color: #999;
-
-  text-decoration: none;
-
-  font-size: 9px;
-}
-
-.help-links a:hover {
-  background: #ddd;
-  color: #000;
-}
-
-
-/* =========================================================
-   CHAT
+   LATE NIGHT LINE
 ========================================================= */
 
 .chat-notice {
-  margin-bottom: 20px;
+  margin-bottom: 18px;
 
-  padding: 15px;
+  padding: 14px;
 
   border: 1px solid #292929;
 
@@ -1017,20 +1072,21 @@ body::after {
 .chat-messages {
   flex: 1;
 
+  min-height: 320px;
+
   padding: 20px;
 
   overflow-y: auto;
 }
 
 .chat-message {
-  max-width: 75%;
+  max-width: 78%;
 
-  margin-bottom: 20px;
+  margin-bottom: 22px;
 }
 
 .chat-message.you {
   margin-left: auto;
-
   text-align: right;
 }
 
@@ -1040,12 +1096,26 @@ body::after {
 }
 
 .chat-text {
-  margin-top: 5px;
+  margin-top: 6px;
 
   color: #aaa;
 
   font-size: 10px;
   line-height: 1.8;
+}
+
+.typing {
+  display: none;
+
+  padding: 0 20px 15px;
+
+  color: #444;
+
+  font-size: 8px;
+}
+
+.typing.visible {
+  display: block;
 }
 
 .chat-input-row {
@@ -1077,6 +1147,72 @@ body::after {
   background: #080808;
 
   color: #777;
+}
+
+.chat-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+
+  margin-top: 10px;
+}
+
+.chat-control {
+  padding: 10px 13px;
+
+  border: 1px solid #292929;
+
+  background: transparent;
+
+  color: #666;
+
+  font-size: 8px;
+}
+
+.chat-control:hover {
+  color: #ddd;
+}
+
+
+/* =========================================================
+   MAP
+========================================================= */
+
+.map {
+  min-height: 350px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  position: relative;
+
+  overflow: hidden;
+
+  border: 1px solid #222;
+}
+
+.map::before {
+  content: "";
+
+  position: absolute;
+  inset: 20%;
+
+  border: 1px dashed #181818;
+
+  transform: rotate(8deg);
+}
+
+.map-center {
+  position: relative;
+  z-index: 2;
+
+  text-align: center;
+
+  color: #aaa;
+
+  font-size: 10px;
+  line-height: 2.8;
 }
 
 
@@ -1122,45 +1258,193 @@ body::after {
 
 
 /* =========================================================
-   MAP
+   GENUINE HELP ROUTE
+   INTENTIONALLY DOES NOT USE THE SITE AESTHETIC
 ========================================================= */
 
-.map {
-  min-height: 350px;
+.help-modal {
+  position: fixed;
+  inset: 0;
 
+  display: none;
+
+  z-index: 5000;
+
+  overflow-y: auto;
+
+  background: #f7f7f7;
+
+  color: #171717;
+
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Arial,
+    sans-serif;
+}
+
+.help-modal.open {
+  display: block;
+}
+
+.help-page {
+  width: min(720px, 100%);
+
+  margin: auto;
+
+  padding: 55px 25px 70px;
+}
+
+.help-page-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding-bottom: 18px;
+
+  border-bottom: 1px solid #ddd;
+}
+
+.help-page-brand {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.help-page-close {
+  border: 0;
+  background: transparent;
+
+  color: #444;
+
+  font-size: 24px;
+}
+
+.help-page h1 {
+  margin-top: 55px;
+
+  font-size: clamp(32px, 7vw, 54px);
+  line-height: 1.05;
+}
+
+.help-page-lead {
+  max-width: 600px;
+
+  margin-top: 18px;
+
+  color: #444;
+
+  font-size: 17px;
+  line-height: 1.65;
+}
+
+.help-alert {
+  margin-top: 35px;
+
+  padding: 24px;
+
+  border: 2px solid #171717;
+
+  background: white;
+}
+
+.help-alert h2 {
+  font-size: 20px;
+}
+
+.help-alert p {
+  margin-top: 12px;
+
+  color: #444;
+
+  line-height: 1.6;
+}
+
+.help-buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+
+  gap: 12px;
+
+  margin-top: 20px;
+}
+
+.help-button {
   display: flex;
   align-items: center;
   justify-content: center;
 
-  border: 1px solid #222;
+  min-height: 62px;
 
-  position: relative;
+  border: 2px solid #171717;
 
-  overflow: hidden;
+  background: #171717;
+  color: white;
+
+  text-decoration: none;
+
+  font-weight: 700;
 }
 
-.map::before {
-  content: "";
-
-  position: absolute;
-  inset: 20%;
-
-  border: 1px dashed #181818;
-
-  transform: rotate(8deg);
+.help-button.secondary {
+  background: white;
+  color: #171717;
 }
 
-.map-center {
-  position: relative;
-  z-index: 2;
+.help-section {
+  margin-top: 40px;
 
-  text-align: center;
+  padding-top: 30px;
 
-  color: #aaa;
+  border-top: 1px solid #ddd;
+}
 
-  font-size: 10px;
+.help-section h2 {
+  font-size: 20px;
+}
 
-  line-height: 2.8;
+.help-section p {
+  margin-top: 12px;
+
+  color: #444;
+
+  line-height: 1.7;
+}
+
+.help-resource {
+  display: block;
+
+  margin-top: 18px;
+
+  padding: 18px;
+
+  border: 1px solid #ccc;
+
+  color: #171717;
+
+  text-decoration: none;
+}
+
+.help-resource:hover {
+  background: white;
+}
+
+.help-resource strong {
+  display: block;
+
+  margin-bottom: 6px;
+}
+
+.help-back {
+  display: inline-block;
+
+  margin-top: 35px;
+
+  color: #333;
+
+  text-decoration: underline;
+
+  cursor: pointer;
 }
 
 
@@ -1174,7 +1458,7 @@ body::after {
   left: 50%;
   bottom: 25px;
 
-  z-index: 2000;
+  z-index: 8000;
 
   transform:
     translate(-50%, 25px);
@@ -1216,6 +1500,10 @@ body::after {
     grid-template-columns: 1fr;
   }
 
+  .static-choice {
+    grid-template-columns: 1fr;
+  }
+
   .world-grid {
     grid-template-columns: 1fr;
   }
@@ -1241,33 +1529,32 @@ body::after {
     left: 75px;
   }
 
+  .help-buttons {
+    grid-template-columns: 1fr;
+  }
+
 }
 
 </style>
 </head>
 
 
-<body>
+<body class="site-mode">
 
 
 <!-- ========================================================
      INTRO
 ========================================================= -->
 
-<section
-  id="intro"
-  class="screen active"
->
+<section id="intro" class="screen active">
 
   <div class="intro-system">
 
     connection: unstable<br>
-    location: unknown<br>
     identity: unnecessary<br>
     time: <span id="clock">03:17</span>
 
   </div>
-
 
   <div class="intro-center">
 
@@ -1279,15 +1566,12 @@ body::after {
       for everything you couldn't say out loud.
     </div>
 
-    <button
-      id="enterButton"
-      class="enter-button"
-    >
+    <button id="enterButton" class="enter-button">
       ENTER QUIETLY
     </button>
 
     <div>
-      <span class="blinking-cursor"></span>
+      <span class="cursor"></span>
     </div>
 
   </div>
@@ -1299,57 +1583,37 @@ body::after {
      ACCOUNT
 ========================================================= -->
 
-<section
-  id="auth"
-  class="screen"
->
+<section id="auth" class="screen">
 
   <div class="auth-container">
 
-    <div class="auth-top">
-
-      <div class="tiny">
-        HOWTODISAPPEAR / ENTRY
-      </div>
-
-      <h2>
-        ARE YOU NEW HERE?
-      </h2>
-
-      <p class="auth-description">
-        You don't need to use your real name.
-        Create a fictional identity for your time here.
-      </p>
-
+    <div class="auth-code">
+      HOWTODISAPPEAR / ENTRY
     </div>
 
+    <h2>
+      ARE YOU NEW HERE?
+    </h2>
 
-    <div
-      id="authChoices"
-      class="auth-choice"
-    >
+    <p class="auth-description">
+      You don't need to use your real name.
+      Create a fictional identity for your time here.
+    </p>
 
-      <button
-        id="createButton"
-        class="primary-button"
-      >
+    <div id="authChoices" class="auth-choice">
+
+      <button id="createButton" class="primary-button">
         CREATE AN IDENTITY
       </button>
 
-      <button
-        id="returnButton"
-        class="secondary-button"
-      >
+      <button id="returnButton" class="secondary-button">
         I'VE BEEN HERE BEFORE
       </button>
 
     </div>
 
 
-    <form
-      id="signupForm"
-      class="signup-form"
-    >
+    <form id="signupForm" class="signup-form">
 
       <div class="form-group">
 
@@ -1377,40 +1641,13 @@ body::after {
 
         <div class="symbol-grid">
 
-          <button
-            type="button"
-            class="symbol-button selected"
-          >○</button>
-
-          <button
-            type="button"
-            class="symbol-button"
-          >△</button>
-
-          <button
-            type="button"
-            class="symbol-button"
-          >□</button>
-
-          <button
-            type="button"
-            class="symbol-button"
-          >◇</button>
-
-          <button
-            type="button"
-            class="symbol-button"
-          >☆</button>
-
-          <button
-            type="button"
-            class="symbol-button"
-          >+</button>
-
-          <button
-            type="button"
-            class="symbol-button"
-          >~</button>
+          <button type="button" class="symbol-button selected">○</button>
+          <button type="button" class="symbol-button">△</button>
+          <button type="button" class="symbol-button">□</button>
+          <button type="button" class="symbol-button">◇</button>
+          <button type="button" class="symbol-button">☆</button>
+          <button type="button" class="symbol-button">+</button>
+          <button type="button" class="symbol-button">~</button>
 
         </div>
 
@@ -1425,31 +1662,17 @@ body::after {
 
         <select id="startingPlace">
 
-          <option>
-            THE ROOM
-          </option>
-
-          <option>
-            THE STATION
-          </option>
-
-          <option>
-            THE CITY
-          </option>
-
-          <option>
-            SOMEWHERE UNKNOWN
-          </option>
+          <option>THE ROOM</option>
+          <option>THE STATION</option>
+          <option>THE CITY</option>
+          <option>SOMEWHERE UNKNOWN</option>
 
         </select>
 
       </div>
 
 
-      <button
-        type="submit"
-        class="primary-button"
-      >
+      <button type="submit" class="primary-button">
         ENTER
       </button>
 
@@ -1461,13 +1684,10 @@ body::after {
 
 
 <!-- ========================================================
-     MAIN
+     MAIN APP
 ========================================================= -->
 
-<section
-  id="app-main"
-  class="screen"
->
+<section id="app" class="screen">
 
   <nav class="navigation">
 
@@ -1475,20 +1695,14 @@ body::after {
       HOWTODISAPPEAR
     </div>
 
-    <button
-      id="menuButton"
-      class="menu-button"
-    >
+    <button id="menuButton" class="menu-button">
       ···
     </button>
 
   </nav>
 
 
-  <div
-    id="sideMenu"
-    class="side-menu"
-  >
+  <div id="sideMenu" class="side-menu">
 
     <button data-modal="profile">
       PROFILE
@@ -1506,10 +1720,6 @@ body::after {
       LATE NIGHT LINE
     </button>
 
-    <button data-modal="map">
-      MAP
-    </button>
-
     <button data-modal="help">
       NEED HELP?
     </button>
@@ -1525,10 +1735,7 @@ body::after {
 
     <section class="welcome">
 
-      <div
-        id="visitorLabel"
-        class="visitor-label"
-      >
+      <div id="visitorLabel" class="visitor-label">
         VISITOR
       </div>
 
@@ -1548,149 +1755,94 @@ body::after {
     <section class="feature-grid">
 
 
-      <article
-        class="feature"
-        data-modal="room"
-      >
+      <article class="feature" data-modal="room">
 
-        <div class="feature-number">
-          01
-        </div>
+        <div class="feature-number">01</div>
 
-        <h3>
-          MY ROOM
-        </h3>
+        <h3>MY ROOM</h3>
 
         <p>
           Somewhere quiet to exist for a while.
         </p>
 
-        <div class="feature-arrow">
-          ↗
-        </div>
+        <div class="feature-arrow">↗</div>
 
       </article>
 
 
-      <article
-        class="feature"
-        data-modal="worlds"
-      >
+      <article class="feature" data-modal="worlds">
 
-        <div class="feature-number">
-          02
-        </div>
+        <div class="feature-number">02</div>
 
-        <h3>
-          WORLDS
-        </h3>
+        <h3>WORLDS</h3>
 
         <p>
           Places that aren't quite real.
         </p>
 
-        <div class="feature-arrow">
-          ↗
-        </div>
+        <div class="feature-arrow">↗</div>
 
       </article>
 
 
-      <article
-        class="feature"
-        data-modal="journal"
-      >
+      <article class="feature" data-modal="static">
 
-        <div class="feature-number">
-          03
-        </div>
+        <div class="feature-number">03</div>
 
-        <h3>
-          UNSENT
-        </h3>
+        <h3>THE STATIC</h3>
+
+        <p>
+          For when you feel nothing, or everything.
+        </p>
+
+        <div class="feature-arrow">↗</div>
+
+      </article>
+
+
+      <article class="feature" data-modal="journal">
+
+        <div class="feature-number">04</div>
+
+        <h3>UNSENT</h3>
 
         <p>
           Things you don't know how to say.
         </p>
 
-        <div class="feature-arrow">
-          ↗
-        </div>
+        <div class="feature-arrow">↗</div>
 
       </article>
 
 
-      <article
-        class="feature"
-        data-modal="wall"
-      >
+      <article class="feature" data-modal="wall">
 
-        <div class="feature-number">
-          04
-        </div>
+        <div class="feature-number">05</div>
 
-        <h3>
-          THE WALL
-        </h3>
+        <h3>THE WALL</h3>
 
         <p>
           Anonymous thoughts left behind.
         </p>
 
-        <div class="feature-arrow">
-          ↗
-        </div>
+        <div class="feature-arrow">↗</div>
 
       </article>
 
 
-      <article
-        class="feature"
-        data-modal="chat"
-      >
+      <article class="feature" data-modal="chat">
 
-        <div class="feature-number">
-          05
-        </div>
+        <div class="feature-number">06</div>
 
-        <h3>
-          LATE NIGHT LINE
-        </h3>
+        <h3>LATE NIGHT LINE</h3>
 
         <p>
-          Someone is listening.
+          A place to talk to another visitor.
         </p>
 
-        <div class="feature-arrow">
-          ↗
-        </div>
+        <div class="feature-arrow">↗</div>
 
       </article>
-
-
-      <article
-        class="feature"
-        data-modal="help"
-      >
-
-        <div class="feature-number">
-          06
-        </div>
-
-        <h3>
-          NEED HELP?
-        </h3>
-
-        <p>
-          You don't have to carry everything alone.
-        </p>
-
-        <div class="feature-arrow">
-          ↗
-        </div>
-
-      </article>
-
 
     </section>
 
@@ -1700,20 +1852,14 @@ body::after {
 
 
 <!-- ========================================================
-     MODAL
+     GENERAL MODAL
 ========================================================= -->
 
-<div
-  id="modal"
-  class="modal"
->
+<div id="modal" class="modal">
 
   <div class="modal-window">
 
-    <button
-      id="closeModal"
-      class="modal-close"
-    >
+    <button id="closeModal" class="modal-close">
       ×
     </button>
 
@@ -1724,10 +1870,165 @@ body::after {
 </div>
 
 
-<div
-  id="toast"
-  class="toast"
-></div>
+<!-- ========================================================
+     REAL HELP ROUTE
+========================================================= -->
+
+<div id="helpModal" class="help-modal">
+
+  <div class="help-page">
+
+    <div class="help-page-top">
+
+      <div class="help-page-brand">
+        howtodisappear
+      </div>
+
+      <button
+        id="closeHelp"
+        class="help-page-close"
+        aria-label="Close help"
+      >
+        ×
+      </button>
+
+    </div>
+
+
+    <h1>
+      Need help?
+    </h1>
+
+    <p class="help-page-lead">
+      You don't have to figure everything out alone.
+      If you need a real person right now, these are
+      genuine support services in Canada.
+    </p>
+
+
+    <div class="help-alert">
+
+      <h2>
+        If you're in immediate danger
+      </h2>
+
+      <p>
+        Call 9-1-1 or go to the nearest emergency
+        department. If you can, stay with someone
+        you trust and tell them what's happening.
+      </p>
+
+    </div>
+
+
+    <div class="help-section">
+
+      <h2>
+        9-8-8 Suicide Crisis Helpline
+      </h2>
+
+      <p>
+        If you're thinking about suicide, worried about
+        someone else, or dealing with a suicide-related
+        crisis, you can call or text 9-8-8 in Canada.
+        Support is available 24/7.
+      </p>
+
+      <div class="help-buttons">
+
+        <a
+          class="help-button"
+          href="tel:988"
+        >
+          CALL 9-8-8
+        </a>
+
+        <a
+          class="help-button secondary"
+          href="sms:988"
+        >
+          TEXT 9-8-8
+        </a>
+
+      </div>
+
+    </div>
+
+
+    <div class="help-section">
+
+      <h2>
+        Kids Help Phone
+      </h2>
+
+      <p>
+        Kids Help Phone provides support to young people
+        across Canada. You can reach a crisis responder
+        by text or talk with a counsellor by phone.
+      </p>
+
+      <a
+        class="help-resource"
+        href="sms:686868?&body=CONNECT"
+      >
+        <strong>
+          Text CONNECT to 686868
+        </strong>
+
+        24/7 crisis text support.
+      </a>
+
+
+      <a
+        class="help-resource"
+        href="tel:18006686868"
+      >
+        <strong>
+          Call 1-800-668-6868
+        </strong>
+
+        24/7 phone support.
+      </a>
+
+
+      <a
+        class="help-resource"
+        href="https://kidshelpphone.ca/"
+        target="_blank"
+        rel="noopener"
+      >
+        <strong>
+          Visit Kids Help Phone
+        </strong>
+
+        Access their online support and resources.
+      </a>
+
+    </div>
+
+
+    <div class="help-section">
+
+      <p>
+        This website is not a crisis service,
+        counselling service, or emergency service.
+        The people in the Late Night Line are other
+        visitors, not trained crisis responders.
+      </p>
+
+    </div>
+
+
+    <a id="helpBack" class="help-back">
+      ← Return to howtodisappear
+    </a>
+
+  </div>
+
+</div>
+
+
+<div id="toast" class="toast"></div>
 
 
 <script>
@@ -1740,30 +2041,7 @@ let currentUser = null;
 
 let selectedSymbol = "○";
 
-
-const defaultWall = [
-
-  {
-    visitor: "VISITOR_108",
-    message: "I wish I knew how to explain it."
-  },
-
-  {
-    visitor: "VISITOR_024",
-    message: "I thought I was over it."
-  },
-
-  {
-    visitor: "VISITOR_391",
-    message: "Maybe tomorrow."
-  },
-
-  {
-    visitor: "VISITOR_077",
-    message: "I don't know what I feel."
-  }
-
-];
+let chatTimer = null;
 
 
 /* =========================================================
@@ -1776,38 +2054,8 @@ const intro =
 const auth =
   document.getElementById("auth");
 
-const appMain =
-  document.getElementById("app-main");
-
-const enterButton =
-  document.getElementById("enterButton");
-
-const createButton =
-  document.getElementById("createButton");
-
-const returnButton =
-  document.getElementById("returnButton");
-
-const authChoices =
-  document.getElementById("authChoices");
-
-const signupForm =
-  document.getElementById("signupForm");
-
-const usernameInput =
-  document.getElementById("username");
-
-const startingPlace =
-  document.getElementById("startingPlace");
-
-const visitorLabel =
-  document.getElementById("visitorLabel");
-
-const menuButton =
-  document.getElementById("menuButton");
-
-const sideMenu =
-  document.getElementById("sideMenu");
+const app =
+  document.getElementById("app");
 
 const modal =
   document.getElementById("modal");
@@ -1815,10 +2063,13 @@ const modal =
 const modalContent =
   document.getElementById("modalContent");
 
-const closeModalButton =
-  document.getElementById("closeModal");
+const helpModal =
+  document.getElementById("helpModal");
 
-const toastElement =
+const sideMenu =
+  document.getElementById("sideMenu");
+
+const toast =
   document.getElementById("toast");
 
 
@@ -1828,9 +2079,9 @@ const toastElement =
 
 function showScreen(screen) {
 
-  intro.classList.remove("active");
-  auth.classList.remove("active");
-  appMain.classList.remove("active");
+  [intro, auth, app].forEach(
+    element => element.classList.remove("active")
+  );
 
   screen.classList.add("active");
 
@@ -1846,19 +2097,19 @@ function showScreen(screen) {
    TOAST
 ========================================================= */
 
-let toastTimeout;
+let toastTimer;
 
 function showToast(message) {
 
-  clearTimeout(toastTimeout);
+  clearTimeout(toastTimer);
 
-  toastElement.textContent = message;
+  toast.textContent = message;
 
-  toastElement.classList.add("visible");
+  toast.classList.add("visible");
 
-  toastTimeout = setTimeout(() => {
+  toastTimer = setTimeout(() => {
 
-    toastElement.classList.remove("visible");
+    toast.classList.remove("visible");
 
   }, 2500);
 
@@ -1866,19 +2117,30 @@ function showToast(message) {
 
 
 /* =========================================================
-   ENTER
+   INTRO
 ========================================================= */
 
-enterButton.addEventListener("click", () => {
+document
+  .getElementById("enterButton")
+  .addEventListener("click", () => {
 
-  const savedUser =
-    localStorage.getItem("howtodisappear_user");
+    const saved =
+      localStorage.getItem(
+        "howtodisappear_user"
+      );
 
-  if (savedUser) {
+    if (!saved) {
+
+      showScreen(auth);
+
+      return;
+
+    }
 
     try {
 
-      currentUser = JSON.parse(savedUser);
+      currentUser =
+        JSON.parse(saved);
 
       showMain();
 
@@ -1892,32 +2154,30 @@ enterButton.addEventListener("click", () => {
 
     }
 
-  } else {
-
-    showScreen(auth);
-
-  }
-
-});
+  });
 
 
 /* =========================================================
-   CREATE ACCOUNT UI
+   ACCOUNT CREATION
 ========================================================= */
 
-createButton.addEventListener("click", () => {
+document
+  .getElementById("createButton")
+  .addEventListener("click", () => {
 
-  authChoices.style.display = "none";
+    document
+      .getElementById("authChoices")
+      .style.display = "none";
 
-  signupForm.classList.add("visible");
+    document
+      .getElementById("signupForm")
+      .classList.add("visible");
 
-  setTimeout(() => {
+    document
+      .getElementById("username")
+      .focus();
 
-    usernameInput.focus();
-
-  }, 100);
-
-});
+  });
 
 
 /* =========================================================
@@ -1932,11 +2192,9 @@ document
 
       document
         .querySelectorAll(".symbol-button")
-        .forEach(other => {
-
-          other.classList.remove("selected");
-
-        });
+        .forEach(item =>
+          item.classList.remove("selected")
+        );
 
       button.classList.add("selected");
 
@@ -1949,110 +2207,117 @@ document
 
 
 /* =========================================================
-   CREATE ACCOUNT
+   SIGN UP
 ========================================================= */
 
-signupForm.addEventListener("submit", event => {
+document
+  .getElementById("signupForm")
+  .addEventListener("submit", event => {
 
-  event.preventDefault();
+    event.preventDefault();
 
-  const username =
-    usernameInput.value.trim();
+    const username =
+      document
+        .getElementById("username")
+        .value
+        .trim();
 
-  if (!username) {
+    const startingPlace =
+      document
+        .getElementById("startingPlace")
+        .value;
 
-    showToast("choose an identity first.");
+    if (!username) {
 
-    return;
+      showToast(
+        "choose an identity first."
+      );
 
-  }
+      return;
 
-
-  const visitorNumber =
-    Math.floor(
-      100 +
-      Math.random() * 900
-    );
-
-
-  currentUser = {
-
-    username,
-
-    symbol: selectedSymbol,
-
-    visitor:
-      "VISITOR_" +
-      visitorNumber,
-
-    startingPlace:
-      startingPlace.value,
-
-    discovered: [
-      startingPlace.value
-    ],
-
-    entries: [],
-
-    created:
-      new Date().toISOString()
-
-  };
+    }
 
 
-  saveUser();
+    const number =
+      Math.floor(
+        100 +
+        Math.random() * 900
+      );
 
-  showMain();
 
-});
+    currentUser = {
+
+      username,
+
+      symbol:
+        selectedSymbol,
+
+      visitor:
+        "VISITOR_" + number,
+
+      startingPlace,
+
+      discovered:
+        [startingPlace],
+
+      entries: [],
+
+      created:
+        new Date().toISOString()
+
+    };
+
+
+    saveUser();
+
+    showMain();
+
+  });
 
 
 /* =========================================================
    RETURNING USER
 ========================================================= */
 
-returnButton.addEventListener("click", () => {
+document
+  .getElementById("returnButton")
+  .addEventListener("click", () => {
 
-  const savedUser =
-    localStorage.getItem(
-      "howtodisappear_user"
-    );
+    const saved =
+      localStorage.getItem(
+        "howtodisappear_user"
+      );
 
-  if (!savedUser) {
+    if (!saved) {
 
-    showToast(
-      "there isn't an identity saved here yet."
-    );
+      showToast(
+        "there isn't a saved identity yet."
+      );
 
-    return;
+      return;
 
-  }
+    }
 
+    try {
 
-  try {
+      currentUser =
+        JSON.parse(saved);
 
-    currentUser =
-      JSON.parse(savedUser);
+      showMain();
 
-    showMain();
+    } catch {
 
-  } catch {
+      showToast(
+        "the saved identity couldn't be opened."
+      );
 
-    localStorage.removeItem(
-      "howtodisappear_user"
-    );
+    }
 
-    showToast(
-      "the saved identity couldn't be opened."
-    );
-
-  }
-
-});
+  });
 
 
 /* =========================================================
-   SAVE USER
+   USER STORAGE
 ========================================================= */
 
 function saveUser() {
@@ -2071,12 +2336,14 @@ function saveUser() {
 
 function showMain() {
 
-  showScreen(appMain);
+  showScreen(app);
 
-  visitorLabel.textContent =
-    currentUser.visitor +
-    "   " +
-    currentUser.symbol;
+  document
+    .getElementById("visitorLabel")
+    .textContent =
+      currentUser.visitor +
+      "   " +
+      currentUser.symbol;
 
 }
 
@@ -2085,15 +2352,17 @@ function showMain() {
    MENU
 ========================================================= */
 
-menuButton.addEventListener("click", () => {
+document
+  .getElementById("menuButton")
+  .addEventListener("click", () => {
 
-  sideMenu.classList.toggle("open");
+    sideMenu.classList.toggle("open");
 
-});
+  });
 
 
 /* =========================================================
-   MODAL BUTTONS
+   MODAL OPENING
 ========================================================= */
 
 document
@@ -2102,12 +2371,11 @@ document
 
     element.addEventListener("click", () => {
 
-      const type =
-        element.dataset.modal;
-
       sideMenu.classList.remove("open");
 
-      openModal(type);
+      openModal(
+        element.dataset.modal
+      );
 
     });
 
@@ -2115,38 +2383,7 @@ document
 
 
 /* =========================================================
-   CLOSE MODAL
-========================================================= */
-
-closeModalButton.addEventListener(
-  "click",
-  closeModal
-);
-
-
-modal.addEventListener(
-  "click",
-  event => {
-
-    if (event.target === modal) {
-
-      closeModal();
-
-    }
-
-  }
-);
-
-
-function closeModal() {
-
-  modal.classList.remove("open");
-
-}
-
-
-/* =========================================================
-   MODAL CONTENT
+   GENERAL MODAL
 ========================================================= */
 
 function openModal(type) {
@@ -2167,8 +2404,8 @@ function openModal(type) {
       </div>
 
       <p class="modal-description">
-        Your own quiet place inside howtodisappear.
-        There isn't anything you have to accomplish here.
+        Your own quiet place inside
+        howtodisappear.
       </p>
 
       <div class="room">
@@ -2178,15 +2415,15 @@ function openModal(type) {
         </div>
 
         <div
-          class="room-window"
           id="roomWindow"
+          class="room-window"
         ></div>
 
         <div class="room-desk"></div>
 
         <div
-          class="room-radio"
           id="roomRadio"
+          class="room-radio"
         >
           RADIO
         </div>
@@ -2211,86 +2448,106 @@ function openModal(type) {
       </div>
 
       <p class="modal-description">
-        Choose somewhere to disappear into for a while.
+        Places that aren't quite real.
       </p>
 
       <div class="world-grid">
 
+        <div class="world" data-place="THE CITY">
+          <div class="world-number">01</div>
+          <h3>THE CITY</h3>
+          <p>
+            3:17 AM. The streets are almost empty.
+          </p>
+        </div>
+
+        <div class="world" data-place="THE STATION">
+          <div class="world-number">02</div>
+          <h3>THE STATION</h3>
+          <p>
+            There is a train waiting.
+          </p>
+        </div>
+
+        <div class="world" data-place="THE EMPTY CINEMA">
+          <div class="world-number">03</div>
+          <h3>THE EMPTY CINEMA</h3>
+          <p>
+            One screen is still running.
+          </p>
+        </div>
+
+        <div class="world" data-place="PLATFORM 0">
+          <div class="world-number">04</div>
+          <h3>PLATFORM 0</h3>
+          <p>
+            This station isn't on any map.
+          </p>
+        </div>
+
+      </div>
+
+    `;
+
+  }
+
+
+  /* -------------------------------------------------------
+     STATIC
+  ------------------------------------------------------- */
+
+  if (type === "static") {
+
+    html = `
+
+      <div class="modal-title">
+        THE STATIC
+      </div>
+
+      <p class="modal-description">
+        For emotions that don't fit neatly
+        into words.
+      </p>
+
+      <div class="static-choice">
+
         <div
-          class="world"
-          data-place="THE CITY"
+          class="static-door"
+          id="nothingDoor"
         >
 
-          <div class="world-number">
+          <div class="static-number">
             01
           </div>
 
           <h3>
-            THE CITY
+            NOTHING
           </h3>
 
           <p>
-            3:17 AM. The streets are almost empty.
+            numb / empty / detached /
+            disconnected / tired
           </p>
 
         </div>
 
 
         <div
-          class="world"
-          data-place="THE STATION"
+          class="static-door"
+          id="angerDoor"
         >
 
-          <div class="world-number">
+          <div class="static-number">
             02
           </div>
 
           <h3>
-            THE STATION
+            ANGER
           </h3>
 
           <p>
-            There is a train waiting.
-          </p>
-
-        </div>
-
-
-        <div
-          class="world"
-          data-place="THE EMPTY CINEMA"
-        >
-
-          <div class="world-number">
-            03
-          </div>
-
-          <h3>
-            THE EMPTY CINEMA
-          </h3>
-
-          <p>
-            One screen is still running.
-          </p>
-
-        </div>
-
-
-        <div
-          class="world"
-          data-place="PLATFORM 0"
-        >
-
-          <div class="world-number">
-            04
-          </div>
-
-          <h3>
-            PLATFORM 0
-          </h3>
-
-          <p>
-            This station isn't on any map.
+            hurt / frustration / betrayal /
+            overload / don't know
           </p>
 
         </div>
@@ -2315,9 +2572,9 @@ function openModal(type) {
       </div>
 
       <p class="modal-description">
-        Write something you don't know how to say.
-        Your entries are private to your account in
-        this prototype.
+        Write what you don't know how to say.
+        These entries are stored privately
+        in this browser prototype.
       </p>
 
       <textarea
@@ -2333,10 +2590,7 @@ function openModal(type) {
         KEEP IT
       </button>
 
-      <div
-        id="journalEntries"
-        class="entries"
-      ></div>
+      <div id="journalEntries"></div>
 
     `;
 
@@ -2393,19 +2647,14 @@ function openModal(type) {
 
       <div class="chat-notice">
 
-        This is a prototype conversation.
+        You're talking to another visitor,
+        not a counsellor or crisis responder.
 
         <br><br>
 
-        A real version should only connect users
-        after secure authentication, moderation,
-        privacy protections, reporting tools,
-        and safety systems are implemented.
-
-        <br><br>
-
-        You are talking to another visitor,
-        not a counselor.
+        Keep personal information private.
+        You can leave, block, or report
+        a conversation at any time.
 
       </div>
 
@@ -2424,24 +2673,19 @@ function openModal(type) {
             </div>
 
             <div class="chat-text">
-              hey
+              hey. you still awake?
             </div>
 
           </div>
 
+        </div>
 
-          <div class="chat-message">
 
-            <div class="chat-user">
-              VISITOR_284
-            </div>
-
-            <div class="chat-text">
-              i don't really know what to say.
-            </div>
-
-          </div>
-
+        <div
+          id="typing"
+          class="typing"
+        >
+          VISITOR_284 is typing...
         </div>
 
 
@@ -2451,6 +2695,7 @@ function openModal(type) {
             id="chatInput"
             class="chat-input"
             placeholder="type something..."
+            autocomplete="off"
           >
 
           <button
@@ -2465,99 +2710,28 @@ function openModal(type) {
       </div>
 
 
-      <div style="
-        display:flex;
-        flex-wrap:wrap;
-        gap:8px;
-        margin-top:12px;
-      ">
+      <div class="chat-controls">
 
         <button
-          class="secondary-button"
           id="leaveChat"
+          class="chat-control"
         >
           LEAVE
         </button>
 
         <button
-          class="secondary-button"
           id="reportChat"
+          class="chat-control"
         >
           REPORT
         </button>
 
         <button
-          class="secondary-button"
           id="blockChat"
+          class="chat-control"
         >
           BLOCK
         </button>
-
-      </div>
-
-    `;
-
-  }
-
-
-  /* -------------------------------------------------------
-     HELP
-  ------------------------------------------------------- */
-
-  if (type === "help") {
-
-    html = `
-
-      <div class="modal-title">
-        YOU DON'T HAVE TO CARRY EVERYTHING ALONE.
-      </div>
-
-      <div class="help-container">
-
-        <h3>
-          NEED SOMEONE RIGHT NOW?
-        </h3>
-
-        <p>
-          howtodisappear is a place to express yourself,
-          but it isn't a crisis service or a replacement
-          for real-world support.
-        </p>
-
-        <div class="help-number">
-          9-8-8
-        </div>
-
-        <p>
-          In Canada, the Suicide Crisis Helpline
-          is available 24/7 by call or text.
-        </p>
-
-        <div class="help-links">
-
-          <a href="tel:988">
-            CALL 988
-          </a>
-
-          <a href="sms:988">
-            TEXT 988
-          </a>
-
-          <a
-            href="https://988.ca/"
-            target="_blank"
-            rel="noopener"
-          >
-            988.CA
-          </a>
-
-        </div>
-
-        <p>
-          If you are in immediate danger,
-          contact emergency services or go to
-          a trusted adult/person nearby.
-        </p>
 
       </div>
 
@@ -2612,6 +2786,19 @@ function openModal(type) {
 
 
   /* -------------------------------------------------------
+     HELP
+  ------------------------------------------------------- */
+
+  if (type === "help") {
+
+    openHelp();
+
+    return;
+
+  }
+
+
+  /* -------------------------------------------------------
      MAP
   ------------------------------------------------------- */
 
@@ -2640,10 +2827,8 @@ function openModal(type) {
           <br><br>
 
           ${currentUser.discovered
-            .map(place =>
-              escapeHTML(place)
-            )
-            .join("  ·  ")
+            .map(escapeHTML)
+            .join(" · ")
           }
 
         </div>
@@ -2659,8 +2844,209 @@ function openModal(type) {
 
   modal.classList.add("open");
 
-
   attachModalEvents(type);
+
+}
+
+
+/* =========================================================
+   STATIC ROOM
+========================================================= */
+
+function openStaticRoom(mode) {
+
+  const isAnger =
+    mode === "anger";
+
+  modalContent.innerHTML = `
+
+    <div class="static-room ${isAnger ? "anger" : ""}">
+
+      <div class="static-heading">
+        ${isAnger ? "ANGER" : "NOTHING"}
+      </div>
+
+      <div class="static-subheading">
+        ${
+          isAnger
+            ? "you don't have to make it sound reasonable."
+            : "you don't have to force yourself to feel something."
+        }
+      </div>
+
+
+      <div class="feeling-options">
+
+        ${
+          isAnger
+          ? `
+            <button class="feeling-option">HURT</button>
+            <button class="feeling-option">FRUSTRATED</button>
+            <button class="feeling-option">BETRAYED</button>
+            <button class="feeling-option">OVERLOADED</button>
+            <button class="feeling-option">IRRITATED</button>
+            <button class="feeling-option">DON'T KNOW</button>
+          `
+          : `
+            <button class="feeling-option">NUMB</button>
+            <button class="feeling-option">EMPTY</button>
+            <button class="feeling-option">DETACHED</button>
+            <button class="feeling-option">TIRED</button>
+            <button class="feeling-option">DISCONNECTED</button>
+            <button class="feeling-option">DON'T KNOW</button>
+          `
+        }
+
+      </div>
+
+
+      <textarea
+        id="staticInput"
+        class="static-textarea"
+        placeholder="${
+          isAnger
+            ? "say everything you don't want to send..."
+            : "you can write even if you don't know what you feel..."
+        }"
+      ></textarea>
+
+
+      <div class="static-action-row">
+
+        <button
+          id="staticSave"
+          class="static-save"
+        >
+          KEEP THIS PRIVATE
+        </button>
+
+        ${
+          isAnger
+          ? `
+            <button
+              id="angerReset"
+              class="static-save"
+            >
+              GIVE YOURSELF A MINUTE
+            </button>
+          `
+          : ""
+        }
+
+      </div>
+
+
+      <button
+        id="staticBack"
+        class="static-back"
+      >
+        ← BACK TO THE STATIC
+      </button>
+
+    </div>
+
+  `;
+
+
+  document
+    .querySelectorAll(".feeling-option")
+    .forEach(button => {
+
+      button.addEventListener(
+        "click",
+        () => {
+
+          document
+            .querySelectorAll(".feeling-option")
+            .forEach(item =>
+              item.classList.remove("selected")
+            );
+
+          button.classList.add("selected");
+
+        }
+      );
+
+    });
+
+
+  document
+    .getElementById("staticSave")
+    .addEventListener(
+      "click",
+      () => {
+
+        const input =
+          document.getElementById(
+            "staticInput"
+          );
+
+        const text =
+          input.value.trim();
+
+        if (!text) {
+
+          showToast(
+            "there's nothing to save yet."
+          );
+
+          return;
+
+        }
+
+        currentUser.entries.unshift({
+
+          text,
+
+          time:
+            new Date().toLocaleTimeString(
+              [],
+              {
+                hour: "2-digit",
+                minute: "2-digit"
+              }
+            ),
+
+          type: mode
+
+        });
+
+        saveUser();
+
+        input.value = "";
+
+        showToast(
+          "kept private."
+        );
+
+      }
+    );
+
+
+  document
+    .getElementById("staticBack")
+    .addEventListener(
+      "click",
+      () => openModal("static")
+    );
+
+
+  if (isAnger) {
+
+    document
+      .getElementById("angerReset")
+      .addEventListener(
+        "click",
+        () => {
+
+          showToast(
+            "take a minute before doing anything else."
+          );
+
+        }
+      );
+
+  }
 
 }
 
@@ -2672,46 +3058,58 @@ function openModal(type) {
 function attachModalEvents(type) {
 
 
-  /* ROOM */
+  if (type === "static") {
 
-  if (type === "room") {
+    document
+      .getElementById("nothingDoor")
+      .addEventListener(
+        "click",
+        () => openStaticRoom("nothing")
+      );
 
-    const windowElement =
-      document.getElementById("roomWindow");
-
-    const radio =
-      document.getElementById("roomRadio");
-
-
-    windowElement.addEventListener(
-      "click",
-      () => {
-
-        discover("THE WINDOW");
-
-        showToast(
-          "rain is falling outside."
-        );
-
-      }
-    );
-
-
-    radio.addEventListener(
-      "click",
-      () => {
-
-        showToast(
-          "the radio is playing static."
-        );
-
-      }
-    );
+    document
+      .getElementById("angerDoor")
+      .addEventListener(
+        "click",
+        () => openStaticRoom("anger")
+      );
 
   }
 
 
-  /* WORLDS */
+  if (type === "room") {
+
+    document
+      .getElementById("roomWindow")
+      .addEventListener(
+        "click",
+        () => {
+
+          discover("THE WINDOW");
+
+          showToast(
+            "rain is falling outside."
+          );
+
+        }
+      );
+
+
+    document
+      .getElementById("roomRadio")
+      .addEventListener(
+        "click",
+        () => {
+
+          showToast(
+            "the radio is playing static."
+          );
+
+        }
+      );
+
+  }
+
 
   if (type === "worlds") {
 
@@ -2735,8 +3133,6 @@ function attachModalEvents(type) {
   }
 
 
-  /* JOURNAL */
-
   if (type === "journal") {
 
     renderJournal();
@@ -2745,13 +3141,11 @@ function attachModalEvents(type) {
       .getElementById("saveJournal")
       .addEventListener(
         "click",
-        saveJournalEntry
+        saveJournal
       );
 
   }
 
-
-  /* WALL */
 
   if (type === "wall") {
 
@@ -2767,20 +3161,24 @@ function attachModalEvents(type) {
   }
 
 
-  /* CHAT */
-
   if (type === "chat") {
 
     const input =
-      document.getElementById("chatInput");
+      document.getElementById(
+        "chatInput"
+      );
 
     const send =
-      document.getElementById("chatSend");
+      document.getElementById(
+        "chatSend"
+      );
+
 
     send.addEventListener(
       "click",
       sendChat
     );
+
 
     input.addEventListener(
       "keydown",
@@ -2802,6 +3200,8 @@ function attachModalEvents(type) {
         "click",
         () => {
 
+          clearTimeout(chatTimer);
+
           closeModal();
 
           showToast(
@@ -2819,7 +3219,7 @@ function attachModalEvents(type) {
         () => {
 
           showToast(
-            "report submitted."
+            "report recorded."
           );
 
         }
@@ -2831,6 +3231,10 @@ function attachModalEvents(type) {
       .addEventListener(
         "click",
         () => {
+
+          clearTimeout(chatTimer);
+
+          closeModal();
 
           showToast(
             "visitor blocked."
@@ -2875,13 +3279,16 @@ function discover(place) {
    JOURNAL
 ========================================================= */
 
-function saveJournalEntry() {
+function saveJournal() {
 
   const input =
-    document.getElementById("journalInput");
+    document.getElementById(
+      "journalInput"
+    );
 
   const text =
     input.value.trim();
+
 
   if (!text) {
 
@@ -2905,7 +3312,9 @@ function saveJournalEntry() {
           hour: "2-digit",
           minute: "2-digit"
         }
-      )
+      ),
+
+    type: "journal"
 
   });
 
@@ -2980,6 +3389,31 @@ function renderJournal() {
    WALL
 ========================================================= */
 
+const defaultWall = [
+
+  {
+    visitor: "VISITOR_108",
+    message: "I wish I knew how to explain it."
+  },
+
+  {
+    visitor: "VISITOR_024",
+    message: "I thought I was over it."
+  },
+
+  {
+    visitor: "VISITOR_391",
+    message: "Maybe tomorrow."
+  },
+
+  {
+    visitor: "VISITOR_077",
+    message: "I don't know what I feel."
+  }
+
+];
+
+
 function getWall() {
 
   const saved =
@@ -2997,7 +3431,6 @@ function getWall() {
     return [...defaultWall];
 
   }
-
 
   try {
 
@@ -3021,6 +3454,7 @@ function postWall() {
 
   const text =
     input.value.trim();
+
 
   if (!text) {
 
@@ -3075,16 +3509,12 @@ function renderWall() {
   if (!container) return;
 
 
-  const wall =
-    getWall();
-
-
   container.innerHTML =
-    wall
+    getWall()
       .slice(0, 20)
       .map(item => `
 
-        <div class="wall-entry">
+        <div class="entry">
 
           <div class="wall-visitor">
             ${escapeHTML(item.visitor)}
@@ -3103,8 +3533,142 @@ function renderWall() {
 
 
 /* =========================================================
-   CHAT
+   LATE NIGHT LINE
 ========================================================= */
+
+const chatResponses = [
+
+  {
+    keywords: ["school", "class", "homework", "teacher"],
+    responses: [
+      "yeah. school can make everything else feel smaller than it actually is.",
+      "sounds like today took a lot out of you.",
+      "what happened today?"
+    ]
+  },
+
+  {
+    keywords: ["alone", "lonely", "nobody", "no one"],
+    responses: [
+      "being around people and still feeling alone is a weird kind of lonely.",
+      "you're not the only person awake right now.",
+      "you can talk about it if you want."
+    ]
+  },
+
+  {
+    keywords: ["angry", "mad", "pissed", "furious", "rage"],
+    responses: [
+      "sounds like there's a lot sitting underneath that anger.",
+      "do you know what started it, or did everything just pile up?",
+      "you don't have to make the anger sound reasonable."
+    ]
+  },
+
+  {
+    keywords: ["nothing", "numb", "empty", "feel nothing"],
+    responses: [
+      "sometimes having no words is still saying something.",
+      "you don't have to force yourself to feel different right now.",
+      "what does 'nothing' feel like for you?"
+    ]
+  },
+
+  {
+    keywords: ["tired", "exhausted", "sleep", "awake"],
+    responses: [
+      "same hour, different thoughts.",
+      "sounds like you need a break from everything for a minute.",
+      "what's keeping you awake?"
+    ]
+  },
+
+  {
+    keywords: ["friend", "friends"],
+    responses: [
+      "people can hurt you without realizing how much it mattered.",
+      "did something happen with them?",
+      "sometimes friendship gets complicated really fast."
+    ]
+  },
+
+  {
+    keywords: ["family", "parent", "parents", "mom", "dad"],
+    responses: [
+      "family stuff can be difficult to explain to someone outside it.",
+      "do you want to tell me what happened?",
+      "yeah. that kind of thing can stay in your head for a while."
+    ]
+  },
+
+  {
+    keywords: ["random", "distract", "something else"],
+    responses: [
+      "okay. new subject.",
+      "deal. tell me something completely random.",
+      "what's the weirdest thing you've been thinking about lately?"
+    ]
+  }
+
+];
+
+
+const generalResponses = [
+
+  "I get why that would stay on your mind.",
+
+  "you don't have to make it sound okay.",
+
+  "yeah. I can see why you'd feel that way.",
+
+  "what happened after that?",
+
+  "that sounds like a lot to sit with.",
+
+  "you can keep talking if you want.",
+
+  "sometimes it's easier to say things to someone you'll never meet.",
+
+  "I don't think you need to have the perfect words for it.",
+
+  "yeah. that makes sense.",
+
+  "what part of it bothers you the most?"
+
+];
+
+
+function chooseChatResponse(text) {
+
+  const lower =
+    text.toLowerCase();
+
+
+  for (const category of chatResponses) {
+
+    const matches =
+      category.keywords.some(
+        keyword =>
+          lower.includes(keyword)
+      );
+
+    if (matches) {
+
+      return randomItem(
+        category.responses
+      );
+
+    }
+
+  }
+
+
+  return randomItem(
+    generalResponses
+  );
+
+}
+
 
 function sendChat() {
 
@@ -3116,6 +3680,11 @@ function sendChat() {
   const messages =
     document.getElementById(
       "chatMessages"
+    );
+
+  const typing =
+    document.getElementById(
+      "typing"
     );
 
 
@@ -3145,8 +3714,23 @@ function sendChat() {
 
   input.value = "";
 
+  messages.scrollTop =
+    messages.scrollHeight;
 
-  setTimeout(() => {
+
+  clearTimeout(chatTimer);
+
+  typing.classList.add("visible");
+
+
+  chatTimer = setTimeout(() => {
+
+    typing.classList.remove("visible");
+
+
+    const response =
+      chooseChatResponse(text);
+
 
     messages.innerHTML += `
 
@@ -3157,7 +3741,7 @@ function sendChat() {
         </div>
 
         <div class="chat-text">
-          i'm listening.
+          ${escapeHTML(response)}
         </div>
 
       </div>
@@ -3168,7 +3752,94 @@ function sendChat() {
     messages.scrollTop =
       messages.scrollHeight;
 
-  }, 800);
+  }, 700 + Math.random() * 1100);
+
+}
+
+
+/* =========================================================
+   HELP
+========================================================= */
+
+function openHelp() {
+
+  sideMenu.classList.remove("open");
+
+  modal.classList.remove("open");
+
+  helpModal.classList.add("open");
+
+  document.body.classList.remove(
+    "site-mode"
+  );
+
+  document.body.style.overflow =
+    "hidden";
+
+}
+
+
+function closeHelp() {
+
+  helpModal.classList.remove("open");
+
+  document.body.classList.add(
+    "site-mode"
+  );
+
+  document.body.style.overflow =
+    "";
+
+}
+
+
+document
+  .getElementById("closeHelp")
+  .addEventListener(
+    "click",
+    closeHelp
+  );
+
+
+document
+  .getElementById("helpBack")
+  .addEventListener(
+    "click",
+    closeHelp
+  );
+
+
+/* =========================================================
+   CLOSE GENERAL MODAL
+========================================================= */
+
+document
+  .getElementById("closeModal")
+  .addEventListener(
+    "click",
+    closeModal
+  );
+
+
+modal.addEventListener(
+  "click",
+  event => {
+
+    if (
+      event.target === modal
+    ) {
+
+      closeModal();
+
+    }
+
+  }
+);
+
+
+function closeModal() {
+
+  modal.classList.remove("open");
 
 }
 
@@ -3183,7 +3854,9 @@ document
     "click",
     () => {
 
-      sideMenu.classList.remove("open");
+      sideMenu.classList.remove(
+        "open"
+      );
 
       closeModal();
 
@@ -3205,6 +3878,17 @@ function escapeHTML(value) {
     .replace(/>/g, "&gt;")
     .replace(/"/g, "&quot;")
     .replace(/'/g, "&#039;");
+
+}
+
+
+function randomItem(array) {
+
+  return array[
+    Math.floor(
+      Math.random() * array.length
+    )
+  ];
 
 }
 
@@ -3247,15 +3931,17 @@ document.addEventListener(
   "keydown",
   event => {
 
-    if (event.key === "Escape") {
-
-      closeModal();
-
-      sideMenu.classList.remove(
-        "open"
-      );
-
+    if (event.key !== "Escape") {
+      return;
     }
+
+    closeModal();
+
+    closeHelp();
+
+    sideMenu.classList.remove(
+      "open"
+    );
 
   }
 );
