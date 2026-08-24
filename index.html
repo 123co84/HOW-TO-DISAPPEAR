@@ -1,0 +1,2139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>howtodisappear</title>
+
+<meta name="theme-color" content="#050505">
+<meta name="description" content="For everything you couldn't say out loud.">
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500&display=swap');
+
+:root {
+    --bg: #050505;
+    --panel: #0b0b0b;
+    --text: #e7e7e2;
+    --muted: #777;
+    --line: #242424;
+    --accent: #b8b8b0;
+    --danger: #9d4b4b;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body {
+    width: 100%;
+    min-height: 100%;
+    background: var(--bg);
+    color: var(--text);
+    font-family: "IBM Plex Mono", monospace;
+}
+
+body {
+    overflow-x: hidden;
+}
+
+/* -------------------------
+   ATMOSPHERE
+------------------------- */
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 9998;
+    opacity: .055;
+    background-image:
+        repeating-linear-gradient(
+            to bottom,
+            transparent 0px,
+            transparent 2px,
+            #fff 3px
+        );
+}
+
+body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 9999;
+    opacity: .07;
+    background:
+        radial-gradient(circle at center, transparent 30%, #000 100%);
+}
+
+button,
+input,
+textarea {
+    font-family: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+/* -------------------------
+   APP
+------------------------- */
+
+#app {
+    min-height: 100vh;
+    position: relative;
+}
+
+.screen {
+    min-height: 100vh;
+    display: none;
+    position: relative;
+}
+
+.screen.active {
+    display: block;
+}
+
+/* -------------------------
+   INTRO
+------------------------- */
+
+#intro {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 30px;
+    background:
+        radial-gradient(circle at 50% 40%, #161616 0%, #080808 35%, #020202 75%);
+}
+
+.intro-content {
+    max-width: 850px;
+    width: 100%;
+}
+
+.system {
+    position: absolute;
+    top: 25px;
+    left: 25px;
+    color: #555;
+    font-size: 10px;
+    line-height: 1.8;
+    text-align: left;
+}
+
+.title {
+    font-size: clamp(45px, 9vw, 115px);
+    letter-spacing: -5px;
+    font-weight: 300;
+    line-height: .95;
+    text-transform: lowercase;
+    animation: flicker 7s infinite;
+}
+
+.subtitle {
+    margin-top: 25px;
+    color: #8b8b8b;
+    font-size: 12px;
+}
+
+.enter {
+    margin-top: 65px;
+    border: 1px solid #333;
+    background: transparent;
+    color: #aaa;
+    padding: 15px 28px;
+    transition: .3s;
+    font-size: 11px;
+}
+
+.enter:hover {
+    background: #eee;
+    color: #050505;
+}
+
+.cursor {
+    display: inline-block;
+    width: 7px;
+    height: 13px;
+    background: #aaa;
+    margin-left: 4px;
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+    50% { opacity: 0; }
+}
+
+@keyframes flicker {
+    0%, 18%, 20%, 62%, 64%, 100% { opacity: 1; }
+    19%, 63% { opacity: .7; }
+}
+
+/* -------------------------
+   AUTH
+------------------------- */
+
+#auth {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 25px;
+}
+
+.auth-box {
+    width: min(500px, 100%);
+    border: 1px solid var(--line);
+    background: #070707;
+    padding: 45px;
+}
+
+.auth-box h2 {
+    font-size: 20px;
+    font-weight: 400;
+}
+
+.auth-box p {
+    color: #666;
+    font-size: 11px;
+    margin-top: 10px;
+    line-height: 1.8;
+}
+
+.auth-actions {
+    margin-top: 35px;
+    display: grid;
+    gap: 10px;
+}
+
+.primary,
+.secondary {
+    width: 100%;
+    padding: 14px;
+    background: transparent;
+    border: 1px solid #333;
+    color: #aaa;
+}
+
+.primary:hover,
+.secondary:hover {
+    background: #ddd;
+    color: #000;
+}
+
+#signupForm {
+    display: none;
+    margin-top: 25px;
+}
+
+.field {
+    margin-bottom: 18px;
+}
+
+.field label {
+    display: block;
+    color: #666;
+    font-size: 10px;
+    margin-bottom: 7px;
+}
+
+.field input,
+.field textarea {
+    width: 100%;
+    background: #030303;
+    border: 1px solid #292929;
+    color: #ddd;
+    padding: 12px;
+    outline: none;
+}
+
+.field input:focus,
+.field textarea:focus {
+    border-color: #666;
+}
+
+.symbols {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.symbol {
+    width: 42px;
+    height: 42px;
+    border: 1px solid #292929;
+    background: #050505;
+    color: #888;
+}
+
+.symbol.selected {
+    border-color: #aaa;
+    color: white;
+}
+
+/* -------------------------
+   MAIN
+------------------------- */
+
+#main {
+    padding-bottom: 80px;
+}
+
+.topbar {
+    height: 65px;
+    border-bottom: 1px solid var(--line);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 25px;
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(5,5,5,.92);
+    backdrop-filter: blur(10px);
+}
+
+.logo {
+    font-size: 12px;
+    letter-spacing: 1px;
+}
+
+.menu-button {
+    border: 0;
+    background: none;
+    color: #888;
+    font-size: 16px;
+}
+
+.menu-button:hover {
+    color: white;
+}
+
+.dashboard {
+    width: min(1200px, 92%);
+    margin: auto;
+}
+
+.welcome {
+    min-height: 45vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-bottom: 1px solid var(--line);
+}
+
+.welcome small {
+    color: #555;
+    font-size: 10px;
+}
+
+.welcome h1 {
+    font-size: clamp(35px, 7vw, 80px);
+    font-weight: 300;
+    margin: 15px 0;
+}
+
+.welcome p {
+    color: #666;
+    font-size: 11px;
+    max-width: 550px;
+    line-height: 2;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border-left: 1px solid var(--line);
+    margin-top: 40px;
+}
+
+.card {
+    min-height: 190px;
+    padding: 25px;
+    border-right: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    cursor: pointer;
+    transition: .4s;
+    position: relative;
+    overflow: hidden;
+}
+
+.card:hover {
+    background: #0c0c0c;
+}
+
+.card-number {
+    color: #444;
+    font-size: 10px;
+}
+
+.card h3 {
+    margin-top: 35px;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.card p {
+    margin-top: 12px;
+    color: #666;
+    font-size: 10px;
+    line-height: 1.7;
+}
+
+.card::after {
+    content: "↗";
+    position: absolute;
+    right: 20px;
+    bottom: 18px;
+    color: #444;
+}
+
+/* -------------------------
+   MODAL
+------------------------- */
+
+#modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.88);
+    z-index: 200;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+#modal.active {
+    display: flex;
+}
+
+.modal-box {
+    width: min(850px, 100%);
+    max-height: 90vh;
+    overflow-y: auto;
+    background: #070707;
+    border: 1px solid #292929;
+    padding: 35px;
+}
+
+.close {
+    float: right;
+    border: 0;
+    background: none;
+    color: #666;
+    font-size: 18px;
+}
+
+.modal-title {
+    font-size: 25px;
+    font-weight: 300;
+    margin-bottom: 30px;
+}
+
+.room {
+    min-height: 450px;
+    border: 1px solid #222;
+    position: relative;
+    background:
+        linear-gradient(to bottom, #0a0a0a, #030303);
+    overflow: hidden;
+}
+
+.window {
+    position: absolute;
+    top: 50px;
+    right: 50px;
+    width: 180px;
+    height: 120px;
+    border: 3px solid #171717;
+    background: linear-gradient(#080808, #141414);
+    cursor: pointer;
+}
+
+.window::before,
+.window::after {
+    content: "";
+    position: absolute;
+    background: #222;
+}
+
+.window::before {
+    width: 1px;
+    height: 100%;
+    left: 50%;
+}
+
+.window::after {
+    width: 100%;
+    height: 1px;
+    top: 50%;
+}
+
+.room-object {
+    position: absolute;
+    cursor: pointer;
+    color: #777;
+    font-size: 10px;
+}
+
+.desk {
+    bottom: 80px;
+    left: 80px;
+    width: 220px;
+    height: 50px;
+    border-top: 3px solid #222;
+}
+
+.radio {
+    bottom: 110px;
+    left: 140px;
+    border: 1px solid #333;
+    padding: 15px;
+}
+
+.clock {
+    top: 45px;
+    left: 50px;
+    color: #aaa;
+}
+
+/* -------------------------
+   JOURNAL
+------------------------- */
+
+textarea {
+    min-height: 180px;
+    resize: vertical;
+}
+
+.save-entry {
+    margin-top: 12px;
+    padding: 12px 20px;
+    background: transparent;
+    border: 1px solid #333;
+    color: #aaa;
+}
+
+.entries {
+    margin-top: 30px;
+}
+
+.entry {
+    border: 1px solid #222;
+    padding: 18px;
+    margin-bottom: 10px;
+}
+
+.entry-time {
+    color: #555;
+    font-size: 9px;
+}
+
+.entry-text {
+    margin-top: 10px;
+    color: #aaa;
+    white-space: pre-wrap;
+    line-height: 1.8;
+}
+
+/* -------------------------
+   WALL
+------------------------- */
+
+.wall-entry {
+    border-bottom: 1px solid #222;
+    padding: 25px 0;
+}
+
+.wall-entry .visitor {
+    color: #555;
+    font-size: 9px;
+}
+
+.wall-entry .message {
+    margin-top: 12px;
+    color: #aaa;
+    line-height: 1.8;
+}
+
+.wall-form {
+    margin-bottom: 35px;
+}
+
+/* -------------------------
+   HELP
+------------------------- */
+
+.help-box {
+    border: 1px solid #333;
+    padding: 30px;
+    background: #080808;
+}
+
+.help-box h3 {
+    font-size: 20px;
+    font-weight: 400;
+}
+
+.help-box p {
+    color: #777;
+    font-size: 11px;
+    line-height: 1.9;
+    margin-top: 15px;
+}
+
+.help-number {
+    font-size: 34px;
+    margin: 25px 0;
+}
+
+.help-buttons {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.help-buttons a {
+    border: 1px solid #333;
+    color: #aaa;
+    text-decoration: none;
+    padding: 13px 18px;
+}
+
+.help-buttons a:hover {
+    background: #ddd;
+    color: black;
+}
+
+/* -------------------------
+   CHAT
+------------------------- */
+
+.chat-warning {
+    padding: 15px;
+    border: 1px solid #333;
+    color: #777;
+    font-size: 10px;
+    line-height: 1.8;
+    margin-bottom: 20px;
+}
+
+.chat {
+    border: 1px solid #222;
+    min-height: 400px;
+    display: flex;
+    flex-direction: column;
+}
+
+.messages {
+    flex: 1;
+    padding: 20px;
+}
+
+.message {
+    margin-bottom: 20px;
+    max-width: 75%;
+}
+
+.message.you {
+    margin-left: auto;
+    text-align: right;
+}
+
+.message span {
+    display: block;
+    color: #555;
+    font-size: 9px;
+    margin-bottom: 5px;
+}
+
+.message p {
+    color: #aaa;
+    font-size: 11px;
+    line-height: 1.7;
+}
+
+.chat-input {
+    display: flex;
+    border-top: 1px solid #222;
+}
+
+.chat-input input {
+    flex: 1;
+    background: #050505;
+    border: 0;
+    color: #ddd;
+    padding: 15px;
+    outline: none;
+}
+
+.chat-input button {
+    width: 90px;
+    border: 0;
+    border-left: 1px solid #222;
+    background: #080808;
+    color: #777;
+}
+
+/* -------------------------
+   MENU
+------------------------- */
+
+#sideMenu {
+    position: fixed;
+    right: 20px;
+    top: 75px;
+    width: 230px;
+    z-index: 100;
+    background: #080808;
+    border: 1px solid #292929;
+    display: none;
+}
+
+#sideMenu.active {
+    display: block;
+}
+
+#sideMenu button {
+    display: block;
+    width: 100%;
+    text-align: left;
+    padding: 15px;
+    background: none;
+    color: #777;
+    border: 0;
+    border-bottom: 1px solid #1c1c1c;
+}
+
+#sideMenu button:hover {
+    color: white;
+    background: #0e0e0e;
+}
+
+/* -------------------------
+   TOAST
+------------------------- */
+
+#toast {
+    position: fixed;
+    bottom: 25px;
+    left: 50%;
+    transform: translateX(-50%) translateY(30px);
+    background: #ddd;
+    color: #050505;
+    padding: 12px 18px;
+    font-size: 10px;
+    opacity: 0;
+    pointer-events: none;
+    transition: .4s;
+    z-index: 500;
+}
+
+#toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+/* -------------------------
+   MOBILE
+------------------------- */
+
+@media (max-width: 750px) {
+
+    .grid {
+        grid-template-columns: 1fr;
+    }
+
+    .auth-box {
+        padding: 28px;
+    }
+
+    .welcome {
+        min-height: 38vh;
+    }
+
+    .modal-box {
+        padding: 22px;
+    }
+
+    .room {
+        min-height: 500px;
+    }
+
+    .window {
+        right: 20px;
+        top: 30px;
+    }
+
+    .desk {
+        left: 25px;
+    }
+
+    .radio {
+        left: 70px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div id="app">
+
+<!-- =========================
+     INTRO
+========================= -->
+
+<section id="intro" class="screen active">
+
+    <div class="system">
+        connection: unstable<br>
+        location: unknown<br>
+        identity: unnecessary<br>
+        time: <span id="time">03:17</span>
+    </div>
+
+    <div class="intro-content">
+
+        <div class="title">
+            howtodisappear
+        </div>
+
+        <div class="subtitle">
+            for everything you couldn't say out loud.
+        </div>
+
+        <button class="enter" onclick="enterSite()">
+            enter quietly
+        </button>
+
+        <div style="margin-top:20px;">
+            <span class="cursor"></span>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     AUTH
+========================= -->
+
+<section id="auth" class="screen">
+
+    <div class="auth-box">
+
+        <h2>ARE YOU NEW HERE?</h2>
+
+        <p>
+            You don't need to use your real name here.
+            Create a fictional identity for your time inside the world.
+        </p>
+
+        <div class="auth-actions" id="authChoices">
+
+            <button class="primary" onclick="showSignup()">
+                CREATE AN IDENTITY
+            </button>
+
+            <button class="secondary" onclick="loginExisting()">
+                I'VE BEEN HERE BEFORE
+            </button>
+
+        </div>
+
+
+        <form id="signupForm" onsubmit="createAccount(event)">
+
+            <div class="field">
+
+                <label>WHAT SHOULD WE CALL YOU?</label>
+
+                <input
+                    id="username"
+                    maxlength="20"
+                    required
+                    placeholder="visitor"
+                >
+
+            </div>
+
+
+            <div class="field">
+
+                <label>CHOOSE YOUR SYMBOL</label>
+
+                <div class="symbols">
+
+                    <button type="button" class="symbol selected" onclick="chooseSymbol(this)">○</button>
+                    <button type="button" class="symbol" onclick="chooseSymbol(this)">△</button>
+                    <button type="button" class="symbol" onclick="chooseSymbol(this)">□</button>
+                    <button type="button" class="symbol" onclick="chooseSymbol(this)">◇</button>
+                    <button type="button" class="symbol" onclick="chooseSymbol(this)">☆</button>
+                    <button type="button" class="symbol" onclick="chooseSymbol(this)">+</button>
+                    <button type="button" class="symbol" onclick="chooseSymbol(this)">~</button>
+
+                </div>
+
+            </div>
+
+
+            <div class="field">
+
+                <label>CHOOSE YOUR FIRST PLACE</label>
+
+                <select
+                    id="startingPlace"
+                    style="width:100%;background:#030303;color:#aaa;border:1px solid #292929;padding:12px;"
+                >
+
+                    <option>THE ROOM</option>
+                    <option>THE STATION</option>
+                    <option>THE CITY</option>
+                    <option>SOMEWHERE UNKNOWN</option>
+
+                </select>
+
+            </div>
+
+
+            <button class="primary" type="submit">
+                ENTER
+            </button>
+
+        </form>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     MAIN
+========================= -->
+
+<section id="main" class="screen">
+
+    <header class="topbar">
+
+        <div class="logo">
+            HOWTODISAPPEAR
+        </div>
+
+        <button class="menu-button" onclick="toggleMenu()">
+            ···
+        </button>
+
+    </header>
+
+
+    <div id="sideMenu">
+
+        <button onclick="openModal('profile')">
+            PROFILE
+        </button>
+
+        <button onclick="openModal('journal')">
+            UNSENT
+        </button>
+
+        <button onclick="openModal('wall')">
+            THE WALL
+        </button>
+
+        <button onclick="openModal('chat')">
+            LATE NIGHT LINE
+        </button>
+
+        <button onclick="openModal('help')">
+            NEED HELP?
+        </button>
+
+        <button onclick="openModal('map')">
+            MAP
+        </button>
+
+        <button onclick="logout()">
+            LEAVE
+        </button>
+
+    </div>
+
+
+    <main class="dashboard">
+
+        <section class="welcome">
+
+            <small id="visitorNumber">
+                VISITOR
+            </small>
+
+            <h1>
+                welcome back.
+            </h1>
+
+            <p id="welcomeText">
+                You don't have to explain yourself here.
+                You can stay for a while.
+            </p>
+
+        </section>
+
+
+        <section class="grid">
+
+            <article class="card" onclick="openModal('room')">
+
+                <span class="card-number">01</span>
+
+                <h3>MY ROOM</h3>
+
+                <p>
+                    Somewhere quiet to exist for a while.
+                </p>
+
+            </article>
+
+
+            <article class="card" onclick="openModal('worlds')">
+
+                <span class="card-number">02</span>
+
+                <h3>WORLDS</h3>
+
+                <p>
+                    Places that aren't quite real.
+                </p>
+
+            </article>
+
+
+            <article class="card" onclick="openModal('journal')">
+
+                <span class="card-number">03</span>
+
+                <h3>UNSENT</h3>
+
+                <p>
+                    Things you don't know how to say.
+                </p>
+
+            </article>
+
+
+            <article class="card" onclick="openModal('wall')">
+
+                <span class="card-number">04</span>
+
+                <h3>THE WALL</h3>
+
+                <p>
+                    Anonymous thoughts left behind.
+                </p>
+
+            </article>
+
+
+            <article class="card" onclick="openModal('chat')">
+
+                <span class="card-number">05</span>
+
+                <h3>LATE NIGHT LINE</h3>
+
+                <p>
+                    Someone is listening.
+                </p>
+
+            </article>
+
+
+            <article class="card" onclick="openModal('help')">
+
+                <span class="card-number">06</span>
+
+                <h3>NEED HELP?</h3>
+
+                <p>
+                    You don't have to carry everything alone.
+                </p>
+
+            </article>
+
+        </section>
+
+    </main>
+
+</section>
+
+
+<!-- =========================
+     MODAL
+========================= -->
+
+<div id="modal">
+
+    <div class="modal-box">
+
+        <button class="close" onclick="closeModal()">×</button>
+
+        <div id="modalContent"></div>
+
+    </div>
+
+</div>
+
+
+<div id="toast"></div>
+
+</div>
+
+
+<script>
+
+/* =========================
+   DATA
+========================= */
+
+let currentUser = null;
+
+let selectedSymbol = "○";
+
+const defaultWall = [
+    {
+        visitor: "VISITOR_108",
+        message: "I wish I knew how to explain it."
+    },
+    {
+        visitor: "VISITOR_024",
+        message: "I thought I was over it."
+    },
+    {
+        visitor: "VISITOR_391",
+        message: "Maybe tomorrow."
+    },
+    {
+        visitor: "VISITOR_077",
+        message: "I don't know what I feel."
+    }
+];
+
+
+/* =========================
+   UTILITIES
+========================= */
+
+function showScreen(id) {
+
+    document.querySelectorAll(".screen").forEach(screen => {
+        screen.classList.remove("active");
+    });
+
+    document.getElementById(id).classList.add("active");
+
+}
+
+
+function toast(message) {
+
+    const el = document.getElementById("toast");
+
+    el.textContent = message;
+
+    el.classList.add("show");
+
+    setTimeout(() => {
+        el.classList.remove("show");
+    }, 2500);
+
+}
+
+
+/* =========================
+   INTRO
+========================= */
+
+function enterSite() {
+
+    const saved = localStorage.getItem("htdUser");
+
+    if (saved) {
+
+        currentUser = JSON.parse(saved);
+
+        showMain();
+
+    } else {
+
+        showScreen("auth");
+
+    }
+
+}
+
+
+/* =========================
+   AUTH
+========================= */
+
+function showSignup() {
+
+    document.getElementById("authChoices").style.display = "none";
+
+    document.getElementById("signupForm").style.display = "block";
+
+}
+
+
+function chooseSymbol(button) {
+
+    document.querySelectorAll(".symbol").forEach(btn => {
+        btn.classList.remove("selected");
+    });
+
+    button.classList.add("selected");
+
+    selectedSymbol = button.textContent;
+
+}
+
+
+function createAccount(event) {
+
+    event.preventDefault();
+
+    const username =
+        document.getElementById("username").value.trim();
+
+    const startingPlace =
+        document.getElementById("startingPlace").value;
+
+    if (!username) return;
+
+    const visitorID =
+        Math.floor(100 + Math.random() * 899);
+
+    currentUser = {
+
+        username,
+
+        symbol: selectedSymbol,
+
+        visitor: "VISITOR_" + visitorID,
+
+        startingPlace,
+
+        discovered: [startingPlace],
+
+        entries: [],
+
+        created: new Date().toISOString()
+
+    };
+
+    localStorage.setItem(
+        "htdUser",
+        JSON.stringify(currentUser)
+    );
+
+    showMain();
+
+}
+
+
+/* =========================
+   LOGIN
+========================= */
+
+function loginExisting() {
+
+    const saved = localStorage.getItem("htdUser");
+
+    if (!saved) {
+
+        toast("No identity found on this device.");
+
+        return;
+
+    }
+
+    currentUser = JSON.parse(saved);
+
+    showMain();
+
+}
+
+
+/* =========================
+   MAIN
+========================= */
+
+function showMain() {
+
+    showScreen("main");
+
+    document.getElementById("visitorNumber").textContent =
+        currentUser.visitor + "  " + currentUser.symbol;
+
+    document.getElementById("welcomeText").textContent =
+        "You left something here. You can stay for a while.";
+
+}
+
+
+/* =========================
+   MENU
+========================= */
+
+function toggleMenu() {
+
+    document
+        .getElementById("sideMenu")
+        .classList.toggle("active");
+
+}
+
+
+/* =========================
+   MODALS
+========================= */
+
+function openModal(type) {
+
+    document
+        .getElementById("sideMenu")
+        .classList.remove("active");
+
+    const modal =
+        document.getElementById("modal");
+
+    const content =
+        document.getElementById("modalContent");
+
+    let html = "";
+
+
+    /* ROOM */
+
+    if (type === "room") {
+
+        html = `
+
+            <div class="modal-title">
+                MY ROOM
+            </div>
+
+            <p style="color:#666;font-size:11px;margin-bottom:20px;">
+                ${currentUser.username}'s room.
+            </p>
+
+            <div class="room">
+
+                <div class="room-object clock">
+                    03:17
+                </div>
+
+                <div
+                    class="window"
+                    onclick="discover('THE WINDOW')"
+                    title="look outside"
+                ></div>
+
+                <div class="room-object desk"></div>
+
+                <div
+                    class="room-object radio"
+                    onclick="toast('the radio is playing static.')"
+                >
+                    RADIO
+                </div>
+
+            </div>
+
+            <p style="
+                color:#555;
+                font-size:10px;
+                margin-top:20px;
+                line-height:1.8;
+            ">
+                There isn't anything you need to do here.
+                You can just stay.
+            </p>
+
+        `;
+
+    }
+
+
+    /* WORLDS */
+
+    if (type === "worlds") {
+
+        html = `
+
+            <div class="modal-title">
+                WORLDS
+            </div>
+
+            <p style="color:#666;font-size:11px;margin-bottom:25px;">
+                choose somewhere to go.
+            </p>
+
+            <div class="grid" style="margin:0;">
+
+                <article
+                    class="card"
+                    onclick="discover('THE CITY')"
+                >
+                    <span class="card-number">01</span>
+                    <h3>THE CITY</h3>
+                    <p>3:17 AM. The streets are almost empty.</p>
+                </article>
+
+                <article
+                    class="card"
+                    onclick="discover('THE STATION')"
+                >
+                    <span class="card-number">02</span>
+                    <h3>THE STATION</h3>
+                    <p>There is a train waiting.</p>
+                </article>
+
+                <article
+                    class="card"
+                    onclick="discover('THE EMPTY CINEMA')"
+                >
+                    <span class="card-number">03</span>
+                    <h3>THE EMPTY CINEMA</h3>
+                    <p>One screen is still running.</p>
+                </article>
+
+                <article
+                    class="card"
+                    onclick="discover('PLATFORM 0')"
+                >
+                    <span class="card-number">04</span>
+                    <h3>PLATFORM 0</h3>
+                    <p>This station isn't on any map.</p>
+                </article>
+
+            </div>
+
+        `;
+
+    }
+
+
+    /* JOURNAL */
+
+    if (type === "journal") {
+
+        html = `
+
+            <div class="modal-title">
+                UNSENT
+            </div>
+
+            <p style="color:#666;font-size:11px;margin-bottom:20px;">
+                Write something you don't know how to say.
+                It stays private on this device.
+            </p>
+
+            <div class="field">
+
+                <textarea
+                    id="journalText"
+                    placeholder="say it here..."
+                ></textarea>
+
+            </div>
+
+            <button
+                class="save-entry"
+                onclick="saveJournal()"
+            >
+                KEEP IT
+            </button>
+
+            <div class="entries" id="entries"></div>
+
+        `;
+
+    }
+
+
+    /* WALL */
+
+    if (type === "wall") {
+
+        html = `
+
+            <div class="modal-title">
+                THE WALL
+            </div>
+
+            <p style="color:#666;font-size:11px;margin-bottom:30px;">
+                Anonymous thoughts left behind.
+            </p>
+
+            <div class="wall-form">
+
+                <textarea
+                    id="wallText"
+                    placeholder="leave something behind..."
+                    style="min-height:100px;"
+                ></textarea>
+
+                <button
+                    class="save-entry"
+                    onclick="postWall()"
+                >
+                    LEAVE IT HERE
+                </button>
+
+            </div>
+
+            <div id="wallEntries"></div>
+
+        `;
+
+    }
+
+
+    /* CHAT */
+
+    if (type === "chat") {
+
+        html = `
+
+            <div class="modal-title">
+                THE LATE NIGHT LINE
+            </div>
+
+            <div class="chat-warning">
+
+                This prototype uses a simulated conversation.
+                A real version would connect people only after
+                secure authentication, moderation, reporting,
+                privacy protections, and safety systems are implemented.
+
+                <br><br>
+
+                You are talking to another visitor, not a counselor.
+
+            </div>
+
+            <div class="chat">
+
+                <div class="messages" id="messages">
+
+                    <div class="message">
+
+                        <span>VISITOR_284</span>
+
+                        <p>
+                            hey
+                        </p>
+
+                    </div>
+
+                    <div class="message">
+
+                        <span>VISITOR_284</span>
+
+                        <p>
+                            i don't really know what to say.
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <div class="chat-input">
+
+                    <input
+                        id="chatInput"
+                        placeholder="type something..."
+                        onkeydown="if(event.key==='Enter') sendChat()"
+                    >
+
+                    <button onclick="sendChat()">
+                        SEND
+                    </button>
+
+                </div>
+
+            </div>
+
+            <div style="
+                display:flex;
+                gap:8px;
+                margin-top:15px;
+            ">
+
+                <button
+                    class="secondary"
+                    onclick="toast('conversation ended.')"
+                >
+                    LEAVE
+                </button>
+
+                <button
+                    class="secondary"
+                    onclick="toast('report option opened.')"
+                >
+                    REPORT
+                </button>
+
+                <button
+                    class="secondary"
+                    onclick="toast('visitor blocked.')"
+                >
+                    BLOCK
+                </button>
+
+            </div>
+
+        `;
+
+    }
+
+
+    /* HELP */
+
+    if (type === "help") {
+
+        html = `
+
+            <div class="modal-title">
+                YOU DON'T HAVE TO CARRY EVERYTHING ALONE.
+            </div>
+
+            <div class="help-box">
+
+                <h3>
+                    NEED SOMEONE RIGHT NOW?
+                </h3>
+
+                <p>
+                    howtodisappear is a place to express yourself,
+                    but it isn't a crisis service or a replacement
+                    for a trusted person or professional support.
+                </p>
+
+                <div class="help-number">
+                    9-8-8
+                </div>
+
+                <p>
+                    In Canada, the Suicide Crisis Helpline is
+                    available 24/7 by call or text.
+                </p>
+
+                <div class="help-buttons">
+
+                    <a href="tel:988">
+                        CALL 988
+                    </a>
+
+                    <a href="sms:988">
+                        TEXT 988
+                    </a>
+
+                    <a
+                        href="https://988.ca/"
+                        target="_blank"
+                        rel="noopener"
+                    >
+                        988.CA
+                    </a>
+
+                </div>
+
+                <p style="margin-top:25px;">
+
+                    If you are in immediate danger,
+                    contact emergency services or go to a
+                    trusted adult/person nearby.
+
+                </p>
+
+            </div>
+
+        `;
+
+    }
+
+
+    /* MAP */
+
+    if (type === "map") {
+
+        html = `
+
+            <div class="modal-title">
+                YOUR MAP
+            </div>
+
+            <p style="color:#666;font-size:11px;margin-bottom:30px;">
+                places you have discovered.
+            </p>
+
+            <div style="
+                min-height:350px;
+                border:1px solid #222;
+                display:flex;
+                align-items:center;
+                justify-content:center;
+                position:relative;
+            ">
+
+                <div style="
+                    text-align:center;
+                    color:#aaa;
+                    font-size:11px;
+                    line-height:3;
+                ">
+
+                    ${currentUser.symbol}
+                    <br>
+
+                    YOU
+
+                    <br>
+
+                    ↓
+
+                    <br>
+
+                    ${currentUser.discovered.join("  ·  ")}
+
+                </div>
+
+            </div>
+
+        `;
+
+    }
+
+
+    /* PROFILE */
+
+    if (type === "profile") {
+
+        html = `
+
+            <div class="modal-title">
+                YOUR IDENTITY
+            </div>
+
+            <div style="
+                border:1px solid #222;
+                padding:30px;
+            ">
+
+                <div style="font-size:40px;">
+                    ${currentUser.symbol}
+                </div>
+
+                <div style="
+                    margin-top:20px;
+                    font-size:16px;
+                ">
+                    ${escapeHTML(currentUser.username)}
+                </div>
+
+                <div style="
+                    color:#555;
+                    margin-top:10px;
+                    font-size:10px;
+                ">
+                    ${currentUser.visitor}
+                </div>
+
+                <div style="
+                    color:#555;
+                    margin-top:25px;
+                    font-size:10px;
+                    line-height:2;
+                ">
+
+                    ${currentUser.discovered.length}
+                    places discovered
+
+                    <br>
+
+                    ${currentUser.entries.length}
+                    unsent thoughts
+
+                </div>
+
+            </div>
+
+        `;
+
+    }
+
+
+    content.innerHTML = html;
+
+    modal.classList.add("active");
+
+    if (type === "journal") renderEntries();
+
+    if (type === "wall") renderWall();
+
+}
+
+
+function closeModal() {
+
+    document
+        .getElementById("modal")
+        .classList.remove("active");
+
+}
+
+
+/* =========================
+   JOURNAL
+========================= */
+
+function saveJournal() {
+
+    const text =
+        document.getElementById("journalText").value.trim();
+
+    if (!text) return;
+
+    currentUser.entries.unshift({
+
+        text,
+
+        time: new Date().toLocaleTimeString([], {
+            hour: "2-digit",
+            minute: "2-digit"
+        })
+
+    });
+
+    localStorage.setItem(
+        "htdUser",
+        JSON.stringify(currentUser)
+    );
+
+    document.getElementById("journalText").value = "";
+
+    renderEntries();
+
+    toast("saved to unsent.");
+
+}
+
+
+function renderEntries() {
+
+    const container =
+        document.getElementById("entries");
+
+    if (!container) return;
+
+    if (!currentUser.entries.length) {
+
+        container.innerHTML = `
+            <p style="color:#444;font-size:10px;">
+                nothing here yet.
+            </p>
+        `;
+
+        return;
+
+    }
+
+    container.innerHTML =
+        currentUser.entries.map(entry => `
+
+            <div class="entry">
+
+                <div class="entry-time">
+                    ${entry.time}
+                </div>
+
+                <div class="entry-text">
+                    ${escapeHTML(entry.text)}
+                </div>
+
+            </div>
+
+        `).join("");
+
+}
+
+
+/* =========================
+   WALL
+========================= */
+
+function getWall() {
+
+    const saved =
+        localStorage.getItem("htdWall");
+
+    return saved
+        ? JSON.parse(saved)
+        : defaultWall;
+
+}
+
+
+function postWall() {
+
+    const input =
+        document.getElementById("wallText");
+
+    const message =
+        input.value.trim();
+
+    if (!message) return;
+
+    const wall = getWall();
+
+    wall.unshift({
+
+        visitor: currentUser.visitor,
+
+        message
+
+    });
+
+    localStorage.setItem(
+        "htdWall",
+        JSON.stringify(wall)
+    );
+
+    input.value = "";
+
+    renderWall();
+
+    toast("left behind.");
+
+}
+
+
+function renderWall() {
+
+    const container =
+        document.getElementById("wallEntries");
+
+    if (!container) return;
+
+    const wall = getWall();
+
+    container.innerHTML =
+        wall.slice(0, 20).map(item => `
+
+            <div class="wall-entry">
+
+                <div class="visitor">
+                    ${escapeHTML(item.visitor)}
+                </div>
+
+                <div class="message">
+                    ${escapeHTML(item.message)}
+                </div>
+
+            </div>
+
+        `).join("");
+
+}
+
+
+/* =========================
+   CHAT DEMO
+========================= */
+
+function sendChat() {
+
+    const input =
+        document.getElementById("chatInput");
+
+    const text =
+        input.value.trim();
+
+    if (!text) return;
+
+    const messages =
+        document.getElementById("messages");
+
+    messages.innerHTML += `
+
+        <div class="message you">
+
+            <span>${escapeHTML(currentUser.visitor)}</span>
+
+            <p>
+                ${escapeHTML(text)}
+            </p>
+
+        </div>
+
+    `;
+
+    input.value = "";
+
+    setTimeout(() => {
+
+        messages.innerHTML += `
+
+            <div class="message">
+
+                <span>VISITOR_284</span>
+
+                <p>
+                    i'm listening.
+                </p>
+
+            </div>
+
+        `;
+
+        messages.scrollTop =
+            messages.scrollHeight;
+
+    }, 900);
+
+}
+
+
+/* =========================
+   DISCOVERIES
+========================= */
+
+function discover(place) {
+
+    if (!currentUser.discovered.includes(place)) {
+
+        currentUser.discovered.push(place);
+
+        localStorage.setItem(
+            "htdUser",
+            JSON.stringify(currentUser)
+        );
+
+        toast("new place discovered: " + place);
+
+    } else {
+
+        toast(place);
+
+    }
+
+}
+
+
+/* =========================
+   LOGOUT
+========================= */
+
+function logout() {
+
+    closeModal();
+
+    document
+        .getElementById("sideMenu")
+        .classList.remove("active");
+
+    showScreen("intro");
+
+    toast("connection closed.");
+
+}
+
+
+/* =========================
+   ESCAPE HTML
+========================= */
+
+function escapeHTML(str) {
+
+    return String(str)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+
+}
+
+
+/* =========================
+   CLOCK
+========================= */
+
+function updateClock() {
+
+    const now = new Date();
+
+    const time =
+        now.toLocaleTimeString([], {
+            hour: "2-digit",
+            minute: "2-digit"
+        });
+
+    document.getElementById("time").textContent = time;
+
+}
+
+updateClock();
+
+setInterval(updateClock, 30000);
+
+
+/* =========================
+   CLOSE MODAL ON BACKDROP
+========================= */
+
+document
+    .getElementById("modal")
+    .addEventListener("click", function(event) {
+
+        if (event.target === this) {
+
+            closeModal();
+
+        }
+
+    });
+
+
+/* =========================
+   ESC KEY
+========================= */
+
+document.addEventListener("keydown", function(event) {
+
+    if (event.key === "Escape") {
+
+        closeModal();
+
+        document
+            .getElementById("sideMenu")
+            .classList.remove("active");
+
+    }
+
+});
+
+</script>
+
+</body>
+</html>
