@@ -1,2468 +1,3345 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>howtodisappear</title>
-
-<meta name="description"
-content="howtodisappear — a quiet place for the things you can't say out loud.">
-
-<meta name="robots" content="index, follow">
-
-<style>
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-:root {
-  --bg: #07080d;
-  --panel: #0d0f17;
-  --panel2: #11131d;
-  --text: #d9d9df;
-  --muted: #777b89;
-  --dim: #454956;
-
-  --blue: #6c9cff;
-  --violet: #9b82ff;
-  --pink: #e889ad;
-  --orange: #e8a15c;
-  --green: #78bd9b;
-  --cyan: #62c7d9;
-}
-
-html,
-body {
-  min-height: 100%;
-}
-
-body {
-  background: var(--bg);
-  color: var(--text);
-  font-family: "Courier New", monospace;
-  overflow-x: hidden;
-}
-
-button,
-input,
-textarea,
-select {
-  font: inherit;
-}
-
-button {
-  cursor: pointer;
-}
-
-.screen {
-  display: none;
-  min-height: 100vh;
-}
-
-.screen.active {
-  display: block;
-}
-
-
-/* =========================================================
-   INTRO
-========================================================= */
-
-#intro {
-  min-height: 100vh;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  text-align: center;
-
-  background:
-    radial-gradient(
-      circle at 50% 45%,
-      rgba(108,156,255,.12),
-      transparent 28%
-    ),
-    radial-gradient(
-      circle at 70% 80%,
-      rgba(155,130,255,.08),
-      transparent 30%
-    ),
-    #05060a;
-}
-
-.intro-system {
-  position: fixed;
-  top: 20px;
-  left: 22px;
-
-  color: #3f4350;
-  font-size: 9px;
-  line-height: 1.8;
-  text-align: left;
-}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>howtodisappear</title>
+
+  <meta
+    name="description"
+    content="howtodisappear — a quiet digital space for the things you can't say out loud."
+  >
+
+  <meta name="theme-color" content="#080910">
+
+  <style>
+    /* =====================================================
+       RESET
+    ===================================================== */
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100vh;
+      background: #07080d;
+      color: #d7d9e1;
+      font-family: "Courier New", monospace;
+      overflow-x: hidden;
+    }
+
+    button,
+    input,
+    textarea,
+    select {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+
+    /* =====================================================
+       VARIABLES
+    ===================================================== */
+
+    :root {
+      --bg: #07080d;
+      --bg2: #0b0d14;
+      --panel: #10121b;
+      --panel2: #141621;
+
+      --white: #e4e6ed;
+      --text: #b9bdc9;
+      --muted: #737887;
+      --dim: #444957;
+
+      --blue: #719cff;
+      --violet: #9b86ff;
+      --pink: #e890b2;
+      --orange: #e5a05c;
+      --green: #72b998;
+      --cyan: #62c8da;
+    }
+
+
+    /* =====================================================
+       INTRO
+    ===================================================== */
+
+    #intro {
+      min-height: 100vh;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      position: relative;
+
+      text-align: center;
+
+      background:
+        radial-gradient(
+          circle at 50% 45%,
+          rgba(113,156,255,.10),
+          transparent 28%
+        ),
+        radial-gradient(
+          circle at 75% 80%,
+          rgba(155,134,255,.07),
+          transparent 30%
+        ),
+        #05060a;
+    }
+
+    .system-text {
+      position: absolute;
+      top: 20px;
+      left: 20px;
 
-.intro-center {
-  width: 90%;
-}
+      text-align: left;
 
-.title {
-  font-family: Arial, sans-serif;
-  font-size: clamp(40px, 9vw, 105px);
-  font-weight: 300;
-  letter-spacing: -6px;
+      color: #3d414d;
+      font-size: 9px;
+      line-height: 1.8;
+    }
 
-  background:
-    linear-gradient(
-      100deg,
-      #d9e5ff,
-      #9d8dff,
-      #df91b1
-    );
+    .intro-center {
+      width: min(900px, 90%);
+    }
 
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
+    .main-title {
+      font-family: Arial, sans-serif;
+      font-size: clamp(42px, 9vw, 105px);
+      font-weight: 300;
+      letter-spacing: -6px;
+
+      background:
+        linear-gradient(
+          100deg,
+          #dce4ff,
+          #a18dff,
+          #e397b7
+        );
 
-.subtitle {
-  margin-top: 24px;
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
 
-  color: #666b79;
-  font-size: 10px;
-}
+    .intro-subtitle {
+      margin-top: 22px;
 
-.enter {
-  margin-top: 55px;
+      color: #666b78;
+      font-size: 10px;
+      letter-spacing: .4px;
+    }
 
-  padding: 14px 30px;
+    .enter-button {
+      margin-top: 50px;
 
-  border: 1px solid #3a3e4c;
-  border-radius: 3px;
+      padding: 14px 28px;
 
-  background: rgba(255,255,255,.02);
-  color: #999eac;
+      border: 1px solid #363a47;
+      border-radius: 4px;
 
-  font-size: 10px;
+      background: rgba(255,255,255,.02);
+      color: #979ca9;
 
-  transition: .25s;
-}
+      font-size: 10px;
 
-.enter:hover {
-  border-color: var(--blue);
-  color: white;
+      transition:
+        color .2s,
+        border-color .2s,
+        background .2s,
+        box-shadow .2s;
+    }
 
-  box-shadow:
-    0 0 25px rgba(108,156,255,.14);
-}
+    .enter-button:hover {
+      color: white;
+      border-color: var(--blue);
 
+      background: rgba(113,156,255,.05);
 
-/* =========================================================
-   AUTH
-========================================================= */
+      box-shadow:
+        0 0 30px rgba(113,156,255,.12);
+    }
 
-#auth {
-  min-height: 100vh;
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    /* =====================================================
+       ACCOUNT
+    ===================================================== */
 
-  padding: 25px;
+    #account {
+      min-height: 100vh;
 
-  background:
-    radial-gradient(
-      circle at 50% 40%,
-      rgba(155,130,255,.09),
-      transparent 35%
-    ),
-    var(--bg);
-}
+      display: flex;
+      align-items: center;
+      justify-content: center;
 
-.auth-box {
-  width: min(500px, 100%);
+      padding: 25px;
 
-  padding: 36px;
+      background:
+        radial-gradient(
+          circle at 50% 45%,
+          rgba(155,134,255,.08),
+          transparent 32%
+        ),
+        var(--bg);
+    }
 
-  border: 1px solid #292d38;
-  border-radius: 8px;
+    .account-box {
+      width: min(500px, 100%);
 
-  background: rgba(13,15,23,.8);
+      padding: 35px;
 
-  box-shadow:
-    0 30px 100px rgba(0,0,0,.4);
-}
+      border: 1px solid #292d38;
+      border-radius: 8px;
 
-.auth-code {
-  color: #555a69;
-  font-size: 9px;
-}
+      background: rgba(13,15,23,.92);
 
-.auth-box h2 {
-  margin-top: 15px;
+      box-shadow:
+        0 30px 100px rgba(0,0,0,.45);
+    }
 
-  font-family: Arial, sans-serif;
-  font-size: 25px;
-  font-weight: 400;
-}
+    .account-label {
+      color: #555a68;
+      font-size: 9px;
+    }
 
-.auth-box p {
-  margin-top: 12px;
+    .account-box h2 {
+      margin-top: 16px;
 
-  color: #717583;
+      font-family: Arial, sans-serif;
+      font-size: 26px;
+      font-weight: 300;
+    }
 
-  font-size: 10px;
-  line-height: 1.9;
-}
+    .account-box p {
+      margin-top: 13px;
 
-.auth-buttons {
-  margin-top: 30px;
-}
+      color: #717583;
 
-.auth-buttons button,
-.signup button {
-  width: 100%;
+      font-size: 10px;
+      line-height: 1.9;
+    }
 
-  padding: 14px;
+    .account-actions {
+      margin-top: 28px;
+    }
 
-  margin-top: 9px;
+    .account-actions button,
+    .account-form button {
+      width: 100%;
 
-  border: 1px solid #303440;
-  border-radius: 4px;
+      margin-top: 9px;
+      padding: 13px;
 
-  background: transparent;
-  color: #999eac;
+      border: 1px solid #303440;
+      border-radius: 4px;
 
-  font-size: 10px;
+      background: transparent;
+      color: #969ba8;
 
-  transition: .2s;
-}
+      font-size: 10px;
 
-.auth-buttons button:hover,
-.signup button:hover {
-  background: #e5e8ef;
-  color: #08090d;
-}
+      transition: .2s;
+    }
 
-.signup {
-  display: none;
-  margin-top: 25px;
-}
+    .account-actions button:hover,
+    .account-form button:hover {
+      background: #e6e7eb;
+      color: #08090d;
+    }
 
-.signup.visible {
-  display: block;
-}
+    .account-form {
+      display: none;
+      margin-top: 25px;
+    }
 
-.signup label {
-  display: block;
+    .account-form.visible {
+      display: block;
+    }
 
-  margin-top: 18px;
-  margin-bottom: 7px;
+    .account-form label {
+      display: block;
 
-  color: #555a68;
-  font-size: 9px;
-}
+      margin-top: 16px;
+      margin-bottom: 7px;
 
-.signup input,
-.signup select {
-  width: 100%;
+      color: #555a68;
+      font-size: 9px;
+    }
 
-  padding: 12px;
+    .account-form input,
+    .account-form select {
+      width: 100%;
 
-  border: 1px solid #292d38;
-  border-radius: 3px;
+      padding: 12px;
 
-  outline: none;
+      border: 1px solid #292d38;
+      border-radius: 3px;
 
-  background: #07080d;
-  color: #aaaeba;
-}
+      outline: none;
 
+      background: #07080d;
+      color: #b7bbc7;
+    }
 
-/* =========================================================
-   APP
-========================================================= */
+    .account-form input:focus,
+    .account-form select:focus {
+      border-color: var(--blue);
+    }
 
-#app {
-  background:
-    radial-gradient(
-      circle at 20% 0%,
-      rgba(108,156,255,.05),
-      transparent 30%
-    ),
-    radial-gradient(
-      circle at 90% 20%,
-      rgba(155,130,255,.05),
-      transparent 30%
-    ),
-    var(--bg);
-}
 
-.nav {
-  position: sticky;
-  top: 0;
-  z-index: 100;
+    /* =====================================================
+       MAIN APP
+    ===================================================== */
 
-  height: 68px;
+    #app {
+      min-height: 100vh;
 
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+      background:
+        radial-gradient(
+          circle at 10% 0%,
+          rgba(113,156,255,.045),
+          transparent 28%
+        ),
+        radial-gradient(
+          circle at 95% 20%,
+          rgba(155,134,255,.04),
+          transparent 28%
+        ),
+        var(--bg);
+    }
 
-  padding: 0 24px;
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
 
-  border-bottom: 1px solid #20232d;
+      height: 68px;
 
-  background: rgba(7,8,13,.94);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
 
-  backdrop-filter: blur(12px);
-}
+      padding: 0 24px;
 
-.logo {
-  font-family: Arial, sans-serif;
-  color: #c5c9d3;
-  font-size: 12px;
-  letter-spacing: 1px;
-}
+      border-bottom: 1px solid #20232d;
 
-.nav-right {
-  display: flex;
-  align-items: center;
-  gap: 9px;
-}
+      background: rgba(7,8,13,.94);
 
-.help-nav-button {
-  padding: 9px 13px;
+      backdrop-filter: blur(12px);
+    }
 
-  border: 1px solid #d0d3da;
-  border-radius: 3px;
+    .brand {
+      font-family: Arial, sans-serif;
+      color: #c5c9d3;
+      font-size: 12px;
+      letter-spacing: 1px;
+    }
 
-  background: #f0f1f3;
-  color: #17181d;
+    .top-actions {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+    }
 
-  font-size: 9px;
-  font-weight: bold;
+    .help-button {
+      padding: 9px 13px;
 
-  transition: .2s;
-}
+      border: 1px solid #d2d4da;
+      border-radius: 3px;
 
-.help-nav-button:hover {
-  background: white;
-  box-shadow: 0 0 20px rgba(255,255,255,.12);
-}
+      background: #f0f1f3;
+      color: #17181d;
 
-.menu {
-  padding: 8px;
+      font-size: 9px;
+      font-weight: bold;
 
-  border: 0;
+      transition: .2s;
+    }
 
-  background: transparent;
+    .help-button:hover {
+      background: white;
+      box-shadow:
+        0 0 25px rgba(255,255,255,.12);
+    }
 
-  color: #8a8e9b;
+    .menu-button {
+      padding: 8px;
 
-  font-size: 18px;
-}
+      border: 0;
 
-.container {
-  width: min(1150px, 92%);
-  margin: auto;
-}
+      background: transparent;
+      color: #888d9a;
 
+      font-size: 18px;
+    }
 
-/* =========================================================
-   WELCOME
-========================================================= */
+    .content {
+      width: min(1150px, 92%);
+      margin: auto;
+    }
 
-.welcome {
-  min-height: 42vh;
 
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+    /* =====================================================
+       WELCOME
+    ===================================================== */
 
-  border-bottom: 1px solid #1d2029;
-}
+    .welcome {
+      min-height: 42vh;
 
-.visitor {
-  color: #555a68;
-  font-size: 9px;
-}
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
 
-.welcome h1 {
-  margin-top: 14px;
+      border-bottom: 1px solid #1d2029;
+    }
 
-  font-family: Arial, sans-serif;
-  font-size: clamp(45px, 8vw, 82px);
-  font-weight: 300;
-  letter-spacing: -5px;
+    .visitor-id {
+      color: #505562;
+      font-size: 9px;
+    }
 
-  background:
-    linear-gradient(
-      100deg,
-      #e2e4ec,
-      #a5baff,
-      #d1a5ff
-    );
+    .welcome h1 {
+      margin-top: 14px;
 
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
+      font-family: Arial, sans-serif;
+      font-size: clamp(45px, 8vw, 82px);
+      font-weight: 300;
+      letter-spacing: -5px;
 
-.welcome p {
-  max-width: 620px;
+      background:
+        linear-gradient(
+          100deg,
+          #e1e3ea,
+          #a6baff,
+          #d1a6ff
+        );
 
-  margin-top: 20px;
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
 
-  color: #717582;
+    .welcome-description {
+      max-width: 650px;
 
-  font-size: 10px;
-  line-height: 2;
-}
+      margin-top: 20px;
 
+      color: #707582;
 
-/* =========================================================
-   TABS
-========================================================= */
+      font-size: 10px;
+      line-height: 2;
+    }
 
-.grid {
-  display: grid;
 
-  grid-template-columns: repeat(2, 1fr);
+    /* =====================================================
+       NAVIGATION CARDS
+    ===================================================== */
 
-  gap: 12px;
+    .card-grid {
+      display: grid;
 
-  padding: 35px 0 70px;
-}
+      grid-template-columns: repeat(2, 1fr);
 
-.card {
-  position: relative;
+      gap: 12px;
 
-  min-height: 190px;
+      padding: 35px 0 80px;
+    }
 
-  padding: 27px;
+    .nav-card {
+      position: relative;
 
-  border: 1px solid #292d38;
-  border-radius: 7px;
+      min-height: 190px;
 
-  background: linear-gradient(
-    145deg,
-    rgba(255,255,255,.025),
-    rgba(255,255,255,.005)
-  );
+      padding: 27px;
 
-  cursor: pointer;
+      border: 1px solid #292d38;
+      border-radius: 7px;
 
-  overflow: hidden;
+      background:
+        linear-gradient(
+          145deg,
+          rgba(255,255,255,.025),
+          rgba(255,255,255,.005)
+        );
 
-  transition:
-    transform .25s,
-    border-color .25s,
-    background .25s,
-    box-shadow .25s;
-}
+      overflow: hidden;
 
-.card::before {
-  content: "";
+      cursor: pointer;
 
-  position: absolute;
+      transition:
+        transform .2s,
+        border-color .2s,
+        background .2s,
+        box-shadow .2s;
 
-  width: 180px;
-  height: 180px;
+      --accent: var(--blue);
+    }
 
-  right: -80px;
-  bottom: -100px;
+    .nav-card::before {
+      content: "";
 
-  border-radius: 50%;
+      position: absolute;
 
-  background: var(--accent);
+      width: 180px;
+      height: 180px;
 
-  opacity: .08;
+      right: -85px;
+      bottom: -105px;
 
-  filter: blur(25px);
+      border-radius: 50%;
 
-  transition: .3s;
-}
+      background: var(--accent);
 
-.card:hover {
-  transform: translateY(-3px);
+      opacity: .07;
 
-  border-color: var(--accent);
+      filter: blur(30px);
 
-  background:
-    linear-gradient(
-      145deg,
-      rgba(255,255,255,.045),
-      rgba(255,255,255,.01)
-    );
+      transition: .3s;
+    }
 
-  box-shadow:
-    0 15px 45px rgba(0,0,0,.3),
-    0 0 30px color-mix(
-      in srgb,
-      var(--accent) 10%,
-      transparent
-    );
-}
+    .nav-card:hover {
+      transform: translateY(-3px);
 
-.card:hover::before {
-  transform: scale(1.5);
-  opacity: .16;
-}
+      border-color: var(--accent);
 
-.card-number {
-  color: var(--accent);
-  font-size: 9px;
-}
+      background:
+        linear-gradient(
+          145deg,
+          rgba(255,255,255,.045),
+          rgba(255,255,255,.008)
+        );
 
-.card h3 {
-  margin-top: 35px;
+      box-shadow:
+        0 18px 45px rgba(0,0,0,.3);
+    }
 
-  font-family: Arial, sans-serif;
+    .nav-card:hover::before {
+      transform: scale(1.5);
+      opacity: .14;
+    }
 
-  color: #d7dae2;
+    .nav-card.blue {
+      --accent: var(--blue);
+    }
 
-  font-size: 17px;
-  font-weight: 400;
-}
+    .nav-card.violet {
+      --accent: var(--violet);
+    }
 
-.card p {
-  max-width: 280px;
+    .nav-card.orange {
+      --accent: var(--orange);
+    }
 
-  margin-top: 10px;
+    .nav-card.pink {
+      --accent: var(--pink);
+    }
 
-  color: #666b79;
+    .nav-card.green {
+      --accent: var(--green);
+    }
 
-  font-size: 9px;
-  line-height: 1.8;
-}
+    .nav-card.cyan {
+      --accent: var(--cyan);
+    }
 
-.arrow {
-  position: absolute;
+    .card-number {
+      color: var(--accent);
+      font-size: 9px;
+    }
 
-  right: 22px;
-  bottom: 19px;
+    .nav-card h3 {
+      margin-top: 34px;
 
-  color: var(--accent);
+      font-family: Arial, sans-serif;
 
-  font-size: 17px;
+      color: #d9dbe2;
 
-  transition: .2s;
-}
+      font-size: 17px;
+      font-weight: 400;
+    }
 
-.card:hover .arrow {
-  transform: translate(3px,-3px);
-}
+    .nav-card p {
+      max-width: 330px;
 
+      margin-top: 10px;
 
-/* INDIVIDUAL TAB COLOURS */
+      color: #676c79;
 
-.card.room {
-  --accent: var(--blue);
-}
+      font-size: 9px;
+      line-height: 1.8;
+    }
 
-.card.worlds {
-  --accent: var(--violet);
-}
+    .card-arrow {
+      position: absolute;
 
-.card.static {
-  --accent: var(--orange);
-}
+      right: 22px;
+      bottom: 19px;
 
-.card.unsent {
-  --accent: var(--pink);
-}
+      color: var(--accent);
 
-.card.wall {
-  --accent: var(--green);
-}
+      font-size: 17px;
 
-.card.chat {
-  --accent: var(--cyan);
-}
+      transition: .2s;
+    }
 
+    .nav-card:hover .card-arrow {
+      transform: translate(3px,-3px);
+    }
 
-/* =========================================================
-   SIDE MENU
-========================================================= */
 
-.side-menu {
-  position: fixed;
+    /* =====================================================
+       SIDE MENU
+    ===================================================== */
 
-  top: 77px;
-  right: 20px;
+    .side-menu {
+      position: fixed;
 
-  width: 255px;
+      top: 76px;
+      right: 20px;
 
-  display: none;
+      width: 255px;
 
-  z-index: 1000;
+      display: none;
 
-  border: 1px solid #2b2f3a;
-  border-radius: 6px;
+      z-index: 500;
 
-  background: #090a10;
+      border: 1px solid #2b2f3a;
+      border-radius: 6px;
 
-  box-shadow: 0 25px 70px rgba(0,0,0,.5);
+      background: #090a10;
 
-  overflow: hidden;
-}
+      box-shadow:
+        0 25px 70px rgba(0,0,0,.55);
 
-.side-menu.open {
-  display: block;
-}
+      overflow: hidden;
+    }
 
-.side-menu button {
-  width: 100%;
+    .side-menu.open {
+      display: block;
+    }
 
-  padding: 15px;
+    .side-menu button {
+      width: 100%;
 
-  border: 0;
-  border-bottom: 1px solid #1d2029;
+      padding: 15px;
 
-  background: transparent;
-  color: #7d8290;
+      border: 0;
+      border-bottom: 1px solid #1d2029;
 
-  text-align: left;
+      background: transparent;
+      color: #7d8290;
 
-  font-size: 10px;
+      text-align: left;
 
-  transition: .15s;
-}
+      font-size: 10px;
 
-.side-menu button:hover {
-  background: #11131b;
-  color: white;
-}
+      transition: .15s;
+    }
 
+    .side-menu button:hover {
+      background: #11131b;
+      color: white;
+    }
 
-/* =========================================================
-   MODALS
-========================================================= */
 
-.modal {
-  position: fixed;
-  inset: 0;
+    /* =====================================================
+       MODAL
+    ===================================================== */
 
-  display: none;
-  align-items: center;
-  justify-content: center;
+    .modal {
+      position: fixed;
+      inset: 0;
 
-  z-index: 2000;
+      display: none;
+      align-items: center;
+      justify-content: center;
 
-  padding: 20px;
+      z-index: 1000;
 
-  background: rgba(2,3,6,.91);
+      padding: 20px;
 
-  backdrop-filter: blur(10px);
-}
+      background: rgba(2,3,6,.92);
 
-.modal.open {
-  display: flex;
-}
+      backdrop-filter: blur(10px);
+    }
 
-.modal-box {
-  width: min(900px, 100%);
-  max-height: 90vh;
+    .modal.open {
+      display: flex;
+    }
 
-  overflow-y: auto;
+    .modal-box {
+      width: min(850px, 100%);
+      max-height: 90vh;
 
-  padding: 32px;
+      overflow-y: auto;
 
-  border: 1px solid #2a2e39;
-  border-radius: 8px;
+      padding: 32px;
 
-  background: #090a10;
+      border: 1px solid #2a2e39;
+      border-radius: 8px;
 
-  box-shadow: 0 30px 100px rgba(0,0,0,.55);
-}
+      background: #090a10;
 
-.close {
-  float: right;
+      box-shadow:
+        0 30px 100px rgba(0,0,0,.55);
+    }
 
-  border: 0;
+    .close-modal {
+      float: right;
 
-  background: transparent;
-  color: #6f7481;
+      border: 0;
 
-  font-size: 25px;
-}
+      background: transparent;
+      color: #6f7481;
 
-.modal-title {
-  margin-bottom: 18px;
+      font-size: 25px;
+    }
 
-  font-family: Arial, sans-serif;
+    .modal-title {
+      margin-bottom: 16px;
 
-  color: #e0e2e8;
+      font-family: Arial, sans-serif;
 
-  font-size: 27px;
-  font-weight: 300;
-}
+      color: #e0e2e8;
 
-.modal-description {
-  margin-bottom: 25px;
+      font-size: 28px;
+      font-weight: 300;
+    }
 
-  color: #696e7c;
+    .modal-description {
+      margin-bottom: 25px;
 
-  font-size: 10px;
-  line-height: 1.9;
-}
+      color: #696e7c;
 
+      font-size: 10px;
+      line-height: 1.9;
+    }
 
-/* =========================================================
-   WORLDS
-========================================================= */
 
-.worlds {
-  display: grid;
+    /* =====================================================
+       ROOM
+    ===================================================== */
 
-  grid-template-columns: 1fr 1fr;
+    .room-space {
+      height: 350px;
 
-  gap: 10px;
-}
+      position: relative;
 
-.world {
-  min-height: 160px;
+      border: 1px solid #252936;
+      border-radius: 6px;
 
-  padding: 25px;
+      background:
+        radial-gradient(
+          circle at 72% 30%,
+          rgba(113,156,255,.13),
+          transparent 28%
+        ),
+        #05060a;
+    }
 
-  border: 1px solid #272b36;
-  border-radius: 5px;
+    .window {
+      position: absolute;
 
-  cursor: pointer;
+      top: 35px;
+      right: 35px;
 
-  transition: .2s;
-}
+      width: 180px;
+      height: 120px;
 
-.world:hover {
-  border-color: var(--violet);
-  background: #101019;
-}
+      border: 2px solid #171b25;
 
-.world small {
-  color: var(--violet);
-}
+      box-shadow:
+        0 0 40px rgba(113,156,255,.05);
+    }
 
-.world h3 {
-  margin-top: 25px;
+    .bed {
+      position: absolute;
 
-  font-family: Arial, sans-serif;
+      left: 45px;
+      bottom: 65px;
 
-  font-weight: 400;
-  font-size: 15px;
-}
+      width: 270px;
+      height: 50px;
 
-.world p {
-  margin-top: 9px;
+      border-top: 2px solid #1d212c;
+    }
 
-  color: #555a68;
+    .room-message {
+      position: absolute;
 
-  font-size: 9px;
-  line-height: 1.8;
-}
+      left: 50%;
+      bottom: 30px;
 
+      transform: translateX(-50%);
 
-/* =========================================================
-   STATIC
-========================================================= */
+      color: #343947;
 
-.static-grid {
-  display: grid;
+      font-size: 9px;
+    }
 
-  grid-template-columns: 1fr 1fr;
 
-  gap: 10px;
-}
+    /* =====================================================
+       WORLDS
+    ===================================================== */
 
-.static-card {
-  min-height: 270px;
+    .world-grid {
+      display: grid;
 
-  padding: 28px;
+      grid-template-columns: 1fr 1fr;
 
-  border: 1px solid #292d38;
-  border-radius: 6px;
+      gap: 10px;
+    }
 
-  cursor: pointer;
+    .world {
+      min-height: 160px;
 
-  transition: .25s;
-}
+      padding: 25px;
 
-.static-card:hover {
-  transform: translateY(-3px);
-}
+      border: 1px solid #272b36;
+      border-radius: 5px;
 
-.static-card.nothing:hover {
-  border-color: #7784a6;
-  background: rgba(119,132,166,.06);
-}
+      cursor: pointer;
 
-.static-card.anger:hover {
-  border-color: var(--orange);
-  background: rgba(232,161,92,.06);
-}
+      transition: .2s;
+    }
 
-.static-card small {
-  color: #666b79;
-}
+    .world:hover {
+      border-color: var(--violet);
+      background: rgba(155,134,255,.04);
+    }
 
-.static-card h2 {
-  margin-top: 80px;
+    .world small {
+      color: var(--violet);
+    }
 
-  font-family: Arial, sans-serif;
+    .world h3 {
+      margin-top: 25px;
 
-  font-size: 27px;
-  font-weight: 300;
-}
+      font-family: Arial, sans-serif;
 
-.static-card p {
-  margin-top: 10px;
+      font-size: 15px;
+      font-weight: 400;
+    }
 
-  color: #555a68;
+    .world p {
+      margin-top: 9px;
 
-  font-size: 9px;
-  line-height: 1.8;
-}
+      color: #555a68;
 
+      font-size: 9px;
+      line-height: 1.8;
+    }
 
-/* =========================================================
-   TEXTAREAS
-========================================================= */
 
-textarea,
-.journal,
-.wall {
-  width: 100%;
-  min-height: 170px;
+    /* =====================================================
+       STATIC
+    ===================================================== */
 
-  padding: 16px;
+    .static-grid {
+      display: grid;
 
-  border: 1px solid #292d38;
-  border-radius: 4px;
+      grid-template-columns: 1fr 1fr;
 
-  outline: none;
+      gap: 10px;
+    }
 
-  background: #05060a;
-  color: #b9bdc8;
+    .static-card {
+      min-height: 260px;
 
-  resize: vertical;
+      padding: 28px;
 
-  font-size: 10px;
-  line-height: 1.8;
-}
+      border: 1px solid #292d38;
+      border-radius: 6px;
 
-textarea:focus {
-  border-color: var(--pink);
-}
+      cursor: pointer;
 
-.save {
-  margin-top: 10px;
+      transition: .2s;
+    }
 
-  padding: 12px 18px;
+    .static-card:hover {
+      transform: translateY(-3px);
+    }
 
-  border: 1px solid #343844;
-  border-radius: 3px;
+    .static-card.nothing:hover {
+      border-color: #7d89a7;
+      background: rgba(125,137,167,.05);
+    }
 
-  background: transparent;
-  color: #8f94a1;
+    .static-card.anger:hover {
+      border-color: var(--orange);
+      background: rgba(229,160,92,.05);
+    }
 
-  font-size: 9px;
-}
+    .static-card small {
+      color: #666b79;
+    }
 
-.save:hover {
-  background: #eee;
-  color: #05060a;
-}
+    .static-card h2 {
+      margin-top: 75px;
 
+      font-family: Arial, sans-serif;
 
-/* =========================================================
-   ENTRIES
-========================================================= */
+      font-size: 27px;
+      font-weight: 300;
+    }
 
-.entry {
-  margin-top: 10px;
+    .static-card p {
+      margin-top: 10px;
 
-  padding: 17px;
+      color: #555a68;
 
-  border: 1px solid #20232d;
-  border-radius: 4px;
-}
+      font-size: 9px;
+      line-height: 1.8;
+    }
 
-.entry-time,
-.entry-user {
-  color: #4e5360;
-  font-size: 8px;
-}
 
-.entry-text {
-  margin-top: 9px;
+    /* =====================================================
+       TEXT
+    ===================================================== */
 
-  color: #999eaa;
+    .big-textarea {
+      width: 100%;
+      min-height: 190px;
 
-  font-size: 10px;
-  line-height: 1.8;
+      padding: 16px;
 
-  white-space: pre-wrap;
-}
+      border: 1px solid #292d38;
+      border-radius: 4px;
 
+      outline: none;
 
-/* =========================================================
-   CHAT
-========================================================= */
+      background: #05060a;
+      color: #b9bdc8;
 
-.notice {
-  padding: 15px;
+      resize: vertical;
 
-  border: 1px solid #292d38;
-  border-radius: 4px;
+      font-size: 10px;
+      line-height: 1.8;
+    }
 
-  color: #696e7c;
+    .big-textarea:focus {
+      border-color: var(--pink);
+    }
 
-  font-size: 9px;
-  line-height: 1.8;
-}
+    .save-button {
+      margin-top: 10px;
 
-.chat {
-  margin-top: 15px;
+      padding: 12px 18px;
 
-  border: 1px solid #272b35;
-  border-radius: 4px;
+      border: 1px solid #343844;
+      border-radius: 3px;
 
-  overflow: hidden;
-}
+      background: transparent;
+      color: #8f94a1;
 
-.messages {
-  height: 320px;
+      font-size: 9px;
+    }
 
-  padding: 20px;
+    .save-button:hover {
+      background: #eee;
+      color: #05060a;
+    }
 
-  overflow-y: auto;
-}
 
-.message {
-  max-width: 78%;
+    /* =====================================================
+       ENTRIES
+    ===================================================== */
 
-  margin-bottom: 20px;
-}
+    .entries {
+      margin-top: 20px;
+    }
 
-.message.you {
-  margin-left: auto;
-  text-align: right;
-}
+    .entry {
+      margin-top: 10px;
 
-.message-user {
-  color: #4e5360;
-  font-size: 8px;
-}
+      padding: 17px;
 
-.message-text {
-  margin-top: 6px;
+      border: 1px solid #20232d;
+      border-radius: 4px;
+    }
 
-  color: #aeb2bd;
+    .entry-meta {
+      color: #4e5360;
+      font-size: 8px;
+    }
 
-  font-size: 10px;
-  line-height: 1.8;
-}
+    .entry-text {
+      margin-top: 9px;
 
-.chat-row {
-  display: flex;
+      color: #999eaa;
 
-  border-top: 1px solid #22252f;
-}
+      font-size: 10px;
+      line-height: 1.8;
 
-.chat-input {
-  flex: 1;
+      white-space: pre-wrap;
+    }
 
-  padding: 14px;
 
-  border: 0;
-  outline: none;
+    /* =====================================================
+       FEELING BUTTONS
+    ===================================================== */
 
-  background: #05060a;
-  color: #aaaeba;
-}
+    .feeling-options {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
 
-.chat-send {
-  width: 90px;
+    .feeling {
+      padding: 10px 13px;
 
-  border: 0;
-  border-left: 1px solid #22252f;
+      border: 1px solid #303440;
+      border-radius: 3px;
 
-  background: #0c0e15;
-  color: #7c8290;
-}
+      background: transparent;
+      color: #777c89;
 
+      font-size: 9px;
 
-/* =========================================================
-   REAL HELP PAGE
-========================================================= */
+      transition: .15s;
+    }
 
-.help-page {
-  position: fixed;
-  inset: 0;
+    .feeling:hover,
+    .feeling.selected {
+      border-color: var(--orange);
+      color: var(--orange);
+      background: rgba(229,160,92,.06);
+    }
 
-  display: none;
 
-  z-index: 9999;
+    /* =====================================================
+       WALL
+    ===================================================== */
 
-  overflow-y: auto;
+    .wall-note {
+      padding: 15px;
 
-  background: #f7f7f7;
-  color: #171717;
+      border: 1px solid #292d38;
+      border-radius: 4px;
 
-  font-family:
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
-    Arial,
-    sans-serif;
-}
+      color: #686e7b;
 
-.help-page.open {
-  display: block;
-}
+      font-size: 9px;
+      line-height: 1.8;
 
-.help-content {
-  width: min(720px, 100%);
+      margin-bottom: 16px;
+    }
 
-  margin: auto;
 
-  padding: 35px 25px 70px;
-}
+    /* =====================================================
+       LATE NIGHT LINE
+    ===================================================== */
 
-.help-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+    .line-notice {
+      padding: 16px;
 
-  padding-bottom: 18px;
+      border: 1px solid #292d38;
+      border-radius: 4px;
 
-  border-bottom: 1px solid #ddd;
-}
+      color: #696e7c;
 
-.help-logo {
-  font-size: 13px;
-  font-weight: 600;
-}
+      font-size: 9px;
+      line-height: 1.8;
+    }
 
-.help-close {
-  border: 0;
+    .chat-box {
+      margin-top: 16px;
 
-  background: transparent;
+      border: 1px solid #272b35;
+      border-radius: 4px;
 
-  color: #222;
+      overflow: hidden;
+    }
 
-  font-size: 25px;
-}
+    .messages {
+      height: 300px;
 
-.help-content h1 {
-  margin-top: 50px;
+      padding: 20px;
 
-  font-size: clamp(38px, 8vw, 58px);
-  line-height: 1.05;
-}
+      overflow-y: auto;
+    }
 
-.help-intro {
-  max-width: 600px;
+    .message {
+      max-width: 78%;
 
-  margin-top: 18px;
+      margin-bottom: 20px;
+    }
 
-  color: #444;
+    .message.you {
+      margin-left: auto;
+      text-align: right;
+    }
 
-  font-size: 17px;
-  line-height: 1.65;
-}
+    .message-user {
+      color: #4e5360;
+      font-size: 8px;
+    }
 
-.help-immediate {
-  margin-top: 30px;
+    .message-text {
+      margin-top: 6px;
 
-  padding: 22px;
+      color: #aeb2bd;
 
-  border: 2px solid #171717;
+      font-size: 10px;
+      line-height: 1.8;
+    }
 
-  background: white;
-}
+    .chat-row {
+      display: flex;
 
-.help-immediate h2 {
-  font-size: 20px;
-}
+      border-top: 1px solid #22252f;
+    }
 
-.help-immediate p {
-  margin-top: 10px;
+    .chat-input {
+      flex: 1;
 
-  color: #444;
+      min-width: 0;
 
-  line-height: 1.6;
-}
+      padding: 14px;
 
-.help-section {
-  margin-top: 40px;
+      border: 0;
+      outline: none;
 
-  padding-top: 30px;
+      background: #05060a;
+      color: #aaaeba;
+    }
 
-  border-top: 1px solid #ddd;
-}
+    .chat-send {
+      width: 90px;
 
-.help-section h2 {
-  font-size: 21px;
-}
+      border: 0;
+      border-left: 1px solid #22252f;
 
-.help-section p {
-  margin-top: 12px;
+      background: #0c0e15;
+      color: #7c8290;
+    }
 
-  color: #444;
 
-  line-height: 1.7;
-}
+    /* =====================================================
+       HELP PAGE
+       INTENTIONALLY DIFFERENT FROM THE VIBE
+    ===================================================== */
 
-.help-actions {
-  display: grid;
+    #helpPage {
+      position: fixed;
+      inset: 0;
 
-  grid-template-columns: 1fr 1fr;
+      display: none;
 
-  gap: 12px;
+      z-index: 5000;
 
-  margin-top: 20px;
-}
+      overflow-y: auto;
 
-.help-action {
-  min-height: 62px;
+      background: #f7f7f7;
+      color: #171717;
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
+      font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Arial,
+        sans-serif;
+    }
 
-  border: 2px solid #171717;
+    #helpPage.open {
+      display: block;
+    }
 
-  background: #171717;
-  color: white;
+    .help-content {
+      width: min(720px, 100%);
 
-  text-decoration: none;
+      margin: auto;
 
-  font-weight: 700;
-}
+      padding: 30px 24px 70px;
+    }
 
-.help-action.light {
-  background: white;
-  color: #171717;
-}
+    .help-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
 
-.help-resource {
-  display: block;
+      padding-bottom: 18px;
 
-  margin-top: 15px;
+      border-bottom: 1px solid #ddd;
+    }
 
-  padding: 18px;
+    .help-brand {
+      font-size: 13px;
+      font-weight: 600;
+    }
 
-  border: 1px solid #ccc;
+    .help-close {
+      border: 0;
 
-  background: white;
+      background: transparent;
 
-  color: #171717;
+      color: #222;
 
-  text-decoration: none;
-}
+      font-size: 26px;
+    }
 
-.help-resource:hover {
-  background: #eee;
-}
+    .help-content h1 {
+      margin-top: 50px;
 
-.help-resource strong {
-  display: block;
+      font-size: clamp(40px, 8vw, 60px);
+      line-height: 1.05;
+    }
 
-  margin-bottom: 5px;
-}
+    .help-intro {
+      max-width: 600px;
 
-.help-note {
-  margin-top: 40px;
+      margin-top: 18px;
 
-  padding-top: 25px;
+      color: #444;
 
-  border-top: 1px solid #ddd;
+      font-size: 17px;
+      line-height: 1.65;
+    }
 
-  color: #555;
+    .emergency-box {
+      margin-top: 30px;
 
-  font-size: 13px;
+      padding: 23px;
 
-  line-height: 1.7;
-}
+      border: 2px solid #171717;
 
-.help-return {
-  display: inline-block;
+      background: white;
+    }
 
-  margin-top: 35px;
+    .emergency-box h2 {
+      font-size: 20px;
+    }
 
-  color: #222;
+    .emergency-box p {
+      margin-top: 10px;
 
-  text-decoration: underline;
+      color: #444;
 
-  cursor: pointer;
-}
+      line-height: 1.6;
+    }
 
+    .help-section {
+      margin-top: 40px;
 
-/* =========================================================
-   MOBILE
-========================================================= */
+      padding-top: 30px;
 
-@media (max-width: 700px) {
+      border-top: 1px solid #ddd;
+    }
 
-  .grid {
-    grid-template-columns: 1fr;
-  }
+    .help-section h2 {
+      font-size: 21px;
+    }
 
-  .static-grid,
-  .worlds {
-    grid-template-columns: 1fr;
-  }
+    .help-section p {
+      margin-top: 12px;
 
-  .welcome {
-    min-height: 38vh;
-  }
+      color: #444;
 
-  .welcome h1 {
-    letter-spacing: -3px;
-  }
+      line-height: 1.7;
+    }
 
-  .help-actions {
-    grid-template-columns: 1fr;
-  }
+    .help-actions {
+      display: grid;
 
-  .nav {
-    padding: 0 14px;
-  }
+      grid-template-columns: 1fr 1fr;
 
-  .logo {
-    font-size: 10px;
-  }
+      gap: 12px;
 
-  .help-nav-button {
-    padding: 8px 9px;
-  }
+      margin-top: 20px;
+    }
 
-}
-</style>
+    .help-action {
+      min-height: 62px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      border: 2px solid #171717;
+
+      background: #171717;
+      color: white;
+
+      text-decoration: none;
+
+      font-weight: 700;
+    }
+
+    .help-action.light {
+      background: white;
+      color: #171717;
+    }
+
+    .resource {
+      display: block;
+
+      margin-top: 14px;
+
+      padding: 18px;
+
+      border: 1px solid #ccc;
+
+      background: white;
+
+      color: #171717;
+
+      text-decoration: none;
+    }
+
+    .resource:hover {
+      background: #eee;
+    }
+
+    .resource strong {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    .help-note {
+      margin-top: 40px;
+
+      padding-top: 25px;
+
+      border-top: 1px solid #ddd;
+
+      color: #555;
+
+      font-size: 13px;
+
+      line-height: 1.7;
+    }
+
+
+    /* =====================================================
+       MOBILE
+    ===================================================== */
+
+    @media (max-width: 700px) {
+
+      .topbar {
+        padding: 0 14px;
+      }
+
+      .brand {
+        font-size: 10px;
+      }
+
+      .help-button {
+        padding: 8px 9px;
+      }
+
+      .card-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .world-grid,
+      .static-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .welcome {
+        min-height: 38vh;
+      }
+
+      .welcome h1 {
+        letter-spacing: -3px;
+      }
+
+      .modal-box {
+        padding: 24px;
+      }
+
+      .help-actions {
+        grid-template-columns: 1fr;
+      }
+
+      .system-text {
+        font-size: 8px;
+      }
+
+    }
+
+  </style>
 </head>
 
 
 <body>
 
 
-<!-- =========================================================
-     INTRO
-========================================================= -->
+  <!-- ===================================================
+       INTRO
+  ==================================================== -->
 
-<section id="intro" class="screen active">
+  <section id="intro">
 
-  <div class="intro-system">
-    connection: unstable<br>
-    identity: unnecessary<br>
-    time: <span id="clock"></span>
-  </div>
-
-  <div class="intro-center">
-
-    <div class="title">
-      howtodisappear
+    <div class="system-text">
+      connection: unstable<br>
+      identity: unnecessary<br>
+      time: <span id="clock">--:--</span>
     </div>
 
-    <div class="subtitle">
-      for everything you couldn't say out loud.
-    </div>
+    <div class="intro-center">
 
-    <button class="enter" id="enter">
-      ENTER QUIETLY
-    </button>
+      <div class="main-title">
+        howtodisappear
+      </div>
 
-  </div>
-
-</section>
-
-
-<!-- =========================================================
-     ACCOUNT
-========================================================= -->
-
-<section id="auth" class="screen">
-
-  <div class="auth-box">
-
-    <div class="auth-code">
-      HOWTODISAPPEAR / ENTRY
-    </div>
-
-    <h2>
-      YOU CAN BE SOMEONE ELSE HERE.
-    </h2>
-
-    <p>
-      You don't need to use your real name.
-      Create an identity for this space.
-    </p>
-
-    <div class="auth-buttons" id="authButtons">
-
-      <button id="create">
-        CREATE AN IDENTITY
-      </button>
-
-      <button id="return">
-        I'VE BEEN HERE BEFORE
-      </button>
-
-    </div>
-
-    <form class="signup" id="signup">
-
-      <label>
-        WHAT SHOULD WE CALL YOU?
-      </label>
-
-      <input
-        id="username"
-        maxlength="20"
-        autocomplete="off"
-        required
-        placeholder="something temporary"
-      >
-
-      <label>
-        WHERE DO YOU WANT TO START?
-      </label>
-
-      <select id="startingPlace">
-        <option>MY ROOM</option>
-        <option>THE STATIC</option>
-        <option>UNSENT</option>
-        <option>THE CITY</option>
-      </select>
-
-      <button>
-        ENTER
-      </button>
-
-    </form>
-
-  </div>
-
-</section>
-
-
-<!-- =========================================================
-     MAIN APP
-========================================================= -->
-
-<section id="app" class="screen">
-
-  <nav class="nav">
-
-    <div class="logo">
-      HOWTODISAPPEAR
-    </div>
-
-    <div class="nav-right">
+      <div class="intro-subtitle">
+        for everything you couldn't say out loud.
+      </div>
 
       <button
-        class="help-nav-button"
-        id="helpButton"
+        type="button"
+        class="enter-button"
+        id="enterButton"
+      >
+        ENTER QUIETLY
+      </button>
+
+    </div>
+
+  </section>
+
+
+  <!-- ===================================================
+       ACCOUNT
+  ==================================================== -->
+
+  <section id="account" class="hidden">
+
+    <div class="account-box">
+
+      <div class="account-label">
+        HOWTODISAPPEAR / ENTRY
+      </div>
+
+      <h2>
+        YOU CAN BE SOMEONE ELSE HERE.
+      </h2>
+
+      <p>
+        You don't need to use your real name.
+        Create a temporary identity for this space.
+      </p>
+
+
+      <div
+        class="account-actions"
+        id="accountActions"
+      >
+
+        <button
+          type="button"
+          id="createAccountButton"
+        >
+          CREATE AN IDENTITY
+        </button>
+
+        <button
+          type="button"
+          id="returnAccountButton"
+        >
+          I'VE BEEN HERE BEFORE
+        </button>
+
+      </div>
+
+
+      <form
+        class="account-form"
+        id="accountForm"
+      >
+
+        <label for="username">
+          WHAT SHOULD WE CALL YOU?
+        </label>
+
+        <input
+          id="username"
+          maxlength="20"
+          autocomplete="off"
+          placeholder="something temporary"
+          required
+        >
+
+
+        <label for="startingPlace">
+          WHERE DO YOU WANT TO START?
+        </label>
+
+        <select id="startingPlace">
+
+          <option value="MY ROOM">
+            MY ROOM
+          </option>
+
+          <option value="THE STATIC">
+            THE STATIC
+          </option>
+
+          <option value="UNSENT">
+            UNSENT
+          </option>
+
+          <option value="THE CITY">
+            THE CITY
+          </option>
+
+        </select>
+
+
+        <button type="submit">
+          ENTER
+        </button>
+
+      </form>
+
+    </div>
+
+  </section>
+
+
+  <!-- ===================================================
+       MAIN APP
+  ==================================================== -->
+
+  <section id="app" class="hidden">
+
+    <nav class="topbar">
+
+      <div class="brand">
+        HOWTODISAPPEAR
+      </div>
+
+      <div class="top-actions">
+
+        <button
+          type="button"
+          class="help-button"
+          id="helpButton"
+        >
+          NEED HELP?
+        </button>
+
+        <button
+          type="button"
+          class="menu-button"
+          id="menuButton"
+          aria-label="Open menu"
+        >
+          ···
+        </button>
+
+      </div>
+
+    </nav>
+
+
+    <!-- SIDE MENU -->
+
+    <div
+      class="side-menu"
+      id="sideMenu"
+    >
+
+      <button
+        type="button"
+        data-view="profile"
+      >
+        PROFILE
+      </button>
+
+      <button
+        type="button"
+        data-view="journal"
+      >
+        UNSENT
+      </button>
+
+      <button
+        type="button"
+        data-view="wall"
+      >
+        THE WALL
+      </button>
+
+      <button
+        type="button"
+        data-view="chat"
+      >
+        LATE NIGHT LINE
+      </button>
+
+      <button
+        type="button"
+        id="menuHelpButton"
       >
         NEED HELP?
       </button>
 
       <button
-        class="menu"
-        id="menu"
+        type="button"
+        id="leaveButton"
       >
-        ···
+        LEAVE
       </button>
 
     </div>
 
-  </nav>
 
+    <main class="content">
 
-  <div class="side-menu" id="sideMenu">
+      <!-- WELCOME -->
 
-    <button data-open="profile">
-      PROFILE
-    </button>
+      <section class="welcome">
 
-    <button data-open="journal">
-      UNSENT
-    </button>
-
-    <button data-open="wall">
-      THE WALL
-    </button>
-
-    <button data-open="chat">
-      LATE NIGHT LINE
-    </button>
-
-    <button id="menuHelp">
-      NEED HELP?
-    </button>
-
-    <button id="leave">
-      LEAVE
-    </button>
-
-  </div>
-
-
-  <main class="container">
-
-    <section class="welcome">
-
-      <div
-        class="visitor"
-        id="visitor"
-      ></div>
-
-      <h1>
-        welcome back.
-      </h1>
-
-      <p>
-        You don't have to explain yourself here.
-        You can write something, feel nothing,
-        let the anger exist, disappear into another
-        world, or just sit here for a while.
-      </p>
-
-    </section>
-
-
-    <!-- =====================================================
-         BIG COLOURED NAVIGATION
-    ====================================================== -->
-
-    <section class="grid">
-
-
-      <article
-        class="card room"
-        data-open="room"
-      >
-
-        <div class="card-number">
-          01 / BLUE
+        <div
+          class="visitor-id"
+          id="visitorId"
+        >
+          VISITOR
         </div>
 
-        <h3>
-          MY ROOM
-        </h3>
+        <h1>
+          welcome back.
+        </h1>
 
-        <p>
-          Somewhere quiet to exist for a while.
-          Nobody is asking anything from you.
+        <p class="welcome-description">
+          You don't have to explain yourself here.
+          Write something. Feel nothing. Let the
+          anger exist somewhere safe. Leave a thought
+          behind. Talk. Or just stay for a while.
         </p>
 
-        <div class="arrow">
-          ↗
-        </div>
-
-      </article>
+      </section>
 
 
-      <article
-        class="card worlds"
-        data-open="worlds"
-      >
+      <!-- NAVIGATION -->
 
-        <div class="card-number">
-          02 / VIOLET
-        </div>
-
-        <h3>
-          WORLDS
-        </h3>
-
-        <p>
-          Places that aren't quite real.
-          Leave this one for a little while.
-        </p>
-
-        <div class="arrow">
-          ↗
-        </div>
-
-      </article>
+      <section class="card-grid">
 
 
-      <article
-        class="card static"
-        data-open="static"
-      >
+        <article
+          class="nav-card blue"
+          data-view="room"
+        >
 
-        <div class="card-number">
-          03 / AMBER
-        </div>
+          <div class="card-number">
+            01 / BLUE
+          </div>
 
-        <h3>
-          THE STATIC
-        </h3>
+          <h3>
+            MY ROOM
+          </h3>
 
-        <p>
-          For when you feel absolutely nothing,
-          or when you're carrying too much anger.
-        </p>
+          <p>
+            Somewhere quiet to exist for a while.
+            Nobody is asking anything from you.
+          </p>
 
-        <div class="arrow">
-          ↗
-        </div>
+          <div class="card-arrow">
+            ↗
+          </div>
 
-      </article>
-
-
-      <article
-        class="card unsent"
-        data-open="journal"
-      >
-
-        <div class="card-number">
-          04 / PINK
-        </div>
-
-        <h3>
-          UNSENT
-        </h3>
-
-        <p>
-          Write the things you could never
-          bring yourself to say.
-        </p>
-
-        <div class="arrow">
-          ↗
-        </div>
-
-      </article>
+        </article>
 
 
-      <article
-        class="card wall"
-        data-open="wall"
-      >
+        <article
+          class="nav-card violet"
+          data-view="worlds"
+        >
 
-        <div class="card-number">
-          05 / GREEN
-        </div>
+          <div class="card-number">
+            02 / VIOLET
+          </div>
 
-        <h3>
-          THE WALL
-        </h3>
+          <h3>
+            WORLDS
+          </h3>
 
-        <p>
-          Leave a thought behind.
-          Someone else might find it.
-        </p>
+          <p>
+            Places that aren't quite real.
+            Leave this one for a little while.
+          </p>
 
-        <div class="arrow">
-          ↗
-        </div>
+          <div class="card-arrow">
+            ↗
+          </div>
 
-      </article>
-
-
-      <article
-        class="card chat"
-        data-open="chat"
-      >
-
-        <div class="card-number">
-          06 / CYAN
-        </div>
-
-        <h3>
-          LATE NIGHT LINE
-        </h3>
-
-        <p>
-          A quiet place to talk.
-          You don't have to know what to say.
-        </p>
-
-        <div class="arrow">
-          ↗
-        </div>
-
-      </article>
+        </article>
 
 
-    </section>
+        <article
+          class="nav-card orange"
+          data-view="static"
+        >
 
-  </main>
+          <div class="card-number">
+            03 / AMBER
+          </div>
 
-</section>
+          <h3>
+            THE STATIC
+          </h3>
 
+          <p>
+            For when you feel absolutely nothing,
+            or when you're carrying too much anger.
+          </p>
 
-<!-- =========================================================
-     MODAL
-========================================================= -->
+          <div class="card-arrow">
+            ↗
+          </div>
 
-<div
-  class="modal"
-  id="modal"
->
-
-  <div class="modal-box">
-
-    <button
-      class="close"
-      id="close"
-    >
-      ×
-    </button>
-
-    <div id="modalContent"></div>
-
-  </div>
-
-</div>
+        </article>
 
 
-<!-- =========================================================
-     REAL HELP PAGE
-========================================================= -->
+        <article
+          class="nav-card pink"
+          data-view="journal"
+        >
 
-<div
-  class="help-page"
-  id="helpPage"
->
+          <div class="card-number">
+            04 / PINK
+          </div>
 
-  <div class="help-content">
+          <h3>
+            UNSENT
+          </h3>
 
-    <div class="help-header">
+          <p>
+            Write the things you could never
+            bring yourself to say.
+          </p>
 
-      <div class="help-logo">
-        howtodisappear
-      </div>
+          <div class="card-arrow">
+            ↗
+          </div>
+
+        </article>
+
+
+        <article
+          class="nav-card green"
+          data-view="wall"
+        >
+
+          <div class="card-number">
+            05 / GREEN
+          </div>
+
+          <h3>
+            THE WALL
+          </h3>
+
+          <p>
+            Leave a thought behind.
+            Someone else might find it.
+          </p>
+
+          <div class="card-arrow">
+            ↗
+          </div>
+
+        </article>
+
+
+        <article
+          class="nav-card cyan"
+          data-view="chat"
+        >
+
+          <div class="card-number">
+            06 / CYAN
+          </div>
+
+          <h3>
+            LATE NIGHT LINE
+          </h3>
+
+          <p>
+            A quiet place to talk.
+            You don't have to know what to say.
+          </p>
+
+          <div class="card-arrow">
+            ↗
+          </div>
+
+        </article>
+
+
+      </section>
+
+    </main>
+
+  </section>
+
+
+  <!-- ===================================================
+       MODAL
+  ==================================================== -->
+
+  <div
+    class="modal"
+    id="modal"
+    role="dialog"
+    aria-modal="true"
+  >
+
+    <div class="modal-box">
 
       <button
-        class="help-close"
-        id="helpClose"
+        type="button"
+        class="close-modal"
+        id="closeModal"
+        aria-label="Close"
       >
         ×
       </button>
 
-    </div>
+      <div id="modalContent"></div>
 
-
-    <h1>
-      Need help?
-    </h1>
-
-
-    <p class="help-intro">
-
-      This page is intentionally different
-      from the rest of the site.
-
-      <br><br>
-
-      If things feel too intense, you deserve
-      a real person who can help.
-
-    </p>
-
-
-    <div class="help-immediate">
-
-      <h2>
-        If you're in immediate danger
-      </h2>
-
-      <p>
-        Call <strong>9-1-1</strong> or go to the
-        nearest emergency department. If possible,
-        stay with someone you trust.
-      </p>
-
-    </div>
-
-
-    <section class="help-section">
-
-      <h2>
-        9-8-8 Suicide Crisis Helpline
-      </h2>
-
-      <p>
-        In Canada, you can call or text
-        <strong>9-8-8</strong> if you're thinking
-        about suicide, worried about someone else,
-        or experiencing a suicide-related crisis.
-        Support is available 24/7.
-      </p>
-
-      <div class="help-actions">
-
-        <a
-          class="help-action"
-          href="tel:988"
-        >
-          CALL 9-8-8
-        </a>
-
-        <a
-          class="help-action light"
-          href="sms:988"
-        >
-          TEXT 9-8-8
-        </a>
-
-      </div>
-
-    </section>
-
-
-    <section class="help-section">
-
-      <h2>
-        Kids Help Phone
-      </h2>
-
-      <p>
-        Young people in Canada can also contact
-        Kids Help Phone for confidential support.
-      </p>
-
-
-      <a
-        class="help-resource"
-        href="sms:686868?&body=CONNECT"
-      >
-        <strong>
-          Text CONNECT to 686868
-        </strong>
-
-        Connect with a crisis responder.
-      </a>
-
-
-      <a
-        class="help-resource"
-        href="tel:18006686868"
-      >
-        <strong>
-          Call 1-800-668-6868
-        </strong>
-
-        Connect with Kids Help Phone.
-      </a>
-
-
-      <a
-        class="help-resource"
-        href="https://kidshelpphone.ca/"
-        target="_blank"
-        rel="noopener"
-      >
-        <strong>
-          Visit Kids Help Phone
-        </strong>
-
-        Find more support and resources.
-      </a>
-
-    </section>
-
-
-    <div class="help-note">
-
-      <strong>
-        About this website
-      </strong>
-
-      <br><br>
-
-      howtodisappear is a creative community
-      space. It is not a crisis service,
-      counselling service, or emergency service.
-
-      <br><br>
-
-      The Late Night Line is not a replacement
-      for professional help.
-
-      <br><br>
-
-      If you need immediate help, please use
-      one of the genuine support routes above.
-
-    </div>
-
-
-    <div
-      class="help-return"
-      id="helpReturn"
-    >
-      ← Return to howtodisappear
     </div>
 
   </div>
 
-</div>
+
+  <!-- ===================================================
+       REAL HELP PAGE
+  ==================================================== -->
+
+  <section
+    id="helpPage"
+    aria-label="Help and crisis support"
+  >
+
+    <div class="help-content">
+
+      <header class="help-header">
+
+        <div class="help-brand">
+          howtodisappear / HELP
+        </div>
+
+        <button
+          type="button"
+          class="help-close"
+          id="closeHelp"
+          aria-label="Close help"
+        >
+          ×
+        </button>
+
+      </header>
 
 
-<script>
-
-/* =========================================================
-   SCREEN SYSTEM
-========================================================= */
-
-const intro =
-  document.getElementById("intro");
-
-const auth =
-  document.getElementById("auth");
-
-const app =
-  document.getElementById("app");
-
-const modal =
-  document.getElementById("modal");
-
-const modalContent =
-  document.getElementById("modalContent");
-
-const sideMenu =
-  document.getElementById("sideMenu");
-
-const helpPage =
-  document.getElementById("helpPage");
-
-let user = null;
+      <h1>
+        Need help?
+      </h1>
 
 
-/* =========================================================
-   CLOCK
-========================================================= */
+      <p class="help-intro">
 
-function updateClock() {
+        This page is intentionally different
+        from the rest of the website.
 
-  document.getElementById("clock")
-    .textContent =
-    new Date().toLocaleTimeString(
-      [],
-      {
-        hour: "2-digit",
-        minute: "2-digit"
-      }
-    );
+        <br><br>
 
-}
+        If things feel too intense, you deserve
+        a real person who can help.
 
-updateClock();
-
-setInterval(updateClock, 30000);
+      </p>
 
 
-/* =========================================================
-   SCREEN
-========================================================= */
+      <div class="emergency-box">
 
-function showScreen(screen) {
+        <h2>
+          If you're in immediate danger
+        </h2>
 
-  [intro, auth, app]
-    .forEach(
-      item =>
-        item.classList.remove("active")
-    );
+        <p>
+          Call <strong>911</strong> or go to the
+          nearest emergency department. If you can,
+          stay with someone you trust.
+        </p>
 
-  screen.classList.add("active");
-
-  window.scrollTo(0, 0);
-
-}
+      </div>
 
 
-/* =========================================================
-   INTRO
-========================================================= */
+      <section class="help-section">
 
-document
-  .getElementById("enter")
-  .onclick = () => {
+        <h2>
+          9-8-8 Suicide Crisis Helpline
+        </h2>
 
-    const saved =
-      localStorage.getItem(
-        "howtodisappear_user"
-      );
+        <p>
+          In Canada, you can call or text
+          <strong>988</strong> for crisis support.
+          The service is available 24/7.
+        </p>
 
-    if (saved) {
 
-      try {
+        <div class="help-actions">
 
-        user = JSON.parse(saved);
+          <a
+            class="help-action"
+            href="tel:988"
+          >
+            CALL 9-8-8
+          </a>
+
+          <a
+            class="help-action light"
+            href="sms:988"
+          >
+            TEXT 9-8-8
+          </a>
+
+        </div>
+
+      </section>
+
+
+      <section class="help-section">
+
+        <h2>
+          Kids Help Phone
+        </h2>
+
+        <p>
+          Young people in Canada can also reach
+          Kids Help Phone for support.
+        </p>
+
+
+        <a
+          class="resource"
+          href="sms:686868"
+        >
+          <strong>
+            Text CONNECT to 686868
+          </strong>
+
+          Connect with a crisis responder.
+        </a>
+
+
+        <a
+          class="resource"
+          href="tel:18006686868"
+        >
+          <strong>
+            Call 1-800-668-6868
+          </strong>
+
+          Connect with Kids Help Phone.
+        </a>
+
+
+        <a
+          class="resource"
+          href="https://kidshelpphone.ca/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <strong>
+            Kids Help Phone website
+          </strong>
+
+          Find additional support and resources.
+        </a>
+
+      </section>
+
+
+      <div class="help-note">
+
+        <strong>
+          About howtodisappear
+        </strong>
+
+        <br><br>
+
+        This website is a creative community
+        space. It isn't a crisis service,
+        counselling service, or emergency service.
+
+        <br><br>
+
+        The Late Night Line should not replace
+        professional support.
+
+        <br><br>
+
+        If you need immediate help, use one of
+        the genuine support options above.
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ===================================================
+       JAVASCRIPT
+  ==================================================== -->
+
+  <script>
+
+    /* ===================================================
+       ELEMENTS
+    =================================================== */
+
+    const intro =
+      document.getElementById("intro");
+
+    const account =
+      document.getElementById("account");
+
+    const app =
+      document.getElementById("app");
+
+    const modal =
+      document.getElementById("modal");
+
+    const modalContent =
+      document.getElementById("modalContent");
+
+    const sideMenu =
+      document.getElementById("sideMenu");
+
+    const helpPage =
+      document.getElementById("helpPage");
+
+
+    let currentUser = null;
+
+
+    /* ===================================================
+       CLOCK
+    =================================================== */
+
+    function updateClock() {
+
+      const clock =
+        document.getElementById("clock");
+
+      if (!clock) return;
+
+      clock.textContent =
+        new Date().toLocaleTimeString([], {
+          hour: "2-digit",
+          minute: "2-digit"
+        });
+
+    }
+
+    updateClock();
+
+    setInterval(updateClock, 30000);
+
+
+    /* ===================================================
+       BASIC SCREEN SYSTEM
+    =================================================== */
+
+    function showOnly(section) {
+
+      intro.classList.add("hidden");
+      account.classList.add("hidden");
+      app.classList.add("hidden");
+
+      section.classList.remove("hidden");
+
+      window.scrollTo(0, 0);
+
+    }
+
+
+    /* ===================================================
+       INTRO → ACCOUNT
+    =================================================== */
+
+    document
+      .getElementById("enterButton")
+      .addEventListener("click", function() {
+
+        const saved =
+          localStorage.getItem(
+            "howtodisappear_user"
+          );
+
+        if (saved) {
+
+          try {
+
+            currentUser =
+              JSON.parse(saved);
+
+            showApp();
+
+            return;
+
+          } catch (error) {
+
+            localStorage.removeItem(
+              "howtodisappear_user"
+            );
+
+          }
+
+        }
+
+        showOnly(account);
+
+      });
+
+
+    /* ===================================================
+       CREATE ACCOUNT
+    =================================================== */
+
+    document
+      .getElementById("createAccountButton")
+      .addEventListener("click", function() {
+
+        document
+          .getElementById("accountActions")
+          .classList.add("hidden");
+
+        document
+          .getElementById("accountForm")
+          .classList.add("visible");
+
+        document
+          .getElementById("username")
+          .focus();
+
+      });
+
+
+    /* ===================================================
+       RETURNING USER
+    =================================================== */
+
+    document
+      .getElementById("returnAccountButton")
+      .addEventListener("click", function() {
+
+        const saved =
+          localStorage.getItem(
+            "howtodisappear_user"
+          );
+
+        if (!saved) {
+
+          alert(
+            "There isn't a saved identity on this device yet."
+          );
+
+          return;
+
+        }
+
+        try {
+
+          currentUser =
+            JSON.parse(saved);
+
+          showApp();
+
+        } catch (error) {
+
+          localStorage.removeItem(
+            "howtodisappear_user"
+          );
+
+          alert(
+            "The saved identity couldn't be loaded. You can create a new one."
+          );
+
+        }
+
+      });
+
+
+    /* ===================================================
+       CREATE USER
+    =================================================== */
+
+    document
+      .getElementById("accountForm")
+      .addEventListener("submit", function(event) {
+
+        event.preventDefault();
+
+        const username =
+          document
+            .getElementById("username")
+            .value
+            .trim();
+
+        const startingPlace =
+          document
+            .getElementById("startingPlace")
+            .value;
+
+        if (!username) return;
+
+
+        currentUser = {
+
+          username: username,
+
+          visitor:
+            "VISITOR_" +
+            Math.floor(
+              100 +
+              Math.random() * 900
+            ),
+
+          startingPlace: startingPlace,
+
+          entries: []
+
+        };
+
+
+        saveUser();
 
         showApp();
 
+      });
+
+
+    /* ===================================================
+       SHOW APP
+    =================================================== */
+
+    function showApp() {
+
+      if (!currentUser) {
+
+        showOnly(account);
+
         return;
 
-      } catch {
+      }
 
-        localStorage.removeItem(
-          "howtodisappear_user"
+
+      showOnly(app);
+
+
+      const visitor =
+        document.getElementById(
+          "visitorId"
+        );
+
+      visitor.textContent =
+        currentUser.visitor +
+        " / " +
+        currentUser.username;
+
+    }
+
+
+    /* ===================================================
+       SAVE USER
+    =================================================== */
+
+    function saveUser() {
+
+      if (!currentUser) return;
+
+      try {
+
+        localStorage.setItem(
+          "howtodisappear_user",
+          JSON.stringify(currentUser)
+        );
+
+      } catch (error) {
+
+        console.warn(
+          "Local storage unavailable.",
+          error
         );
 
       }
 
     }
 
-    showScreen(auth);
 
-  };
-
-
-/* =========================================================
-   ACCOUNT
-========================================================= */
-
-document
-  .getElementById("create")
-  .onclick = () => {
+    /* ===================================================
+       CARD NAVIGATION
+    =================================================== */
 
     document
-      .getElementById("authButtons")
-      .style.display = "none";
+      .querySelectorAll("[data-view]")
+      .forEach(function(element) {
 
-    document
-      .getElementById("signup")
-      .classList.add("visible");
+        element.addEventListener(
+          "click",
+          function() {
 
-    document
-      .getElementById("username")
-      .focus();
+            const view =
+              element.dataset.view;
 
-  };
+            closeMenu();
+
+            openView(view);
+
+          }
+        );
+
+      });
 
 
-document
-  .getElementById("return")
-  .onclick = () => {
+    /* ===================================================
+       OPEN VIEW
+    =================================================== */
 
-    const saved =
-      localStorage.getItem(
-        "howtodisappear_user"
-      );
+    function openView(view) {
 
-    if (!saved) {
+      let html = "";
 
-      alert(
-        "There isn't a saved identity on this device yet."
-      );
 
-      return;
+      /* -------------------------------------------------
+         MY ROOM
+      ------------------------------------------------- */
+
+      if (view === "room") {
+
+        html = `
+
+          <div class="modal-title">
+            MY ROOM
+          </div>
+
+          <p class="modal-description">
+            Nothing needs to happen here.
+            You can just exist for a while.
+          </p>
+
+          <div class="room-space">
+
+            <div class="window"></div>
+
+            <div class="bed"></div>
+
+            <div class="room-message">
+              you're allowed to stay.
+            </div>
+
+          </div>
+
+        `;
+
+      }
+
+
+      /* -------------------------------------------------
+         WORLDS
+      ------------------------------------------------- */
+
+      else if (view === "worlds") {
+
+        html = `
+
+          <div class="modal-title">
+            WORLDS
+          </div>
+
+          <p class="modal-description">
+            Places that aren't quite real.
+            Choose somewhere to mentally disappear
+            for a little while.
+          </p>
+
+          <div class="world-grid">
+
+            <div class="world">
+              <small>01 / 03:17</small>
+
+              <h3>
+                THE CITY
+              </h3>
+
+              <p>
+                Almost nobody is outside.
+              </p>
+            </div>
+
+            <div class="world">
+              <small>02 / PLATFORM</small>
+
+              <h3>
+                THE STATION
+              </h3>
+
+              <p>
+                A train is waiting.
+              </p>
+            </div>
+
+            <div class="world">
+              <small>03 / SCREEN 04</small>
+
+              <h3>
+                EMPTY CINEMA
+              </h3>
+
+              <p>
+                One screen is still running.
+              </p>
+            </div>
+
+            <div class="world">
+              <small>04 / UNKNOWN</small>
+
+              <h3>
+                PLATFORM 0
+              </h3>
+
+              <p>
+                This station isn't on any map.
+              </p>
+            </div>
+
+          </div>
+
+        `;
+
+      }
+
+
+      /* -------------------------------------------------
+         STATIC
+      ------------------------------------------------- */
+
+      else if (view === "static") {
+
+        html = `
+
+          <div class="modal-title">
+            THE STATIC
+          </div>
+
+          <p class="modal-description">
+            There are different kinds of difficult
+            days. You don't have to make yours sound
+            reasonable.
+          </p>
+
+          <div class="static-grid">
+
+            <div
+              class="static-card nothing"
+              id="nothingCard"
+            >
+
+              <small>
+                01 / QUIET
+              </small>
+
+              <h2>
+                NOTHING
+              </h2>
+
+              <p>
+                numb · empty · detached · tired ·
+                disconnected
+              </p>
+
+            </div>
+
+            <div
+              class="static-card anger"
+              id="angerCard"
+            >
+
+              <small>
+                02 / LOUD
+              </small>
+
+              <h2>
+                ANGER
+              </h2>
+
+              <p>
+                hurt · frustrated · betrayed ·
+                overwhelmed · furious
+              </p>
+
+            </div>
+
+          </div>
+
+        `;
+
+      }
+
+
+      /* -------------------------------------------------
+         JOURNAL
+      ------------------------------------------------- */
+
+      else if (view === "journal") {
+
+        html = `
+
+          <div class="modal-title">
+            UNSENT
+          </div>
+
+          <p class="modal-description">
+            Write the thing you can't say.
+            You don't have to send it.
+          </p>
+
+          <textarea
+            id="journalInput"
+            class="big-textarea"
+            placeholder="Dear..."
+          ></textarea>
+
+          <button
+            type="button"
+            class="save-button"
+            id="saveJournal"
+          >
+            KEEP IT HERE
+          </button>
+
+          <div
+            class="entries"
+            id="journalEntries"
+          ></div>
+
+        `;
+
+      }
+
+
+      /* -------------------------------------------------
+         WALL
+      ------------------------------------------------- */
+
+      else if (view === "wall") {
+
+        html = `
+
+          <div class="modal-title">
+            THE WALL
+          </div>
+
+          <div class="wall-note">
+            Leave a thought behind. Don't include
+            your real name, location, contact
+            information, or anything that could
+            identify you.
+          </div>
+
+          <textarea
+            id="wallInput"
+            class="big-textarea"
+            placeholder="someone might need to hear this..."
+          ></textarea>
+
+          <button
+            type="button"
+            class="save-button"
+            id="saveWall"
+          >
+            LEAVE IT
+          </button>
+
+          <div
+            class="entries"
+            id="wallEntries"
+          ></div>
+
+        `;
+
+      }
+
+
+      /* -------------------------------------------------
+         CHAT
+      ------------------------------------------------- */
+
+      else if (view === "chat") {
+
+        html = `
+
+          <div class="modal-title">
+            LATE NIGHT LINE
+          </div>
+
+          <div class="line-notice">
+
+            This version is a private demo and does
+            not connect you to strangers.
+
+            <br><br>
+
+            A real version would need accounts,
+            moderation, reporting, blocking,
+            privacy protections, and strong
+            safety rules before users could
+            communicate with each other.
+
+          </div>
+
+          <div class="chat-box">
+
+            <div
+              class="messages"
+              id="messages"
+            >
+
+              <div class="message">
+
+                <div class="message-user">
+                  VISITOR_284
+                </div>
+
+                <div class="message-text">
+                  hey. you're still awake?
+                </div>
+
+              </div>
+
+            </div>
+
+            <div class="chat-row">
+
+              <input
+                id="chatInput"
+                class="chat-input"
+                placeholder="type something..."
+                maxlength="500"
+              >
+
+              <button
+                type="button"
+                class="chat-send"
+                id="sendChat"
+              >
+                SEND
+              </button>
+
+            </div>
+
+          </div>
+
+        `;
+
+      }
+
+
+      /* -------------------------------------------------
+         PROFILE
+      ------------------------------------------------- */
+
+      else if (view === "profile") {
+
+        html = `
+
+          <div class="modal-title">
+            PROFILE
+          </div>
+
+          <p class="modal-description">
+
+            identity:
+            <strong>
+              ${safe(currentUser.username)}
+            </strong>
+
+            <br><br>
+
+            visitor:
+            ${safe(currentUser.visitor)}
+
+            <br><br>
+
+            starting place:
+            ${safe(currentUser.startingPlace)}
+
+          </p>
+
+        `;
+
+      }
+
+
+      /* -------------------------------------------------
+         UNKNOWN VIEW
+      ------------------------------------------------- */
+
+      else {
+
+        html = `
+
+          <div class="modal-title">
+            NOT FOUND
+          </div>
+
+          <p class="modal-description">
+            This room doesn't exist yet.
+          </p>
+
+        `;
+
+      }
+
+
+      modalContent.innerHTML = html;
+
+      modal.classList.add("open");
+
+
+      /* Attach view-specific events AFTER HTML exists */
+
+      if (view === "static") {
+
+        const nothing =
+          document.getElementById(
+            "nothingCard"
+          );
+
+        const anger =
+          document.getElementById(
+            "angerCard"
+          );
+
+        if (nothing) {
+
+          nothing.addEventListener(
+            "click",
+            function() {
+              openFeelingRoom("nothing");
+            }
+          );
+
+        }
+
+        if (anger) {
+
+          anger.addEventListener(
+            "click",
+            function() {
+              openFeelingRoom("anger");
+            }
+          );
+
+        }
+
+      }
+
+
+      if (view === "journal") {
+
+        const save =
+          document.getElementById(
+            "saveJournal"
+          );
+
+        if (save) {
+
+          save.addEventListener(
+            "click",
+            saveJournalEntry
+          );
+
+        }
+
+        renderJournal();
+
+      }
+
+
+      if (view === "wall") {
+
+        const save =
+          document.getElementById(
+            "saveWall"
+          );
+
+        if (save) {
+
+          save.addEventListener(
+            "click",
+            saveWallEntry
+          );
+
+        }
+
+        renderWall();
+
+      }
+
+
+      if (view === "chat") {
+
+        const send =
+          document.getElementById(
+            "sendChat"
+          );
+
+        const input =
+          document.getElementById(
+            "chatInput"
+          );
+
+        if (send) {
+
+          send.addEventListener(
+            "click",
+            sendChatMessage
+          );
+
+        }
+
+        if (input) {
+
+          input.addEventListener(
+            "keydown",
+            function(event) {
+
+              if (
+                event.key === "Enter"
+              ) {
+
+                event.preventDefault();
+
+                sendChatMessage();
+
+              }
+
+            }
+          );
+
+        }
+
+      }
 
     }
 
-    user = JSON.parse(saved);
 
-    showApp();
+    /* ===================================================
+       FEELING ROOM
+    =================================================== */
 
-  };
+    function openFeelingRoom(type) {
+
+      const isAnger =
+        type === "anger";
+
+      const title =
+        isAnger
+          ? "ANGER"
+          : "NOTHING";
+
+      const description =
+        isAnger
+          ? "You don't have to make your anger sound reasonable. Put the feeling somewhere that doesn't hurt you or anyone else."
+          : "You don't have to force yourself to feel something. You can simply describe what the emptiness is like.";
+
+      const placeholder =
+        isAnger
+          ? "what is the anger trying to say?"
+          : "what does nothing feel like today?";
 
 
-document
-  .getElementById("signup")
-  .onsubmit = event => {
+      modalContent.innerHTML = `
 
-    event.preventDefault();
+        <div class="modal-title">
+          ${title}
+        </div>
 
-    const username =
+        <p class="modal-description">
+          ${description}
+        </p>
+
+        <div class="feeling-options">
+
+          ${
+            isAnger
+
+            ? `
+              <button class="feeling">
+                HURT
+              </button>
+
+              <button class="feeling">
+                FRUSTRATED
+              </button>
+
+              <button class="feeling">
+                BETRAYED
+              </button>
+
+              <button class="feeling">
+                OVERWHELMED
+              </button>
+
+              <button class="feeling">
+                FURIOUS
+              </button>
+
+              <button class="feeling">
+                DON'T KNOW
+              </button>
+            `
+
+            : `
+
+              <button class="feeling">
+                NUMB
+              </button>
+
+              <button class="feeling">
+                EMPTY
+              </button>
+
+              <button class="feeling">
+                DETACHED
+              </button>
+
+              <button class="feeling">
+                TIRED
+              </button>
+
+              <button class="feeling">
+                DISCONNECTED
+              </button>
+
+              <button class="feeling">
+                DON'T KNOW
+              </button>
+
+            `
+          }
+
+        </div>
+
+
+        <textarea
+          id="feelingInput"
+          class="big-textarea"
+          style="margin-top:20px"
+          placeholder="${placeholder}"
+        ></textarea>
+
+
+        <button
+          type="button"
+          class="save-button"
+          id="saveFeeling"
+        >
+          KEEP THIS PRIVATE
+        </button>
+
+      `;
+
+
       document
-        .getElementById("username")
-        .value
-        .trim();
+        .querySelectorAll(".feeling")
+        .forEach(function(button) {
 
-    const startingPlace =
+          button.addEventListener(
+            "click",
+            function() {
+
+              document
+                .querySelectorAll(".feeling")
+                .forEach(function(item) {
+                  item.classList.remove(
+                    "selected"
+                  );
+                });
+
+              button.classList.add(
+                "selected"
+              );
+
+            }
+          );
+
+        });
+
+
       document
-        .getElementById("startingPlace")
-        .value;
+        .getElementById("saveFeeling")
+        .addEventListener(
+          "click",
+          function() {
 
-    if (!username) return;
+            const input =
+              document.getElementById(
+                "feelingInput"
+              );
 
-    user = {
+            const text =
+              input.value.trim();
 
-      username,
+            if (!text) return;
 
-      visitor:
-        "VISITOR_" +
-        Math.floor(
-          100 +
-          Math.random() * 900
-        ),
 
-      startingPlace,
+            currentUser.entries.unshift({
 
-      entries: []
+              type: title,
 
-    };
+              text: text,
 
-    localStorage.setItem(
-      "howtodisappear_user",
-      JSON.stringify(user)
-    );
+              time:
+                new Date()
+                  .toLocaleTimeString()
 
-    showApp();
+            });
 
-  };
 
+            saveUser();
 
-/* =========================================================
-   SHOW APP
-========================================================= */
+            input.value = "";
 
-function showApp() {
+            alert(
+              "Kept privately on this device."
+            );
 
-  showScreen(app);
+          }
+        );
 
-  document
-    .getElementById("visitor")
-    .textContent =
-    user.visitor +
-    " / " +
-    user.username;
+    }
 
-}
 
+    /* ===================================================
+       JOURNAL
+    =================================================== */
 
-/* =========================================================
-   HELP
-========================================================= */
+    function saveJournalEntry() {
 
-function openHelp() {
+      const input =
+        document.getElementById(
+          "journalInput"
+        );
 
-  sideMenu.classList.remove("open");
+      if (!input) return;
 
-  modal.classList.remove("open");
+      const text =
+        input.value.trim();
 
-  helpPage.classList.add("open");
+      if (!text) return;
 
-  document.body.style.overflow = "hidden";
 
-}
+      currentUser.entries.unshift({
 
-function closeHelp() {
+        type: "UNSENT",
 
-  helpPage.classList.remove("open");
+        text: text,
 
-  document.body.style.overflow = "";
+        time:
+          new Date()
+            .toLocaleTimeString()
 
-}
+      });
 
-document
-  .getElementById("helpButton")
-  .onclick = openHelp;
 
-document
-  .getElementById("menuHelp")
-  .onclick = openHelp;
+      saveUser();
 
-document
-  .getElementById("helpClose")
-  .onclick = closeHelp;
+      input.value = "";
 
-document
-  .getElementById("helpReturn")
-  .onclick = closeHelp;
+      renderJournal();
 
+    }
 
-/* =========================================================
-   MENU
-========================================================= */
 
-document
-  .getElementById("menu")
-  .onclick = () => {
+    function renderJournal() {
 
-    sideMenu.classList.toggle("open");
+      const container =
+        document.getElementById(
+          "journalEntries"
+        );
 
-  };
+      if (!container) return;
 
 
-/* =========================================================
-   LEAVE
-========================================================= */
+      if (
+        !currentUser ||
+        !Array.isArray(
+          currentUser.entries
+        )
+      ) {
 
-document
-  .getElementById("leave")
-  .onclick = () => {
+        container.innerHTML = "";
 
-    sideMenu.classList.remove("open");
+        return;
 
-    showScreen(intro);
+      }
 
-  };
 
+      container.innerHTML =
+        currentUser.entries
+          .map(function(entry) {
 
-/* =========================================================
-   MODAL
-========================================================= */
+            return `
 
-document
-  .getElementById("close")
-  .onclick = () => {
+              <div class="entry">
 
-    modal.classList.remove("open");
+                <div class="entry-meta">
+                  ${safe(entry.type)}
+                  /
+                  ${safe(entry.time)}
+                </div>
 
-  };
+                <div class="entry-text">
+                  ${safe(entry.text)}
+                </div>
 
+              </div>
 
-modal.onclick = event => {
+            `;
 
-  if (event.target === modal) {
+          })
+          .join("");
 
-    modal.classList.remove("open");
+    }
 
-  }
 
-};
+    /* ===================================================
+       WALL
+    =================================================== */
 
+    function getWall() {
 
-/* =========================================================
-   CARD NAVIGATION
-========================================================= */
+      try {
 
-document
-  .querySelectorAll(".card")
-  .forEach(card => {
+        const saved =
+          localStorage.getItem(
+            "howtodisappear_wall"
+          );
 
-    card.onclick = () => {
+        if (!saved) return [];
 
-      openModal(
-        card.dataset.open
-      );
+        const parsed =
+          JSON.parse(saved);
 
-    };
+        return Array.isArray(parsed)
+          ? parsed
+          : [];
 
-  });
+      } catch (error) {
 
+        return [];
 
-document
-  .querySelectorAll(
-    ".side-menu [data-open]"
-  )
-  .forEach(button => {
+      }
 
-    button.onclick = () => {
+    }
 
-      sideMenu.classList.remove(
-        "open"
-      );
 
-      openModal(
-        button.dataset.open
-      );
+    function saveWallEntry() {
 
-    };
+      const input =
+        document.getElementById(
+          "wallInput"
+        );
 
-  });
+      if (!input) return;
 
+      const text =
+        input.value.trim();
 
-/* =========================================================
-   MODALS
-========================================================= */
+      if (!text) return;
 
-function openModal(type) {
 
-  let html = "";
+      const wall =
+        getWall();
 
 
-  /* ROOM */
+      wall.unshift({
 
-  if (type === "room") {
+        visitor:
+          currentUser.visitor,
 
-    html = `
+        text: text,
 
-      <div class="modal-title">
-        MY ROOM
-      </div>
+        time:
+          new Date()
+            .toLocaleTimeString()
 
-      <p class="modal-description">
-        Nothing needs to happen here.
-        You can just exist.
-      </p>
+      });
 
-      <div style="
-        height:360px;
-        border:1px solid #252936;
-        border-radius:6px;
-        position:relative;
-        background:
-          radial-gradient(
-            circle at 70% 30%,
-            rgba(108,156,255,.12),
-            transparent 30%
-          ),
-          #05060a;
-      ">
 
-        <div style="
-          position:absolute;
-          top:35px;
-          right:35px;
-          width:180px;
-          height:120px;
-          border:2px solid #171b25;
-          box-shadow:
-            0 0 40px rgba(108,156,255,.05);
-        "></div>
+      try {
 
-        <div style="
-          position:absolute;
-          left:45px;
-          bottom:65px;
-          width:270px;
-          height:50px;
-          border-top:2px solid #1d212c;
-        "></div>
+        localStorage.setItem(
+          "howtodisappear_wall",
+          JSON.stringify(
+            wall.slice(0, 50)
+          )
+        );
 
-        <div style="
-          position:absolute;
-          left:50%;
-          bottom:30px;
-          transform:translateX(-50%);
-          color:#343947;
-          font-size:9px;
-        ">
-          you're allowed to stay.
-        </div>
+      } catch (error) {
 
-      </div>
+        console.warn(
+          "Could not save wall.",
+          error
+        );
 
-    `;
+      }
 
-  }
 
+      input.value = "";
 
-  /* WORLDS */
+      renderWall();
 
-  if (type === "worlds") {
+    }
 
-    html = `
 
-      <div class="modal-title">
-        WORLDS
-      </div>
+    function renderWall() {
 
-      <p class="modal-description">
-        You don't have to disappear.
-        Sometimes you just need somewhere else
-        to put your thoughts.
-      </p>
+      const container =
+        document.getElementById(
+          "wallEntries"
+        );
 
-      <div class="worlds">
+      if (!container) return;
 
-        <div class="world">
-          <small>01 / 03:17</small>
-          <h3>THE CITY</h3>
-          <p>
-            Almost nobody is outside.
-          </p>
-        </div>
 
-        <div class="world">
-          <small>02 / PLATFORM</small>
-          <h3>THE STATION</h3>
-          <p>
-            A train is waiting.
-          </p>
-        </div>
+      const wall =
+        getWall();
 
-        <div class="world">
-          <small>03 / SCREEN 04</small>
-          <h3>EMPTY CINEMA</h3>
-          <p>
-            One screen is still running.
-          </p>
-        </div>
 
-        <div class="world">
-          <small>04 / UNKNOWN</small>
-          <h3>PLATFORM 0</h3>
-          <p>
-            This station isn't on any map.
-          </p>
-        </div>
+      container.innerHTML =
+        wall
+          .map(function(item) {
 
-      </div>
+            return `
 
-    `;
+              <div class="entry">
 
-  }
+                <div class="entry-meta">
+                  ${safe(item.visitor)}
+                  /
+                  ${safe(item.time)}
+                </div>
 
+                <div class="entry-text">
+                  ${safe(item.text)}
+                </div>
 
-  /* STATIC */
+              </div>
 
-  if (type === "static") {
+            `;
 
-    html = `
+          })
+          .join("");
 
-      <div class="modal-title">
-        THE STATIC
-      </div>
+    }
 
-      <p class="modal-description">
-        There are two rooms here.
-        Pick whichever one sounds closer.
-      </p>
 
-      <div class="static-grid">
+    /* ===================================================
+       CHAT DEMO
+    =================================================== */
 
-        <div
-          class="static-card nothing"
-          onclick="staticRoom('nothing')"
-        >
+    function sendChatMessage() {
 
-          <small>
-            01 / QUIET
-          </small>
+      const input =
+        document.getElementById(
+          "chatInput"
+        );
 
-          <h2>
-            NOTHING
-          </h2>
+      const messages =
+        document.getElementById(
+          "messages"
+        );
 
-          <p>
-            numb · empty · detached · tired ·
-            disconnected
-          </p>
+      if (!input || !messages) return;
+
+
+      const text =
+        input.value.trim();
+
+      if (!text) return;
+
+
+      messages.innerHTML += `
+
+        <div class="message you">
+
+          <div class="message-user">
+            ${safe(currentUser.visitor)}
+          </div>
+
+          <div class="message-text">
+            ${safe(text)}
+          </div>
 
         </div>
 
-        <div
-          class="static-card anger"
-          onclick="staticRoom('anger')"
-        >
-
-          <small>
-            02 / LOUD
-          </small>
-
-          <h2>
-            ANGER
-          </h2>
-
-          <p>
-            hurt · frustrated · betrayed ·
-            overloaded · furious
-          </p>
-
-        </div>
-
-      </div>
-
-    `;
-
-  }
+      `;
 
 
-  /* JOURNAL */
-
-  if (type === "journal") {
-
-    html = `
-
-      <div class="modal-title">
-        UNSENT
-      </div>
-
-      <p class="modal-description">
-        Write the thing you can't say.
-        You don't have to send it.
-      </p>
-
-      <textarea
-        id="journalInput"
-        placeholder="Dear..."
-      ></textarea>
-
-      <button
-        class="save"
-        id="journalSave"
-      >
-        KEEP IT HERE
-      </button>
-
-      <div id="entries"></div>
-
-    `;
-
-  }
+      input.value = "";
 
 
-  /* WALL */
+      const responses = [
 
-  if (type === "wall") {
+        "yeah. i'm here.",
 
-    html = `
+        "you don't have to make it sound okay.",
 
-      <div class="modal-title">
-        THE WALL
-      </div>
+        "you can keep talking.",
 
-      <p class="modal-description">
-        Leave one thought behind.
-        Don't include personal information.
-      </p>
+        "that sounds like a lot.",
 
-      <textarea
-        id="wallInput"
-        placeholder="someone might need to hear this..."
-      ></textarea>
+        "you don't need the perfect words.",
 
-      <button
-        class="save"
-        id="wallSave"
-      >
-        LEAVE IT
-      </button>
+        "sometimes it's easier to write it down.",
 
-      <div id="wallEntries"></div>
+        "you can take your time."
 
-    `;
-
-  }
+      ];
 
 
-  /* CHAT */
+      setTimeout(function() {
 
-  if (type === "chat") {
+        const response =
+          responses[
+            Math.floor(
+              Math.random() *
+              responses.length
+            )
+          ];
 
-    html = `
 
-      <div class="modal-title">
-        LATE NIGHT LINE
-      </div>
-
-      <div class="notice">
-
-        This demo does not connect you to a real
-        stranger yet.
-
-        <br><br>
-
-        A future version should use real accounts,
-        moderation, reporting, blocking, and
-        age-appropriate safety systems before
-        allowing visitors to communicate.
-
-        <br><br>
-
-        For now, this is a private conversation
-        simulation so you can experience the idea.
-
-      </div>
-
-      <div class="chat">
-
-        <div
-          class="messages"
-          id="messages"
-        >
+        messages.innerHTML += `
 
           <div class="message">
 
@@ -2471,550 +3348,80 @@ function openModal(type) {
             </div>
 
             <div class="message-text">
-              hey. you're still awake?
+              ${response}
             </div>
 
           </div>
 
-        </div>
-
-        <div class="chat-row">
-
-          <input
-            id="chatInput"
-            class="chat-input"
-            placeholder="type something..."
-          >
-
-          <button
-            id="chatSend"
-            class="chat-send"
-          >
-            SEND
-          </button>
-
-        </div>
-
-      </div>
-
-    `;
-
-  }
+        `;
 
 
-  /* PROFILE */
+        messages.scrollTop =
+          messages.scrollHeight;
 
-  if (type === "profile") {
+      }, 700);
 
-    html = `
-
-      <div class="modal-title">
-        PROFILE
-      </div>
-
-      <p class="modal-description">
-
-        ${escapeHTML(user.username)}
-
-        <br><br>
-
-        ${escapeHTML(user.visitor)}
-
-        <br><br>
-
-        starting place:
-        ${escapeHTML(user.startingPlace)}
-
-      </p>
-
-    `;
-
-  }
+    }
 
 
-  modalContent.innerHTML = html;
-
-  modal.classList.add("open");
-
-
-  if (type === "journal") {
+    /* ===================================================
+       MODAL CLOSE
+    =================================================== */
 
     document
-      .getElementById("journalSave")
-      .onclick = saveJournal;
-
-    renderEntries();
-
-  }
-
-
-  if (type === "wall") {
-
-    document
-      .getElementById("wallSave")
-      .onclick = saveWall;
-
-    renderWall();
-
-  }
-
-
-  if (type === "chat") {
-
-    document
-      .getElementById("chatSend")
-      .onclick = sendMessage;
-
-    document
-      .getElementById("chatInput")
+      .getElementById("closeModal")
       .addEventListener(
-        "keydown",
-        event => {
-
-          if (event.key === "Enter") {
-            sendMessage();
-          }
-
-        }
+        "click",
+        closeModal
       );
 
-  }
 
-}
+    modal.addEventListener(
+      "click",
+      function(event) {
 
+        if (
+          event.target === modal
+        ) {
 
-/* =========================================================
-   NOTHING / ANGER
-========================================================= */
+          closeModal();
 
-function staticRoom(type) {
-
-  const isAnger =
-    type === "anger";
-
-  modalContent.innerHTML = `
-
-    <div>
-
-      <div class="modal-title">
-
-        ${isAnger ? "ANGER" : "NOTHING"}
-
-      </div>
-
-      <p class="modal-description">
-
-        ${
-          isAnger
-          ?
-          "You don't have to make your anger sound reasonable."
-          :
-          "You don't have to force yourself to feel something."
         }
 
-      </p>
-
-      <div class="feelings">
-
-        ${
-          isAnger
-          ?
-          `
-          <button>HURT</button>
-          <button>FRUSTRATED</button>
-          <button>BETRAYED</button>
-          <button>OVERLOADED</button>
-          <button>FURIOUS</button>
-          <button>DON'T KNOW</button>
-          `
-          :
-          `
-          <button>NUMB</button>
-          <button>EMPTY</button>
-          <button>DETACHED</button>
-          <button>TIRED</button>
-          <button>DISCONNECTED</button>
-          <button>DON'T KNOW</button>
-          `
-        }
-
-      </div>
-
-      <textarea
-        id="staticInput"
-        style="margin-top:20px"
-        placeholder="${
-          isAnger
-          ?
-          "put the anger somewhere that can't hurt you or anyone else..."
-          :
-          "write even if you don't know what you're feeling..."
-        }"
-      ></textarea>
-
-      <button
-        class="save"
-        id="staticSave"
-      >
-        KEEP THIS PRIVATE
-      </button>
-
-    </div>
-
-  `;
-
-
-  document
-    .querySelectorAll(".feelings button")
-    .forEach(button => {
-
-      button.onclick = () => {
-
-        document
-          .querySelectorAll(
-            ".feelings button"
-          )
-          .forEach(
-            b =>
-              b.classList.remove(
-                "selected"
-              )
-          );
-
-        button.classList.add(
-          "selected"
-        );
-
-      };
-
-    });
-
-
-  document
-    .getElementById("staticSave")
-    .onclick = () => {
-
-      const text =
-        document
-          .getElementById("staticInput")
-          .value
-          .trim();
-
-      if (!text) return;
-
-      user.entries.unshift({
-
-        text,
-
-        time:
-          new Date().toLocaleTimeString()
-
-      });
-
-      saveUser();
-
-      document
-        .getElementById("staticInput")
-        .value = "";
-
-    };
-
-}
-
-
-/* =========================================================
-   JOURNAL
-========================================================= */
-
-function saveJournal() {
-
-  const input =
-    document.getElementById(
-      "journalInput"
+      }
     );
 
-  const text =
-    input.value.trim();
 
-  if (!text) return;
-
-  user.entries.unshift({
-
-    text,
-
-    time:
-      new Date().toLocaleTimeString()
-
-  });
-
-  saveUser();
-
-  input.value = "";
-
-  renderEntries();
-
-}
-
-
-function renderEntries() {
-
-  const container =
-    document.getElementById(
-      "entries"
-    );
-
-  if (!container) return;
-
-  container.innerHTML =
-    user.entries
-      .map(entry => `
-
-        <div class="entry">
-
-          <div class="entry-time">
-            ${escapeHTML(entry.time)}
-          </div>
-
-          <div class="entry-text">
-            ${escapeHTML(entry.text)}
-          </div>
-
-        </div>
-
-      `)
-      .join("");
-
-}
-
-
-/* =========================================================
-   WALL
-========================================================= */
-
-function getWall() {
-
-  try {
-
-    return JSON.parse(
-      localStorage.getItem(
-        "howtodisappear_wall"
-      )
-    ) || [];
-
-  } catch {
-
-    return [];
-
-  }
-
-}
-
-
-function saveWall() {
-
-  const input =
-    document.getElementById(
-      "wallInput"
-    );
-
-  const text =
-    input.value.trim();
-
-  if (!text) return;
-
-  const wall =
-    getWall();
-
-  wall.unshift({
-
-    visitor:
-      user.visitor,
-
-    text
-
-  });
-
-  localStorage.setItem(
-    "howtodisappear_wall",
-    JSON.stringify(
-      wall.slice(0, 50)
-    )
-  );
-
-  input.value = "";
-
-  renderWall();
-
-}
-
-
-function renderWall() {
-
-  const container =
-    document.getElementById(
-      "wallEntries"
-    );
-
-  if (!container) return;
-
-  container.innerHTML =
-    getWall()
-      .map(item => `
-
-        <div class="entry">
-
-          <div class="entry-user">
-            ${escapeHTML(item.visitor)}
-          </div>
-
-          <div class="entry-text">
-            ${escapeHTML(item.text)}
-          </div>
-
-        </div>
-
-      `)
-      .join("");
-
-}
-
-
-/* =========================================================
-   CHAT DEMO
-========================================================= */
-
-function sendMessage() {
-
-  const input =
-    document.getElementById(
-      "chatInput"
-    );
-
-  const messages =
-    document.getElementById(
-      "messages"
-    );
-
-  const text =
-    input.value.trim();
-
-  if (!text) return;
-
-  messages.innerHTML += `
-
-    <div class="message you">
-
-      <div class="message-user">
-        ${escapeHTML(user.visitor)}
-      </div>
-
-      <div class="message-text">
-        ${escapeHTML(text)}
-      </div>
-
-    </div>
-
-  `;
-
-  input.value = "";
-
-  setTimeout(() => {
-
-    const responses = [
-
-      "yeah. I'm here.",
-
-      "you don't have to make it sound okay.",
-
-      "you can keep talking.",
-
-      "that sounds like a lot.",
-
-      "sometimes it's easier to write it here.",
-
-      "you don't need the perfect words.",
-
-      "I get why you'd want somewhere to put that."
-
-    ];
-
-    const response =
-      responses[
-        Math.floor(
-          Math.random() *
-          responses.length
-        )
-      ];
-
-    messages.innerHTML += `
-
-      <div class="message">
-
-        <div class="message-user">
-          VISITOR_284
-        </div>
-
-        <div class="message-text">
-          ${response}
-        </div>
-
-      </div>
-
-    `;
-
-    messages.scrollTop =
-      messages.scrollHeight;
-
-  }, 850);
-
-}
-
-
-/* =========================================================
-   STORAGE
-========================================================= */
-
-function saveUser() {
-
-  localStorage.setItem(
-    "howtodisappear_user",
-    JSON.stringify(user)
-  );
-
-}
-
-
-/* =========================================================
-   SECURITY
-========================================================= */
-
-function escapeHTML(value) {
-
-  return String(value)
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#039;");
-
-}
-
-
-/* =========================================================
-   ESCAPE KEY
-========================================================= */
-
-document.addEventListener(
-  "keydown",
-  event => {
-
-    if (event.key === "Escape") {
+    function closeModal() {
 
       modal.classList.remove(
         "open"
       );
 
-      closeHelp();
+      modalContent.innerHTML = "";
+
+    }
+
+
+    /* ===================================================
+       MENU
+    =================================================== */
+
+    document
+      .getElementById("menuButton")
+      .addEventListener(
+        "click",
+        function() {
+
+          sideMenu.classList.toggle(
+            "open"
+          );
+
+        }
+      );
+
+
+    function closeMenu() {
 
       sideMenu.classList.remove(
         "open"
@@ -3022,10 +3429,159 @@ document.addEventListener(
 
     }
 
-  }
-);
 
-</script>
+    /* ===================================================
+       HELP
+    =================================================== */
+
+    document
+      .getElementById("helpButton")
+      .addEventListener(
+        "click",
+        openHelp
+      );
+
+
+    document
+      .getElementById("menuHelpButton")
+      .addEventListener(
+        "click",
+        openHelp
+      );
+
+
+    document
+      .getElementById("closeHelp")
+      .addEventListener(
+        "click",
+        closeHelp
+      );
+
+
+    function openHelp() {
+
+      closeMenu();
+      closeModal();
+
+      helpPage.classList.add(
+        "open"
+      );
+
+      document.body.style.overflow =
+        "hidden";
+
+    }
+
+
+    function closeHelp() {
+
+      helpPage.classList.remove(
+        "open"
+      );
+
+      document.body.style.overflow =
+        "";
+
+    }
+
+
+    /* ===================================================
+       LEAVE
+    =================================================== */
+
+    document
+      .getElementById("leaveButton")
+      .addEventListener(
+        "click",
+        function() {
+
+          closeMenu();
+          closeModal();
+
+          showOnly(intro);
+
+        }
+      );
+
+
+    /* ===================================================
+       ESCAPE KEY
+    =================================================== */
+
+    document.addEventListener(
+      "keydown",
+      function(event) {
+
+        if (
+          event.key !== "Escape"
+        ) return;
+
+
+        closeMenu();
+        closeModal();
+        closeHelp();
+
+      }
+    );
+
+
+    /* ===================================================
+       CLICK OUTSIDE SIDE MENU
+    =================================================== */
+
+    document.addEventListener(
+      "click",
+      function(event) {
+
+        const clickedMenu =
+          sideMenu.contains(
+            event.target
+          );
+
+        const clickedButton =
+          document
+            .getElementById("menuButton")
+            .contains(event.target);
+
+
+        if (
+          !clickedMenu &&
+          !clickedButton
+        ) {
+
+          closeMenu();
+
+        }
+
+      }
+    );
+
+
+    /* ===================================================
+       SAFE HTML
+    =================================================== */
+
+    function safe(value) {
+
+      return String(value ?? "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+
+    }
+
+
+    /* ===================================================
+       STARTUP
+    =================================================== */
+
+    console.log(
+      "howtodisappear loaded successfully."
+    );
+
+  </script>
 
 </body>
 </html>
